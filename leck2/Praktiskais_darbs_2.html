@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Praktiskais darbs 2</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<style>
+ol {
+    counter-reset: item;
+}
+ol li {
+    display: block;
+    position: relative;
+}
+ol li:before {
+    content: counters(item, ".")".";
+    counter-increment: item;
+    position: absolute;
+    margin-right: 100%;
+    right: 10px; /* space between number and text */
+</style>
+
+</head>
+<body>
+
+<a href="../">Atpakaļ</a>
+
+<h3>Mērķis: Apgūt CSS lietojumu, lai izstrādātu vietnes vizuālo noformējumu</h3>
+
+<h4>Uzdevums: Izmantojot CSS noformēt iepriekšējā praktiskajā darbā izveidoto HTML (vai arī jaunizveidotu), radot vienotu stilu visām lapām.</h4>
+
+<ol>
+
+<li>Izvēlieties glītu krāsu kombināciju jūsu lapai.
+<ol>
+<li>Idejas varat smelties no <a href="http://colorhunt.co" target="_blank">colorhunt.co</a> paletēm, <a href="https://www.canva.com/learn/website-color-schemes/">Canva</a> vai <a href="http://blog.visme.co/website-color-schemes/">Visme</a> blogos utt.</li>
+</ol>
+</li>
+
+<li>Uzveidojiet izkārtojumu un galveni:
+<ol>
+<li>Jāizveido ārēja CSS datne, kas tiek iekļauta html dokumentā ar <code>link</code> taga palīdzību.</li>
+<li>Jāizveido <code>960px</code> plata un vismaz <code>500px</code> augsta divu kolonnu (saturs + reklāmas vai cits papildus saturs) lapa, kura ir centrēta loga vidū izmantojot <code>margin: 0 auto;</code> stilu.</li>
+<li>Jāizveido horizontālā izvēlne lapas augšpusē, izmantojot <code>ul</code>, <code>li</code> tagus un <code>list-style</code> īpašību. Uzbīdot ar peli uz izvēlnes tās fona un teksta krāsai jāmainās uz pretējo. Jāizmanto <code>padding</code> un <code>margin</code>, izvēlnes elementu stilizēšanai.</li>
+<li>Zem izvēlnes jānovelk horizontāla svītra visu <code>960px</code> platumā izmantojot <code>border</code> īpašību.</li>
+</ol>
+</li>
+
+<li>Noformējiet saturu:
+<ol>
+<li>Jāizmanto <code>class</code> vai <code>id</code> selektori, lai noteiktu kuriem html elementiem piešķirt jaunu izskatu.</li>
+<li>Jāizmanto teksta stila īpašības, piemēram, <code>font-family</code> stilu.</li>
+<li>Visām saitēm jāpaslēpj apakšsvītra un jābūt tumši pelēkām.</li>
+<li>Jāizveido rindkopa ar tekstu kurā ievietots attēls. Tekstam jāplūst ap attēlu izmantojot <code>float</code> īpašību.</li>
+<li>Jāizmanto katra otrā elementa fona iekrāsošana citā krāsā, piemēram. bloga ierakstiem, izmantojot <code>nth-child(odd)</code> pseidoklasi.</li>
+</ol>
+</li>
+
+<li>Izveidojiet drukas stilu:
+<ol>
+<li>Vietnei jābūt dažādām stila lapām priekš izvades uz druku un ekrānu. Piemēram, lai netērētu printera tinti drukas stila lapai var nenorādīt nekādus fona atribūtus vai arī atsevišķus elementus, kā navigāciju, paslēpt izmantojot atribūtus <code>display: none;</code> vai <code>visibility: hidden;</code>.</li>
+</ol>
+</li>
+
+</ol>
+
+<p>Darbu sagatavojiet jaunā folderī ar nosaukumu "Vārds Uzvārds Prakt2" (aiztājiet ar savu vārdu un uzvārdu).<br/>
+Praktiskā darba folderi arhivējiet zip formātā.<br/>
+Nosūtiet arhīvu uz e-pastu mikelis@va.lv.</p>
+
+<p>Piemērs:</p>
+
+<img src="piemers.PNG"/>
+
+</body>
+</html>
