@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Praktiskais darbs 3</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<style>
+.ordering ol {
+    counter-reset: item;
+}
+.ordering ol li {
+    display: block;
+    position: relative;
+}
+.ordering ol li:before {
+    content: counters(item, ".")".";
+    counter-increment: item;
+    position: absolute;
+    margin-right: 100%;
+    right: 10px; /* space between number and text */
+</style>
+
+</head>
+<body>
+
+<a href="../">Atpakaļ</a>
+
+<h3>Mērķis: Apgūt izklājumu veidošanu</h3>
+
+<h4>Uzdevums: Izmantot Bootstrap</h4>
+
+<div class="ordering">
+<ol>
+
+<li>Izveidojiet lapu (izmantojot Bootstrap) ar zemāk redzamo izkārtojumus:
+<ol>
+<li>Nepieciešams izkārtot saturu priekš telefona un datora ekrāna kā redzams attēlā.</li>
+</ol>
+</li>
+
+<li>Ar satura elementiem:
+<ol>
+<li>Virsraksti, paragrāfi un saraksti;</li>
+<li>Attēli;</li>
+<li>Citāts un autoru (blockquote, source);</li>
+<li>Tabulu ar iekrāsotām rindām (zebra striped) un parakstu (caption).</li>
+</ol>
+</li>
+
+<li>Un komponentiem:
+<ol>
+<li>Brīdinājums (alert);</li>
+<li>Akordeons;</li>
+<li>Formu ar dažiem formas elementiem;</li>
+<li>Bilžu karuseli ar navigāciju;</li>
+<li>Tooltip.</li>
+</ol>
+</li>
+
+</ol>
+</div>
+
+<ul>
+<li>Izmantojiet avotus:
+<ul>
+<li>Instalēšana: <a href="http://getbootstrap.com/docs/4.0/getting-started/download/#bootstrapcdn">http://getbootstrap.com/docs/4.0/getting-started/download/#bootstrapcdn</a></li>
+<li>Izkārtojums: <a href="http://getbootstrap.com/docs/4.0/layout/grid/">http://getbootstrap.com/docs/4.0/layout/grid/</a></li>
+<li>Tipogrāfija: <a href="http://getbootstrap.com/docs/4.0/content/typography/">http://getbootstrap.com/docs/4.0/content/typography/</a></li>
+<li>Komponenti: <a href="http://getbootstrap.com/docs/4.0/components/alerts/">http://getbootstrap.com/docs/4.0/components/alerts/</a></li>
+<li>Citi paraugi: <a href="https://www.w3schools.com/bootstrap/bootstrap_examples.asp">https://www.w3schools.com/bootstrap/bootstrap_examples.asp</a></li>
+</ul>
+</li>
+</ul>
+
+<p>Paraugs:</p>
+<img src="responsive.jpg"/>
+
+<p>Darbu sagatavojiet jaunā folderī ar nosaukumu "Vārds Uzvārds Prakt3" (aiztājiet ar savu vārdu un uzvārdu).<br/>
+Praktiskā darba folderi arhivējiet zip formātā.<br/>
+Nosūtiet arhīvu uz e-pastu mikelis@va.lv.</p>
+
+</body>
+</html>
