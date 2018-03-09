@@ -1,0 +1,580 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>web teh</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		
+		<link rel="stylesheet" href="lekcijas.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+			
+			
+<section data-markdown><textarea data-template>
+## 4. Lekcija: JavaScript I
+
+
+Note: 
+</textarea></section>
+
+
+
+<!-- -->
+
+
+<section data-markdown><textarea data-template>
+### Šajā lekcijā (needs update)
+	
+* Praktiskais pielietojums
+* Mainīgie
+* Operatori
+* Masīvi
+* DOM koks
+* Lietotāju saskarne notikumu apstrādē
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### JavaScript (update)
+
+* JavaScript ir programmēšanas valoda, kas radīta speciāli tīmekļa lapu papildus iespēju programmēšanai.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Praktiskais pielietojums
+
+* Ievades formu pārbaude pirms sūtīšanas uz serveri
+* Interaktīvas izvēlnes izveide
+* Pārlūkprogrammas logu vadība
+* Interaktīvu aprēķinu veikšanai
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Praktiskais pielietojums
+
+* Ievades formu pārbaude pirms sūtīšanas uz serveri
+* Interaktīvas izvēlnes izveide
+* Pārlūkprogrammas logu vadība
+* Interaktīvu aprēķinu veikšanai
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### JavaScript ierobežojumi
+
+* JavaScriptiem NAV pieeja:
+ * ne datnēm uz lietotāja datora,
+ * ne datnēm uz servera.
+
+Note: 
+</textarea></section>
+
+
+
+
+
+<section>
+<h3>JavaScript iekļaušana HTML</h3>
+
+<ul>
+<li>Tiek lietots tags <code>&lt;script&gt;</code>.
+<li>Vai arī atsevišķā JavaScript failā.
+</ul>
+
+<!-- 
+<script type="text/javascript">
+	// JavaScript kods
+</script>
+
+<script src="script.js" type="text/javascript">
+</script>
+ -->
+<pre><code data-trim data-noescape>
+&lt;script type=&quot;text/javascript&quot;&gt;
+	// JavaScript kods
+&lt;/script&gt;
+
+&lt;script src=&quot;script.js&quot; type=&quot;text/javascript&quot;&gt;
+&lt;/script&gt;
+</code></pre>
+
+</section>
+
+
+<section>
+<h3>Pārlūkprogrammām, kas neuztur JavaScript</h3>
+
+<ul>
+<li>Dažreiz atslēdz drošības apsvērumu dēļ!
+<li>Ļoti ieteicams visu JavaScript programmas kodu iekļaut kā HTML komentārus &lt;!--
+komentāri //--&gt;
+<li>&lt;noscript&gt; -> lai izveidotu alternatīvu lapas dizainu.
+</ul>
+
+<pre><code data-trim data-noescape>
+&lt;script type=&quot;text/javascript&quot;&gt;
+&lt;!--
+document.writeln(&quot;&lt;h1&gt;Welcome to JavaScript Programming!&lt;/h1&gt;&quot;);
+// --&gt;
+&lt;/script&gt;
+&lt;noscirpt&gt;
+&lt;h1&gt;Welcome to JavaScript Programming!&lt;/h1&gt;
+&lt;/noscript&gt;
+</code></pre>
+
+</section>
+
+
+<section>
+<h3>Sintakse - semikols</h3>
+
+<pre><code data-trim data-noescape>
+x += 10; y -= 5; z = 0
+</code></pre>
+
+</section>
+
+
+<section>
+<h3>Komentāri</h3>
+
+<ul>
+<li>Divu veidu komentāri: 
+<ol>
+<li>rindas komentārs
+<li>bloka komentārs
+</ol>
+<li><pre><code data-trim data-noescape>document.writeln()</code></pre> -> ir funkcija, kas izvada tai padoto tekstu uz HTML dokumentu.
+
+</ul>
+
+</section>
+
+
+<section>
+<h3>Mainīgie</h3>
+
+<ul>
+<li>Pirms to lietošanas nav jādeklarē
+<li>Nav jānorāda datu tips
+<li>Pirmais simbols var būt 
+<ul>
+<li>jebkurš latīņu alfabēta burts vai 
+<li>zemsvītra '_',
+<li>simbols '$',
+</ul>
+<li>bet pārējie var būt gan cipari, gan burti, gan zemsvītra.
+<li>JS ir reģistrjūtīgs (case sensitive).
+</ul>
+
+<pre><code data-trim data-noescape>
+</code></pre>
+
+</section>
+
+
+<section>
+<h3>Globālie un lokālie mainīgie</h3>
+
+<ul>
+<li>Vai mainīgais pieder pie globālajiem vai lokālajiem mainīgajiem nosaka tas, kur šis mainīgais ir deklarēts. 
+<ul>
+<li>Ja mainīgo deklarē kādas funkcijas ietvaros, tad tas automātiski kļūst par šīs funkcijas lokālo mainīgo. 
+<li>Lai izveidotu globālo mainīgo tas jādefinē &lt;script&gt; taga ietvaros taču ārpus funkcijām.
+</ul>
+</ul>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Mainīgo datu tipi
+
+* skaitlis (number);
+* teksts (string);
+* loģiskais – būls (boolean);
+* masīvus (array);
+* objektus (object);
+* null.
+
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Simbolu virknes (string)
+
+* Simbolu virknes (string) JS ļauj norādīt iekļaujot tās gan pēdiņās “ “, gan apastrofos ' '.
+* Lai sibolu virknē varētu iekļaut speciālos simbolus kā pēdiņas, apostrofus, tab, backspace, pārnese jaunā līnijā, tad nepieciešams izmantot izvairīšanās virknes (escape character).
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Escape characters</h3>
+
+<pre><code data-trim data-noescape>
+document.writeln('apostrofs\', pēdīņa\" un slīpsvītra\\&lt;br&gt;');
+document.writeln('A = \101&lt;br&gt;');
+document.writeln('A = \x41&lt;br&gt;');
+document.writeln('Č = \u010C&lt;br&gt;');
+</code></pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Operatori
+
+* Aritmētiskie operatori
+* Salīdzināšanas operatori
+* Loģiskie operatori
+* Operatoru izpildes prioritātes
+
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Aritmētiskie operatori (todo)
+
+* 
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Piešķiršanas operatori (todo)
+
+* 
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Tipa automātiska nomainīšanās</h3>
+
+<pre><code data-trim data-noescape>
+document.writeln(x=2+2+"2")
+//Rezultāts: "42"
+</code></pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Salīdzināšanas operatori (todo)
+
+* 
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Salīdzināšas operatoru piemērs</h3>
+
+<pre><code data-trim data-noescape>
+document.writeln(1 == 1)      //Rezultāts: true
+a = "abc"
+document.writeln(a == "abc")  //Rezultāts: true
+document.writeln(a != "abc")  //Rezultāts: false
+document.writeln(3 < 2.9)     //Rezultāts: false
+document.writeln(10 >= 10)    //Rezultāts: true
+</code></pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Identisks/nav identisks (todo)
+
+* 
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Loģiskie operatori (todo)
+
+* 
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Operatoru izpildes secība (todo)
+
+* 
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Masīvi
+
+* Masīvus uztur valodā iebūvēta Array klase.
+* Lai izveidotu jaunu masīvu ir jāizmanto new atslēgas vārds.
+* Masīva indekss var būt tikai vesels skaitlis un sākas ar 0
+* Lai iegūtu kādu vērtību no masīva izmanto [] kvadrātiekavas
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Masīvu izveidošana</h3>
+
+<pre><code data-trim data-noescape>
+tukshs_masivs = new Array()
+
+inicializets_masivs = new Array(1, 'teksts')
+document.writeln(inicializets_masivs[1])
+//Rezultāts: teksts
+</code></pre>
+
+</section>
+
+
+<section>
+<h3>Vairākdimensiju masīvi</h3>
+
+<pre><code data-trim data-noescape>
+divu_dimensiju_masivs = new Array(
+                              new Array('0-0','0-1'),
+                              new Array('1-0','1-1')
+                              )
+document.writeln(divu_dimensiju_masivs[0][0])
+document.writeln(divu_dimensiju_masivs[1][1])
+
+divu_dimensiju_masivs2 = new Array()
+divu_dimensiju_masivs2[0] = new Array('0-0','0-1')
+divu_dimensiju_masivs2[1] = new Array('1-0','1-1')
+document.writeln(divu_dimensiju_masivs2[0][1])
+document.writeln(divu_dimensiju_masivs2[1][0])
+
+//Rezultāts: 0-0 1-1 0-1 1-0
+</code></pre>
+
+</section>
+
+
+<section>
+<h3>Vairākdimensiju masīvi</h3>
+
+<pre><code data-trim data-noescape>
+divu_dimensiju_masivs3 = [['0-0','0-1'],['1-0','1-1']]
+document.writeln(divu_dimensiju_masivs3[0][1])
+document.writeln(divu_dimensiju_masivs3[1][0])
+//Rezultāts: 0-1 1-0
+</code></pre>
+
+</section>
+
+
+<section>
+<h3>Array objekta metodes (vairāki slaidi todo)</h3>
+
+<pre><code data-trim data-noescape>
+</code></pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Sazarojuma operatori
+
+* if ... else
+* switch
+* nosacījuma operators - ?:
+* nosacījums ? vērtība_ja_patiess : vērtība_ja_nepatiess
+
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Sazarojuma operatoru piemēri (vairāki slaidi todo)</h3>
+
+<pre><code data-trim data-noescape>
+</code></pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Cikla operatori
+
+* while;
+* do ... while;
+* for
+* for – in;
+
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Cikla operatoru piemēri (vairāki slaidi todo)</h3>
+
+<pre><code data-trim data-noescape>
+</code></pre>
+
+</section>
+
+
+<section>
+<h3>Funkciju sintakse</h3>
+
+<pre><code data-trim data-noescape>
+function funkcijas_nosaukums ([arguments [, arguments ...]]){
+      komandu_bloks;
+}
+</code></pre>
+
+</section>
+
+
+<section>
+<h3>Funkcijas piemērs</h3>
+
+<pre><code data-trim data-noescape>
+//funkcijas definēšana
+function sveiki(){
+      document.writeln("Sveika pasaule!&lt;br&gt;");
+}
+
+//funkcijas izmantošana
+sveiki();
+sveiki();
+
+/*Rezultāts:
+Sveika pasaule!&lt;br&gt;
+Sveika pasaule!&lt;br&gt;
+*/
+</code></pre>
+
+</section>
+
+
+
+
+<!--
+
+
+Sample 1: Markdown
+
+<section data-markdown><textarea data-template>
+### 
+
+* 
+
+Note: 
+</textarea></section>
+
+
+Sample 2: Regular with bullets
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+</ul>
+
+</section>
+
+
+Sample 3: Regular with bullets and code sample
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre><code data-trim data-noescape>
+
+</code></pre>
+
+</section>
+
+
+-->
+				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+		
+		
+<!-- Include required JS files -->
+<script type="text/javascript" src="js/shCore.js"></script>
+ 
+<!--
+    At least one brush, here we choose JS. You need to include a brush for every
+    language you want to highlight
+-->
+<script type="text/javascript" src="css/shBrushJScript.js"></script>
+ 
+<!-- Include *at least* the core style and default theme -->
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeDefault.css" rel="stylesheet" type="text/css" />
+		
+	</body>
+</html>

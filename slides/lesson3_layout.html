@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>web teh</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+			
+<!-- Sams: 3) Introducing HTML and CSS -->
+<section data-markdown>
+	<textarea data-template>
+	## 3. Lekcija: Lapas izkārtojumi
+	
+	* Glavenais temats: izkārtojumi
+	* CSS Flexbox
+	* CSS Grid
+	* Bootstrap bibliotēka
+	
+	Note: 
+	</textarea>
+</section>
+
+
+<section data-markdown>
+	<textarea data-template>
+	### Box modelis
+	
+	![boxmodel](img/boxmodel.gif "Box modelis")
+	
+	Note: 
+	</textarea>
+</section>
+
+
+<section data-markdown>
+	<textarea data-template>
+	### Elementu izmērs un attēlojums
+	
+	* Box modelis
+	  * Borders
+	  * Margin un padding
+	  * Izmērs un attēlojums ('display' property)
+	  * Float (left, right) un clear
+	
+	Note: Block elements are as wide as the container you place them within (you can modify their height and width using CSS). Block elements are also preceded and followed by line breaks. /// Inline elements are only as wide as they need to be to display their contents.
+	</textarea>
+</section>
+
+
+<section data-markdown>
+	<textarea data-template>
+	### Izkārtojums ar CSS Flexbox
+	
+	* Flexible Box Module
+	* Vienas dimensijas izkārtošanas modelis
+	
+	Note: 
+	</textarea>
+</section>
+
+
+<section data-markdown>
+	<textarea data-template>
+	### Izkārtojums ar CSS Grid
+	
+	Note: 
+	</textarea>
+</section>
+
+
+<section data-markdown>
+	<textarea data-template>
+	### Pārlūkprogrammu atbalsts
+	
+	Note: 
+	</textarea>
+</section>
+
+
+<section data-markdown>
+	<textarea data-template>
+	### Bootstrap bibliotēka
+	
+	Note: 
+	</textarea>
+</section>
+
+
+<section data-markdown>
+	<textarea data-template>
+	### Web developer tools
+	
+	* Kur var redzēt HTTP statusus
+	* HTML saturs
+	* CSS stila rediģēšana
+	* CSS box modelis
+	* Ekrāna izmēra testēšana
+	
+	Note: 
+	</textarea>
+</section>
+
+
+<!--
+
+
+<section data-markdown>
+	<textarea data-template>
+	
+	
+	Note: 
+	</textarea>
+</section>
+
+-->
+				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+			
+				<!-- Sams: 3) Introducing HTML and CSS -->
+				<section data-markdown>
+					<textarea data-template>
+					# 1. HTML
+					
+					* Hiperteksta iezīmēšanas valoda (Hypertext Markup Language)
+					* HTML apraksta dokumenta satura vispārējo struktūru (bet ne izskatu)
+					
+					Note: You should know what HTML is, what it can do, and most important, what it can’t do. /// This concept might be a bit foreign to you if you’re used to working with WYSIWYG (What You See Is What You Get) editors, so let’s go over the information carefully. /// Nav programmēšanas valoda.
+					</textarea>
+				</section>
+						
+				<section data-markdown>
+					<textarea data-template>
+					### HTML apraksta lapas struktūru
+					
+					![struktura](img/structure.png "Struktūra")
+					
+					Note: If you’ve worked with word processing programs that use style sheets (such as Microsoft Word) or paragraph catalogs (such as FrameMaker), you’ve done something similar; each section of text conforms to one of a set of styles that are predefined before you start working.
+					</textarea>
+				</section>				
+
+				<section data-markdown>
+					<textarea data-template>
+					??? Tagi ???
+					
+					Note: HTML defines a set of common elements for web pages: headings, paragraphs, lists, and tables. It also defines character formats such as boldface and code examples. These ele- ments and formats are indicated inside HTML documents using tags. Each tag has a spe- cific name and is set off from the content of the document using a notation that I discuss a bit later.
+					</textarea>
+				</section>
+				
+				<section data-markdown>
+					<textarea data-template>
+					### HTML nenosaka lapas izklājumu
+					
+					???
+					
+					* Teksta redaktorā ...
+					* HTML specification says nothing about how a page looks
+					* Different browsers running on diverse platforms style elements differently
+					
+					Note: Pārlūkprogrammas rāda kā grib. /// Vēlāk būs par CSS.
+					</textarea>
+				</section>
+				
+				<section data-markdown>
+					<textarea data-template>
+					### Pareizi / Nepareizi
+					
+					* Pareizi:
+					  * Veidot lapas, kuras strādā visās pārlūkprogrammās
+					  * Skaidrs, labi strukturēts saturs
+					* Nepareizi:
+					  * Veidot lapas, kas labi izskatās uz jūsu datora
+					
+					Note: Ko ir viegli lasīt un saprast. /// The Web, as a design medium, is not a new form of paper. The Web is an entirely differ- ent medium, with its own constraints and goals that are very different from working with paper.
+					</textarea>
+				</section>
+				
+				<section data-markdown>
+					<textarea data-template>
+					### Kā darbojas marķēšana
+					
+					* Sākam ar tekstu
+					* Pievienojam speciālus tagus apkārt vārdiem un rindkopām
+					* Tagi norāda dažādas teksta daļas
+					* Pārlūkprogramma attēlo dažādos veidos
+					
+					Note: HTML has a defined set of tags you can use. You can’t (you can in HTML5) make up your own tags to create new styles or features. And just to make sure that things are really confusing, various browsers support different sets of tags.
+					</textarea>
+				</section>				
+
+				<section data-markdown>
+					<textarea data-template>
+					??? What HTML Files Look Like
+					
+					??? rediģēšanas un aplūkošanas process
+					
+					Note: 
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+					### Teksta formatējums ar atsterpēm
+					
+					* HTML ignorē teksta atstarpes (whitespace)
+					  * atstarpes (space)
+					  * tabulācijas (tab)
+					  * rindas pārneses (return)
+					
+					Ielikt screeenshot ar paraugu
+					
+					Ielikt screenshotu no editora, kurā redzams sakārtots html.
+					
+					Note: Tabus lieto, lai programmētājam ir vieglāk redzēt html struktūru.
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+					### HTML atribūti
+					
+					Note: 
+					</textarea>
+				</section>
+
+				<!--
+				
+				<section data-markdown>
+					<textarea data-template>
+					
+					
+					Note: 
+					</textarea>
+				</section>
+				
+				-->
+				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
