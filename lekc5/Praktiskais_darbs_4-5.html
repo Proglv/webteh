@@ -52,7 +52,34 @@
 <li>Pārbauda vai lietotājvārds ir vismaz 5 simbolus garš.
 <li>Pārbauda vai vecums ir no 18 līdz 110.
 <li>Pārbauda vai e-pasta adresē ir simbols "@".
-<li>
+<li>Izmantojiet šo kodu (un papildiniet):
+<pre><code>
+&lt;form id=&quot;forma&quot;&gt;
+&lt;input type=&quot;text&quot; id=&quot;name&quot; value=&quot;test&quot;&gt;
+&lt;/form&gt;
+
+
+&lt;script&gt;
+var forma = document.getElementById('forma');
+
+function validateForm(event) {
+	event.preventDefault(); // Apturēt forma nosūtī&scaron;anu
+
+	var name = document.getElementById('name');
+	console.log(name);
+	console.log(name.value);
+
+	if (name.value == &quot;mikelis&quot;) {
+		forma.submit();
+	} else {
+		// forma nav derīga, paziņojam kas par problēmu
+		alert(&quot;nepareizs vārds&quot;);
+	}
+}
+
+forma.addEventListener(&quot;submit&quot;, validateForm, false);
+&lt;/script&gt;
+</code></pre>
 </ol>
 </li>
 </ol>
@@ -81,6 +108,7 @@ xhr.send();
 </div>
 
 
+<!-- 
 <h4>Uzdevums 4</h4>
 <div class="ordering">
 <ol>
@@ -91,6 +119,7 @@ xhr.send();
 </li>
 </ol>
 </div>
+ -->
 
 
 <p>Darbu sagatavojiet jaunā folderī ar nosaukumu "Vārds Uzvārds Prakt45" (aiztājiet ar savu vārdu un uzvārdu).<br/>
