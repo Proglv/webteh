@@ -55,14 +55,25 @@
 </ol>
 </div>
 
-<h4>Uzdevums 3</h4>
+<h4>Uzdevums 3: Ieladēt datus izmantojot AJAX un attēlot lapā</h4>
 <div class="ordering">
 <ol>
-<li>...
-<ol>
-<li>...
-</ol>
-</li>
+<li>Ielādēt saturu no lapas http://numbersapi.com/111 (vai cita adrese, kas atgriež vienkāršu tekstu).
+<li>Attēlojiet atgriezto tekstu mājaslapas elementā.
+<li>Piesaistiet elementu ar "click" notikumu, lai ielādētu jaunus rezultātus.
+<li><em>Izmantojiet šo kodu:
+<pre><code>
+// AJAX objekta izveida un reakcijas funkcijas definēšana
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    alert(this.responseText);
+  }
+};
+// AJAX pieprasījums
+xhr.open("GET", "http://numbersapi.com/111", true);
+xhr.send();
+</code></pre>
 </ol>
 </div>
 
