@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Praktiskais darbs 4-5</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<style>
+.ordering ol {
+    counter-reset: item;
+}
+.ordering ol li {
+    display: block;
+    position: relative;
+}
+.ordering ol li:before {
+    content: counters(item, ".")".";
+    counter-increment: item;
+    position: absolute;
+    margin-right: 100%;
+    right: 10px; /* space between number and text */
+</style>
+
+</head>
+<body>
+
+<a href="../">Atpakaļ</a>
+
+<h3>Mērķis: Javascript pamatu apgūšana</h3>
+
+<h4>Uzdevums 1: Izveidot ciklu</h4>
+<div class="ordering">
+<ol>
+<li>Izveidojiet JavaScript programmu, kas:
+<ol>
+<li>Izvada skaitļus no 1 līdz 100.
+<li>Bet, ja skaitlis dalās 3, tad izvada "Fizz". Ja skaitlis dalās ar 5, izvada "Buzz".
+<li>Ja skaitlis dalas gan ar 3, gan ar 5 - izvada FizzBuzz.
+<li><em>Izvadei uz ekrāna izmantojiet funkciju <code>document.writeln()</code></em>
+<li><em>Izmantojiet kādu no cikla operatoriem - "for", "while" "do ... while" utt.
+</ol>
+</li>
+</ol>
+</div>
+
+<h4>Uzdevums 2: Formas validācija</h4>
+<div class="ordering">
+<ol>
+<li>Izveidojiet formu un JS programmu, kas pārbauda formas datus pirms nosūtīšanas:
+<ol>
+<li>Formas lauki: name, surname, username, password, age.
+<li>Pārbauda vai lauki ir aizpildīti (nedrīkt būt tukšas vērtības).
+<li>Pārbauda vai lietotājvārds ir vismaz 5 simbolus garš.
+</ol>
+</li>
+</ol>
+</div>
+
+<h4>Uzdevums 3</h4>
+<div class="ordering">
+<ol>
+<li>...
+<ol>
+<li>...
+</ol>
+</li>
+</ol>
+</div>
+
+
+<h4>Uzdevums 4</h4>
+<div class="ordering">
+<ol>
+<li>...
+<ol>
+<li>...
+</ol>
+</li>
+</ol>
+</div>
+
+
+<p>Darbu sagatavojiet jaunā folderī ar nosaukumu "Vārds Uzvārds Prakt45" (aiztājiet ar savu vārdu un uzvārdu).<br/>
+Praktiskā darba folderi arhivējiet zip formātā.<br/>
+Nosūtiet arhīvu uz e-pastu mikelis@va.lv.</p>
+
+</body>
+</html>
