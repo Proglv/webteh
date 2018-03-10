@@ -1,0 +1,512 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>web teh</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		
+		<link rel="stylesheet" href="lekcijas.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+			
+<section data-markdown><textarea data-template>
+## 1. Lekcija: HTML
+
+
+Note: 
+</textarea></section>
+
+
+<!-- 
+<section data-markdown><textarea data-template>
+### Šajā lekcijā
+
+* Ievads tīmekļa tehnoloģijās
+* URL
+* HTTP pieprasījumi
+* HTML/XHTML
+* Tagi
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Kas ir internets? todo
+
+* 
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Interneta servisi
+
+* vispasaules tīmeklis (WWW),
+* elektroniskais pasts (POP3, IMAP, SMTP),
+* failu pārsūtīšanas iespējas (FTP, SCP),
+* reālā laika teksta komunikācijas (IRC, ICQ, AIM, utt.),
+* attālinātas piekļuves iespējas (telnet, ssh),
+* lokālo datortīklu apvienošana (VPN),
+* citi servisi (Datu bāzes, biznesa aplikācijas)
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Īsais ieskats vēsturē todo
+
+* 1989. gads CERN jeb Eiropas elementārdaļiņu fizikas laboratorija (Ženēva, Šveice).
+* Tim Berner-Lee
+* Neskaidri, bet aizraujoši!
+* HTML (ang. Hypertext Markup Language, lat. Hiperteksta iezīmēšanas valoda)
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Web vēsture todo
+
+* https://www.w3.org/History/1989/proposal.html
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Terminoloģija todo
+
+* Web serveris
+* Tīmekļa (HTML) dokuments jeb tīmekļa lapa (web lapa)
+* Sākumlapa jeb mājaslapa
+* Vietne (visas lapas kopā)
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Vispasaules tīmekļa darbības principi todo
+
+* Serveris
+* Klients
+* Pārlūkprogramma
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Pārlūkprogrammas
+
+* Chrome (ieteiktā)
+* Firefox
+* MS Edge
+* Safari
+
+Note: 
+</textarea></section>
+
+<section data-markdown><textarea data-template>
+### Informācijas plūsma todo
+
+* 
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### URL - Uniform Resource Locator
+
+* Apraksta ceļu kā iegūt datortīklā pieejamu informāciju.
+* URL tiek saukts arī par tīmekļa adresi vai arī URI (ang. Uniform Resource Idetifier).
+* LV → Vienotais resursu vietrādis
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### URL struktūra todo
+
+* 
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### HTTP pieprasījumi
+
+HTTP jeb hiperteksta transporta protokols ir aplikāciju (lietojuma) līmeņa (OSI līmenis) protokols, kas nodrošina to, lai interneta lietotājs varētu lejupielādēt tam interesējošo dokumentu. 
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### HTTP pieprasījumi
+
+* GET metode ir paredzēta tikai informācijas iegūšanai no servera.
+* POST metode ir tieši paredzēta manipulācijai ar datiem, tādēļ tā pieļauj lielākus pieprasījuma datu apjomus nekā GET.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### HTTP pieprasījuma un atbildes paraugs todo
+
+* 
+
+Note: 
+</textarea></section>
+ -->
+
+
+<section data-markdown><textarea data-template>
+### Kas ir HTML?
+
+* HTML ir iezīmēšanas valoda, lai aprakstītu tīmekļa dokumentus (tīmekļa vietnes)
+* HTML - Hyper Text Markup Language
+* Iezīmēšanas valoda ir kopa ar iezīmēšanas elementiem (tagiem).
+* HTML dokumenti ir aprakstīti ar HTML tagiem
+* Katrs HTML tags apraksta atšķirīgu dokumenta saturu.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Tagi un to atribūti (I)</h3>
+
+<ul>
+<li>Tagi ir HTML elementi, kas norāda kā attēlot vai citādi apstrādāt dokumenta tekstu.
+<li><code>&lt;tags...&gt; Taga saturs &lt;/tags&gt;</code>
+<li>Tagus un tekstu kas atrodas starp atverošo un aizverošo tagu, sauc par taga saturu.
+<li>Atsevišķiem tagiem nav obligāti nepieciešams noslēdzošais tags, jo starp to sākuma un beigu tagu nav atļauti citi tagi vai teksts.
+<li><code>&lt;br .../&gt;</code>
+
+</ul>
+
+</section>
+
+
+<section>
+<h3>Tagi un to atribūti (II)</h3>
+
+<ul>
+<li>Pirmais vārds (vai burts/i) tagā ir arī tā nosaukums, kas parasti diezgan labi apraksta taga funkciju.
+<li>Nākamie vārdi tagā ir tā atribūti, kuriem ir konkrēta vērtības, kas norādītā pēc vienādības zīmes '='.
+<li>Piemērs:
+</ul>
+<code>&lt;a href=&quot;http://www.va.lv&quot;&gt;ViA&lt;/a&gt;</code>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Biežāk izmantotie atribūti
+
+* alt - Specifies an alternative text for an image
+* disabled - Specifies that an input element should be disabled
+* href - Specifies the URL (web address) for a link
+* id - Specifies a unique id for an element
+* src - Specifies the URL (web address) for an image
+* style - Specifies an inline CSS style for an element
+* title - Specifies extra information about an element (displayed as a tool tip)
+* value - Specifies the value (text content) for an input element.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Obligātie tagi</h3>
+
+<pre><code data-trim data-noescape>
+&lt;html&gt;
+&lt;head&gt;
+&lt;body&gt;
+</code></pre>
+
+</section>
+
+
+<section>
+<h3>HTML dokuments</h3>
+
+<pre><code data-trim data-noescape>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Mans HTML dokuments&lt;/title&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Mans HTML virsraksts&lt;/h1&gt;
+&lt;p&gt;
+	Apgūstot tīmekļa tehnoloģijas
+	&lt;br/&gt;
+	&lt;a href=&quot;http://www.va.lv&quot;&gt;Vidzemes augstskolā&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;&amp;lt;&amp;copy;2018&amp;gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+</section>
+
+
+<!-- 
+<section data-markdown><textarea data-template>
+### HTML struktūra todo
+
+* 
+
+Note: 
+</textarea></section>
+ -->
+
+
+<section>
+<h3>Meta informācija</h3>
+
+<pre><code data-trim data-noescape>
+&lt;head&gt;
+&lt;title&gt;Lapas virsraksts&lt;/title&gt;
+&lt;meta name=&quot;keywords&quot; content=&quot;lekcija, teorija, html, meta&quot; /&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;/head&gt;
+</code></pre>
+
+</section>
+
+
+<section>
+<h3>Speciālie tagi</h3>
+
+<ul>
+<li>&lt;link&gt;
+<li>&lt;style&gt;
+<li>&lt;script&gt;
+</ul>
+
+<pre><code data-trim data-noescape>
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;stili/stils.css&quot; /&gt;
+</code></pre>
+
+</section>
+
+
+<section>
+<h3>!DOCTYPE (I)</h3>
+
+<ul>
+<li>HTML dokumenta sākumā (1.rindā) jābūt doctype tagam kas norāda dokumenta tipu, lai pārlūkprogrammai būtu zināms kura specifikācija izmantota dokumenta veidošanā. 
+<li>http://www.w3.org/QA/2002/04/valid-dtd-list.html
+</ul>
+
+</section>
+
+
+<section>
+<h3>!DOCTYPE (II)</h3>
+
+<ul>
+<li>Strict - nav pieļaujami HTML elementi, kas nodrošina vizuālo noformējumu.
+<li>Transitional - iekļauti arī vizuālā noformējuma elementi, kas atļauj jau HTML dokumentā noteikt burtu, līniju izmēru un krāsu, kā arī citas īpašības.
+<li>Frameset - ja vēlaties HTML dokumentā izmantot freimus.
+<li>&lt;!DOCTYPE html&gt; būs OK!
+</ul>
+
+</section>
+
+
+<section>
+<h3>Saites uz citiem resursiem</h3>
+
+<ul>
+<li>Saites uz resursiem norādīt to adresii izmanto:
+<ul>
+<li>lai izveidotu saitas uz citiem dokumentiem,
+<li>lai iekļautu attēlus, kuri jāparāda HTML dokumentā.
+</ul>
+<li>Absolūtais ceļš norāda pilnu ceļu līdz interesējošai datnei. Parasti tas tiek izmantots, ja vēlaties norādīt saiti uz citā tīmekļa vietnē esošiem resursiem. &lt;a&nbsp;href=&quot;/mape2/dok2.html&quot;&gt;
+<li>Relatīvais ceļš nozīmē, ka tiek norātīts ceļš uz citu resursu attiecībā pret html dokumentu,kurā šī saite norādīta. &lt;a&nbsp;href=&quot;dok2.html&quot;&gt;
+</ul>
+<li>Vienas tīmekļa vietnes ietvaros ieteicams lietot tikai relatīvos ceļus.
+</ul>
+
+</section>
+
+
+<section>
+<h3>Relatīvais ceļš</h3>
+
+<ul>
+<li>Direktorijas vai faila nosaukums
+<li>. → esošā direktorija
+<li>.. -> vecāku direktorija
+<li>/ -> direktoriju atdalīšanai
+</ul>
+
+</section>
+
+
+<section>
+<h3>HTML attēlošana</h3>
+
+<ul>
+<li>HTML ievadītās līnijas pārneses (enter u.c.) netiek attēlotas pārlūkprogrammā.
+<li>Lai kārtotu teksta struktūru izmantojiet &lt;p&gt;, &lt;br&gt; u.c. tagus
+</ul>
+
+</section>
+
+
+<section>
+<h3>HTML attēlošana</h3>
+
+<ul>
+<li>Bloka līmeņa tagi - aizņem maksimālu platumu, attēlojas viens zem otra
+<li>Ringas līmeņa tagi - aizņem minimālu platumu, attēlojas blakus viens otram
+</ul>
+
+</section>
+
+
+<section>
+<h3>Bloka līmeņa tagi (I)</h3>
+
+<ul>
+<li>&lt;h1&gt;,&lt;h2&gt;,&lt;h3&gt;,&lt;h4&gt;,&lt;h5&gt;,&lt;h6&gt;
+<li>&lt;p&gt;
+<li>&lt;ul&gt;, &lt;ol&gt; un &lt;li&gt;
+</ul>
+
+</section>
+
+
+<section>
+<h3>List piemēri todo</h3>
+
+
+
+</section>
+
+
+<section>
+<h3>HTML validācija</h3>
+
+<ul>
+<li>Lai pārbaudītu vai izveidotais HTML vai XHTML dokuments atbilst prasībām var izmantot validatorus, kas pieejami gan internetā tiešsaistē <a href="http://validator.w3.org/">http://validator.w3.org/</a>, gan arī lejuplādei.
+</ul>
+
+</section>
+
+<!--
+
+
+Sample 1: Markdown
+
+<section data-markdown><textarea data-template>
+### 
+
+* 
+
+Note: 
+</textarea></section>
+
+
+Sample 2: Regular with bullets
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+</ul>
+
+</section>
+
+
+Sample 3: Regular with bullets and code sample
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre><code data-trim data-noescape>
+
+</code></pre>
+
+</section>
+
+
+-->
+				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+		
+		
+<!-- Include required JS files -->
+<script type="text/javascript" src="js/shCore.js"></script>
+ 
+<!--
+    At least one brush, here we choose JS. You need to include a brush for every
+    language you want to highlight
+-->
+<script type="text/javascript" src="css/shBrushJScript.js"></script>
+ 
+<!-- Include *at least* the core style and default theme -->
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeDefault.css" rel="stylesheet" type="text/css" />
+		
+	</body>
+</html>
