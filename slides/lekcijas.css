@@ -1,3 +1,19 @@
-code {
-font-size: 110% !important;
+
+.gutter {
+display: none;
+}
+
+.present .syntaxhighlighter {
+/* margin: 0 !important; */
+/* margin-bottom: 100px; */
+}
+
+.present .syntaxhighlighter .js,
+.present .syntaxhighlighter .html {
+font-size: 0.68em !important;
+letter-spacing: -4px !important;
+}
+
+.present .syntaxhighlighter table td.code .line {
+padding: 0 !important;
 }

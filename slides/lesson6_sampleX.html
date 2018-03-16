@@ -1,0 +1,28 @@
+<!DOCTYPE html> <html>
+<head>
+<title>Altering Form Values</title> </head>
+<body>
+<ul id="editable"> </ul>
+<form id="addElement">
+<label>New list item: <input name="liContent" size="60" /></label>
+<input type="submit" value="Add Item" /> </form>
+<p><a id="clearList" href="#">Clear List</a></p>
+<script src="jquery.js"></script>
+<script type="text/javascript" charset="utf-8">
+$(function () {
+	$("#clearList").click(function (event) {
+		event.preventDefault();
+		$("#editable").empty();
+	});
+	$("#addElement").submit(function (event) {
+		event.preventDefault();
+		$("#editable").append("<li>"
+			+ $("#addElement input[name='liContent']").val() + "</li>");
+		$("#addElement input[name='liContent']").val("");
+	});
+	$(document).on('click', "#editable li", function () {
+		$(this).remove(); 
+	});
+});
+</script> </body>
+</html>
