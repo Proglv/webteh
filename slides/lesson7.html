@@ -81,6 +81,7 @@ Note:
 </textarea></section>
 
 
+<!-- 
 <section data-markdown><textarea data-template>
 ### Apache un PHP sasaistes shēma
 
@@ -88,6 +89,21 @@ Note:
 
 Note: 
 </textarea></section>
+ -->
+
+
+<section>
+
+<img src="img/nixon-imag-022.png">
+
+</section>
+
+
+<section>
+
+<img src="img/nixon-imag-023.png">
+
+</section>
 
 
 <section data-markdown><textarea data-template>
@@ -618,10 +634,17 @@ Note:
 
 * PHP izmanto asociatīvos masīvus. Tas nozīmē katrai vērtībai var norādīt brīvi izvēlētu atslēgu jeb indeksu.
 * Atslēga jeb indekss ir kā vērtības adrese masīvā. 
-* Lai izveidotu jaunu masīvu jāizmanto PHP iebūvētā funkcija <code>array()</code>. Tai tiek padoti <code>atslēga => vērtība</code> pāri. 
 * Indekss drīkst būt vesels skaitlis vai simbolu virkne (<code>string</code>), vērtība var būt jebkura tipa mainīgais tai skaitā masīvs. 
-* Masīva indekss var būt tikai vesels skaitlis un tam jābūt robežās no 0 līdz n, kur n ir elementu skaits. (TODO)
-* TODO: īsā sintakse!
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Array
+
+* Lai izveidotu jaunu masīvu jāizmanto PHP iebūvētā funkcija <code>array()</code>. Tai tiek padoti <code>atslēga => vērtība</code> pāri. 
+* īsā sintakse ar kvadrātiekavām: []
 
 Note: 
 </textarea></section>
@@ -657,40 +680,28 @@ array( [atslēga =>] vērtība
 <h3>Array piemērs</h3>
 
 <pre class="brush: php">
-//vērtības var pievienot masīvam jau tā izveidošanas brīdī $arr = array("vards" => "Jānis", 40 => 123);
+//vērtības var pievienot masīvam jau tā izveidošanas brīdī
+$arr = array("vards" => "Jānis", 40 => 123); // pilnā sintakse
+$arr = ["vards" => "Jānis", 40 => 123]; // īsā sintakse
 $a = $arr["vards"]; //vērtība: Jānis
 $a = $arr[40]; //vērtība: 123
 
 //var izveidot arī tukšu masīvu un pievienot tam vērtības vēlāk
-$arr2 = array();
+$arr2 = array(); // pilnā sintakse
+$arr2 = []; // īsā sintakse
 $arr2["vards"] = "Kaspars";
-
-//var pievienot jaunu masīvu, kā vērtību
-//(veidot 2 un vairāk dimensiju masīvu)
-$arr["mans_masivs"] = array("atslega1" => "vertiba1");
-
-//tad vērtībai var piekļūt sekojoši
-$a = $arr["mans_masivs"]["atslega1"]; //Rezultāts: vertiba1
 </pre>
 
 </section>
 
 
 <section>
-<h3>Array piemērs ar īso sintaksi</h3>
+<h3>Array piemērs</h3>
 
 <pre class="brush: php">
-//vērtības var pievienot masīvam jau tā izveidošanas brīdī $arr = ["vards" => "Jānis", 40 => 123];
-$a = $arr["vards"]; //vērtība: Jānis
-$a = $arr[40]; //vērtība: 123
-
-//var izveidot arī tukšu masīvu un pievienot tam vērtības vēlāk
-$arr2 = array();
-$arr2["vards"] = "Kaspars";
-
 //var pievienot jaunu masīvu, kā vērtību
 //(veidot 2 un vairāk dimensiju masīvu)
-$arr["mans_masivs"] = ["atslega1" => "vertiba1"];
+$arr["mans_masivs"] = array("atslega1" => "vertiba1");
 
 //tad vērtībai var piekļūt sekojoši
 $a = $arr["mans_masivs"]["atslega1"]; //Rezultāts: vertiba1
@@ -1323,6 +1334,16 @@ Note:
 </textarea></section>
 
 
+<section data-markdown><textarea data-template>
+### Klases un objekti
+
+* Atslēgas vārds new izveido aiz tā norādītās klases objektu izsaucot <code>__construct()</code> funkciju un atgriežot jaunu, inicializētu objektu.
+* Objekta atribūtus un funkcijas var izsaukt izmantojot -> operatoru, bet <code>$this</code> ir speciāls mainīgais, kas pieejams tikai objekta iekšienē un norāda uz konkrēto objektu.
+
+Note: 
+</textarea></section>
+
+
 <section>
 <h3>Klases un objekti</h3>
 
@@ -1349,15 +1370,55 @@ class Durvis{
 	// koks, plastmasa, metāls, ...
 	// balts, zils, zaļš, ...
 	// atvērtas, aizvērtas
-	/*k ontruktors inicializē objekta atribūtus, kad tas tiek veidots */
+	...
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Klases un objekti</h3>
+
+<pre class="brush: php">
+class Durvis{
+	...
+	/*kontruktors inicializē objekta atribūtus, kad tas tiek veidots */
 	public function __construct($materials){
 		$this->materials = $materials;
 		$this->stavoklis = 'aizvertas';
 	}
+	...
+}
+?>
+</pre>
+
+</section>
+
+
+<section>
+<h3>Klases un objekti</h3>
+
+<pre class="brush: php">
+class Durvis{
+	...
 	/* funkcijas apraksta kādas darbības iespējams veikt ar objektu */
 	public function krasot($krasa){
 		$this->krasa = $krasa;
 	}
+	...
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Klases un objekti</h3>
+
+<pre class="brush: php">
+class Durvis{
+	...
 	public function vert(){
 		if ($this->stavoklis == 'atvertas'){
 			$this->stavoklis = 'aizvertas';
@@ -1365,11 +1426,39 @@ class Durvis{
 			$this->stavoklis = 'atvertas';
 		}
 	}
+	...
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Klases un objekti</h3>
+
+<pre class="brush: php">
+class Durvis{
+	...
 	public function aprakstit(){
 		echo "<p>Materiāls: $this->materials <br />\n";
 		echo "Krāsa: $this->krasa <br />\n";
 		echo "Stāvoklis: $this->stavoklis <br /></p>\n";
 	}
+	...
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Klases un objekti</h3>
+
+<pre class="brush: php">
+class Durvis{
+
+	...
+
 }
 // Izveido jaunas durvis (izsauc konstruktoru)
 $manasDurvis = new Durvis('metals');
@@ -1378,20 +1467,9 @@ $manasDurvis->krasot('balts');
 $manasDurvis->aprakstit();
 $manasDurvis->vert();
 $manasDurvis->aprakstit();
-?>
 </pre>
 
 </section>
-
-
-<section data-markdown><textarea data-template>
-### Klases un objekti
-
-* Atslēgas vārds new izveido aiz tā norādītās klases objektu izsaucot <code>__construct()</code> funkciju un atgriežot jaunu, inicializētu objektu.
-* Objekta atribūtus un funkcijas var izsaukt izmantojot -> operatoru, bet <code>$this</code> ir speciāls mainīgais, kas pieejams tikai objekta iekšienē un norāda uz konkrēto objektu.
-
-Note: 
-</textarea></section>
 
 
 <section>
@@ -1464,8 +1542,15 @@ function dalijums($skaititajs, $saucejs){
 		return $skaititajs / $saucejs;
 	}
 }
-$skait = 1;
-$sauc = 0;
+</pre>
+
+</section>
+
+
+<section>
+<h3>Izņēmumi (Exceptions)</h3>
+
+<pre class="brush: php">
 try{
 	$a = dalijums($skait,$sauc);
 	echo "$skait / $sauc = $a";

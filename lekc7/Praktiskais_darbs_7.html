@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Praktiskais darbs 7</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<style>
+.ordering ol {
+    counter-reset: item;
+}
+.ordering ol li {
+    display: block;
+    position: relative;
+}
+.ordering ol li:before {
+    content: counters(item, ".")".";
+    counter-increment: item;
+    position: absolute;
+    margin-right: 100%;
+    right: 10px; /* space between number and text */
+</style>
+
+</head>
+<body>
+
+<a href="../">Atpakaļ</a>
+
+<h3>Mērķis: PHP apgūšana</h3>
+
+<h4>Uzdevums 1: Saglabāt un nolasīt sīkdatni (cookie)</h4>
+<div class="ordering">
+<ol>
+<li>Izveidojiet PHP programmu, kas izmanto sīkdatni:
+<ol>
+<li>Uztaisīt HTML dokumentu ar formu un diviem dropdown "valsts" un "valoda".
+<li>Nosūtīt mainīgos uz serveri ar POST metodi.
+<li>Ar PHP saglabāt šos mainīgos sīkdatnē (cookie).
+<li>Ar PHP nolasīt šos mainīgos no sīkdatnes un uzstādīt kā noklusētās vērtības dropdowniem.
+<li>Izveidot saiti, kas uzstāda vērtības uz "Latvija" un "Latviešu" (ar GET metodi).
+</ol>
+</li>
+</ol>
+</div>
+
+
+<!-- 
+<h4>Uzdevums 2: Izveidot TODO aplikāciju</h4>
+<div class="ordering">
+<ol>
+<li>Izveidojiet JavaScript/jQuery programmu:
+<ol>
+<li><em>Variet izmantot kā paraugu - <a href="../slides/lesson6_sampleX.html">piemēru no prezentācijas</a>.</em>
+<li>Var pievienot un dzēst todo ierakstus (skat, piemēru).
+<li>Var atzīmēt ierakstu kā "izpildītu" - aktīvs checkbox un ieraksts <span style="text-decoration: line-through;">pārsvītrots</span>.
+<li>Var atzīmēt ierakstu kā "neizpildītu" - neaktīvs checkbox.
+<li>Bonus uzdevums (nav obligāts) - saglabāt visu sarakstu localStorage datubāzē un ielādēt atverot lapu. Skat: <a href="https://www.w3schools.com/html/html5_webstorage.asp">https://www.w3schools.com/html/html5_webstorage.asp</a>
+</ol>
+</li>
+</ol>
+</div>
+ -->
+
+
+
+
+
+
+<!-- 
+<h4>Uzdevums 2: Formas validācija</h4>
+<div class="ordering">
+<ol>
+<li>Izveidojiet formu un JS programmu, kas pārbauda formas datus pirms nosūtīšanas:
+<ol>
+<li>Formas lauki: name, surname, username, password, age.
+<li>Pārbauda vai lauki ir aizpildīti (nedrīkt būt tukšas vērtības).
+<li>Pārbauda vai lietotājvārds ir vismaz 5 simbolus garš.
+<li>Pārbauda vai vecums ir no 18 līdz 110.
+<li>Pārbauda vai e-pasta adresē ir simbols "@".
+<li>Izmantojiet šo kodu (un papildiniet):
+<pre><code>
+&lt;form id=&quot;forma&quot;&gt;
+&lt;input type=&quot;text&quot; id=&quot;name&quot; value=&quot;test&quot;&gt;
+&lt;/form&gt;
+
+
+&lt;script&gt;
+var forma = document.getElementById('forma');
+
+function validateForm(event) {
+	event.preventDefault(); // Apturēt forma nosūtī&scaron;anu
+
+	var name = document.getElementById('name');
+	console.log(name);
+	console.log(name.value);
+
+	if (name.value == &quot;mikelis&quot;) {
+		forma.submit();
+	} else {
+		// forma nav derīga, paziņojam kas par problēmu
+		alert(&quot;nepareizs vārds&quot;);
+	}
+}
+
+forma.addEventListener(&quot;submit&quot;, validateForm, false);
+&lt;/script&gt;
+</code></pre>
+</ol>
+</li>
+</ol>
+</div>
+
+<h4>Uzdevums 3: Ieladēt datus izmantojot AJAX un attēlot lapā</h4>
+<div class="ordering">
+<ol>
+<li>Ielādēt saturu no lapas http://numbersapi.com/111 (vai cita adrese, kas atgriež vienkāršu tekstu).
+<li>Attēlojiet atgriezto tekstu mājaslapas elementā.
+<li>Piesaistiet elementu ar "click" notikumu, lai ielādētu jaunus rezultātus.
+<li><em>Izmantojiet šo kodu:
+<pre><code>
+// AJAX objekta izveida un reakcijas funkcijas definēšana
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    alert(this.responseText);
+  }
+};
+// AJAX pieprasījums
+xhr.open("GET", "http://numbersapi.com/111", true);
+xhr.send();
+</code></pre>
+</ol>
+</div>
+ -->
+
+
+<!-- 
+<h4>Uzdevums 4</h4>
+<div class="ordering">
+<ol>
+<li>...
+<ol>
+<li>...
+</ol>
+</li>
+</ol>
+</div>
+ -->
+
+
+<p>Darbu sagatavojiet jaunā folderī ar nosaukumu "Vārds Uzvārds Prakt7" (aiztājiet ar savu vārdu un uzvārdu).<br/>
+Praktiskā darba folderi arhivējiet zip formātā.<br/>
+Nosūtiet arhīvu uz e-pastu mikelis@va.lv.</p>
+
+</body>
+</html>
