@@ -1,0 +1,1757 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>web teh</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		
+		<link rel="stylesheet" href="lekcijas.css">
+
+		<!-- highlighter -->
+		<script type="text/javascript" src="sxh/syntaxhighlighter.js"></script> 
+<!-- 		<link href="sxh/theme-default.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-django.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-rdark.css" rel="stylesheet" type="text/css" /> -->
+		<link href="sxh/theme-midnight.css" rel="stylesheet" type="text/css" />
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+			
+<section data-markdown><textarea data-template>
+## 7. Lekcija: PHP I
+
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Šajā lekcijā
+
+* Kas ir dinamiska tīmekļa vietne?
+* PHP skriptu valoda un interpretators
+* PHP sintakses pamati
+* Mainīgie
+* Operatori
+* Funkcijas
+* Klases un objekti, Mantošana
+* GET un POST pieprasījumi
+* Datu iekļaušana
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Dinamiskas tīmekļa vietnes
+
+* HTML dokumenti ir statiski
+* Dinamiskas tīmekļa vietnes ir programmas, kas apkalpo lietotāju pieprasījumus.
+* Dinamiskas vietnes var izstrādāt dažādās programmēšanas valodās
+* Viena no populārākajām valodām tīmekļa vietņu izstrādāšanā ir PHP
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### PHP - Skriptu valoda un interpretators
+
+* Par skriptu valodām sauc programmēšanas valodas, kas tiek interpretētas.
+* Skripti netiek kompilēti, bet gan “padoti” interpretatoram, kas spēj nolasīt komandas no izejas koda.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Apache un PHP sasaistes shēma
+
+* TODO
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### PHP sintakses pamati
+
+* Analizējot datni interpretetators meklē atverošos ('&lt;?php' ) un aizverošos tagus ('?>'),
+* Visu, kas atrodas ārpus php tagiem interpretators ignorē un izvada ārā.
+* PHP skriptus var ievietot dažādos dokumentos, tai skaitā HTML un XML.
+* Datnei, kas satur skriptus, jāpiešķir paplašinājums .php
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Piemērs</h3>
+
+<pre class="brush: html">
+&lt;body>
+      &lt;h1>&lt;?php echo 'Sveiciens!'; ?>&lt;/h1>
+&lt;/body>
+</pre>
+<pre class="brush: html">
+&lt;body>
+      &lt;h1>Sveiciens!&lt;/h1>
+&lt;/body>
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Komentāri
+
+* Komentārs ir īpaši iezīmēta skripta daļa, kuru interpretators ignorē t.i. neizpilda.
+* PHP ir divu veidu komentāri:
+ * rindas komentārs, kas sākas ar divām slīpsvītrām '//' un turpinās līdz rindiņas beigām un
+ * bloka komentārs, kas var aptvert vairākas rindas. Tā sākumu norāda ar '/\*' un beigas ar '\*/'.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Komentāra piemērs</h3>
+
+<pre class="brush: php">
+&lt;?php
+      // C++ stila vienas rindas komentārs
+      echo 'Šis teksts tiek izvadīts'; // bet šo interpretators ignorē
+      /* bloka komentārs,
+         kas uzrakstīts pa
+         vairākām rindām */
+?>
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Mainīgie un operatori
+
+* Mainīgais ir atmiņas apgabals kurā var ierakstīt kādu vērtību (skaitli, simbolu, simbolu virkni utt).
+* Katram mainīgajam ir jāpiešķir nosaukums.
+* PHP visi mainīgie sākas ar **'$'** simbolu, pēc tam seko **vismaz viens** latīņu alfabēta **burts vai zemsvītra '_'**, bet pārējā nosaukuma daļa var sastāvēt no latīņu alfabēta burtiem, cipariem un zemsvītrām.
+* Atšķirībā no citām programmēšanas valodām kā Java un C++ mainīgā tips iepriekš nav jānorāda, interpretators to nosaka pēc piešķirtās vērtības.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Mainīgie</h3>
+
+<ul>
+<li>Derīgi mainīgo nosaukumi:
+</ul>
+
+<pre class="brush: php">
+$mainigais
+$ShisIr1MainigaisArCiparu
+$_mainigais_ar_zemsvitru
+</pre>
+
+<ul>
+<li>Nederīgi mainīgo nosaukumi:
+</ul>
+
+<pre class="brush: php">
+$1mainigais_ar_ciparu_sakuma
+$mainigais-ar-neatlautiem-simboliem
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Mainīgie
+
+* Vērtības mainīgajiem piešķir izmantojot vienādības zīmi '=', kur tās kreisajā pusē ir mainīgais, bet labajā pusē vērtība, kura jāpiešķir šim mainīgajam.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Skalārie mainīgie
+
+* Skalārie mainīgie laika momentā spēj glabāt tikai vienu vērtību atšķirībā no masīviem un objektiem.
+* PHP piedāvā četrus skalāro mainīgo tipus: būls (<code>boolean</code>), vesels skaitlis (<code>integer</code>),
+decimāldaļskaitlis (<code>float</code>) un simbolu virkne (<code>string</code>).
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Skaitļi</h3>
+
+<ul>
+<li>integer - vesels skaitlis, kura vērtību var norādīt decimālajā, oktālajā vai heksadecimālajā skaitīšanas sistēmā.
+</ul>
+
+<pre class="brush: php">
+$a = 1234; // decimāls skaitlis
+$a = -123; // a negatīvs skaitlis
+$a = 0123; // octāls skaitlis (vienāds ar 83 decimālajā sistēmā)
+$a = 0x1A; // hexadecimāls skaitlis (26 – decimālajā sistēmā)
+</pre>
+
+</section>
+
+
+<section>
+<h3>Skaitļi</h3>
+
+<ul>
+<li>float - decimāldaļskaitlis, kura vērtību var norādīt trīs dažādos pierakstos, kas visi ir decimālajā skaitīšanas sistēmā.
+</ul>
+
+<pre class="brush: php">
+$a = 1.234;
+$b = 1.2e3;
+$c = 7E-10;
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Aritmētiskie operatori
+
+* PHP ir iebūvēti aritmētiskie operatori
+ * '+' - saskaitīšanai, 
+ * '-' - atņemšanai,
+ * '*' - reizināšanai, 
+ * '/' - dalīšanai un
+ * '%' - moduļa aprēķināšanai
+* Tiek piedāvāti arī operatori, kas apvieno piešķiršanu un aritmētiskas operācijas
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Iebūvētie aritmētiskie operatori</h3>
+
+<pre class="brush: php">
+$summa = 1 + 2;	//mainīgā vērtība: 3
+$starpiba = 1 – 2;	//vērtība: -1
+$reizinajums = 1 * 2;	//vērtība: 2
+$dalijums = 1 / 2;	//vērtība: 0.5
+$modulis = 1 % 2;	//vērtība: 1
+</pre>
+
+</section>
+
+
+<section>
+<h3>Apvienota piešķiršana un aritmētikas operācijas</h3>
+
+<pre class="brush: php">
+$a++; //palielina $a vērtību par 1
+$a--; //samazina $a vērtību par 1
+$a += $b;  //dara to pašu ko $a = $a + $b
+$a -= $b;  //dara to pašu ko $a = $a - $b
+$a *= $b;  //dara to pašu ko $a = $a * $b
+$a /= $b;  //dara to pašu ko $a = $a / $b
+$a %= $b;  //dara to pašu ko $a = $a % $b
+</pre>
+
+</section>
+
+
+<section>
+<h3>Boolean</h3>
+
+Boolean - var saglabāt tikai divas vērtības - patiess un nepatiess
+
+<pre class="brush: php">
+$navPatiesiba = false;
+$navPatiesiba = 0; //nulle ir līdzvērtīga False;
+$irPatiesiba = true;
+$irPatiesiba = 1; //jebkurš cipars, kas atšķiras no 0, tai skaitā
+				  //negatīvs tiek uztverts kā TRUE
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Loģiskie operatori
+
+* Loģiskie operatori strādā tikai ar boolean vērtībām. 
+* Ja tiek padoti mainīgie kas satur string vai skaitli, tad šie mainīgie tiek konvertēti uz boolean. 
+* Tukšs strings "", <code>0</code> un <code>null</code> tiek konvertēti uz <code>false</code>, bet pārējās vērtības uz <code>true</code>.
+* Loģiskie operatori tiek ļoti bieži izmantoti vairāku nosacījumu pārbaudei, pēc kuriem izvēlas kādu skripta daļu tālāk izpildīt.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Loģiskie operatori</h3>
+
+<table>
+<tr>
+<td>Operators</td>
+<td>Pielietojums</td>
+<td>Apraksts</td>
+</tr>
+<tr>
+<td>&&</td>
+<td>$a && $b</td>
+<td>“un” operators atgriež vērtību true, ja $a un $b abi ir true</td>
+</tr>
+<tr>
+<td>||</td>
+<td>$a || $b</td>
+<td>“vai” atgriež true, ja vismaz viens no mainīgajiem ir true</td>
+</tr>
+<tr>
+<td>xor</td>
+<td>$a xor $b</td>
+<td>“xor” atgriež true, ja tikai viens no mainīgajiem ir true, bet otrs false</td>
+</tr>
+</table>
+
+</section>
+
+
+<section>
+<h3>Loģiskie operatori</h3>
+
+<table>
+<tr>
+<td>Operators</td>
+<td>Pielietojums</td>
+<td>Apraksts</td>
+</tr>
+<tr>
+<td>!</td>
+<td>! $a</td>
+<td>“ne” atgriež pretējo vērtību, ja $a ir true, tad ! $a ir false, un otrādi</td>
+</tr>
+</table>
+
+</section>
+
+<section>
+<h3>Loģiskie operatori</h3>
+
+<pre class="brush: php">
+$rej = true; //dzīvnieks rej
+$njaud = false; //dzīvnieks ņaud
+
+$irMajdzivnieks = $rej || $njaud; //vērtība: true
+//Ja dzīvnieks ņaud vai rej, tad tas ir mājdzīvnieks.
+
+$irSuns = $irMajdzivnieks && $rej; //vērtība: true
+//Ja dzīvnieks ir majdzivnieks un tas rej, tad tas ir suns.
+</pre>
+
+</section>
+
+
+<section>
+<h3>Loģiskie operatori</h3>
+
+<pre class="brush: php">
+$irMezaZvers = ! $irMajdzivnieks; //vērtība: false
+//Ja dzīvnieks nav mājdzivnieks, tad tas ir meža zvērs.
+//Šajā gadījumā tas ir mājdzīvnieks, tādēļ $mezaZvers ir nepatiess.
+
+$navKluda = $irMezaZvers xor $irMajdzivnieks //vērtība: true
+//Dzīvnieks var būt tikai meža vai tikai māju, citādi sistēmā ir
+//ieviesusies kļūda.
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### String
+
+* String tipa mainīgais satur simbolu virkni.
+* Ir divi veidi kā piešķirt mainīgajam konkrētu string tipa vērtību:
+ * ar apostrofiem;
+ * ar pēdiņām.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Ar apostrofiem
+
+* Simbolu virknes sākumu un beigas norāda ar apostrofu '''. 
+* Ja viens no simboliem, kuru jūs vēlaties norādīt simbolu virknē, ir apostrofs tad pirms apostrofa jāpieliek slīpsvītra '\' .
+* Tas pats attiecas arī uz slīpsvītru, ja simbolu virknes beigās vēlaties norādīt slīpsvītru, tad pirms tās jānorāda vēl viena slīpsvītra. 
+* Abos gadījumos izvairīšanās simbols netiks attēlots. 
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3></h3>
+
+<pre class="brush: php">
+$s = 'simbolu virkne';  //vērtība: simbolu virkne
+$s = 'satur (\') apostrofu';  //vērtība: satur (') apostrofu
+$s = 'ar slīpsvītru\\';  //vērtība: ar slīpsvītru\
+$s = 'ar \ slīpsvītru';  //vērtība: ar \ slīpsvītru
+$s = 'ar \\ slīpsvītru';  //vērtība: ar \ slīpsvītru
+$s = '\\\\ 2 slīpsvītras!'; //vērtība: \\ 2 slīpsvītras
+$s = 'kļūda ar slīpsvītru\'; //kļuda: syntax error, unexpected T_STRING
+$s = 'kļūda ar ' apostrofu'; //kļuda: syntax error, unexpected T_STRING
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Ar pēdiņām
+
+* Ja simbolu virkne iekļauta pēdiņās '"', tad PHP pieļauj vairāk iespēju izmantot izvairīšanās
+* Nozīmīgākā īpašība pēdiņās iekļautajiem stringiem ir tā, ka ierakstot tajā mainīgā vārdu stringā mainīgā vārda vietā tiks ievietota mainīgā vērtība.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Ar pēdiņām</h3>
+
+<table>
+<tr>
+<td>Simboli</td>
+<td>Apraksts</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>Linefeed (LF) pārnes tekstu jaunā rindā - Unix un Windows OS</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>Carriage return (CR) pārnes tekstu jaunā rindā – Mac un Windows OS</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>Tabulēšanas simbols</td>
+</tr>
+<tr>
+<td>\\</td>
+<td>Slīpsvītra '\'</td>
+</tr>
+</table>
+
+</section>
+
+
+<section>
+<h3>Ar pēdiņām</h3>
+
+<table>
+<tr>
+<td>Simboli</td>
+<td>Apraksts</td>
+</tr>
+<tr>
+<td>\$</td>
+<td>Dolāra zīme '$'</td>
+</tr>
+<tr>
+<td>\"</td>
+<td>Pēdiņas '"'</td>
+</tr>
+<tr>
+<td>\[0-7]{1,3}</td>
+<td>Oktāls skaitlis, kas norāda attēlojamā simbola kodu (\101 = A)</td>
+</tr>
+<tr>
+<td>\x[0-9A-Fa-f]{1,2}</td>
+<td>Heksadecimāls skaitlis, kas norāda attēlojamā simbola kodu (\x41 = A)</td>
+</tr>
+</table>
+
+</section>
+
+
+<section>
+<h3>Ar pēdiņām</h3>
+
+<pre class="brush: php">
+$a = "pasaule";
+$s = "Sveika $a!";  //vērtība: Sveika pasaule!
+$s = "100\$";  //vērtība: 100$
+$s = "\x41\x42\x43";  //vērtība: ABC
+</pre>
+
+</section>
+
+
+<section>
+<h3>Konkatenācijas operators</h3>
+
+<ul>
+<li>Teksta mainīgajiem ir tikai viens operators '.', ar kuru var apvienot divas string tipa vērtības.
+</ul>
+
+<pre class="brush: php">
+$a = "pasaule!";
+$s = "Sveika" . $a; //vērtība: Sveika pasaule!
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Salīdzināšanas operatori
+
+* Divu mainīgo vērtības var salīdzināt ar operatoriem 
+ * '==' vienāds, 
+ * '!=' nav vienāds, 
+ * '<' mazāks, 
+ * '>' lielāks, 
+ * '<=' mazāks vienāds un 
+ * '>=' lielāks vienāds. 
+* Jebkura salīdzināšanas operācija atgriež boolean vērtību – patiess vai nepatiess
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Salīdzināšanas operatori</h3>
+
+<pre class="brush: php">
+1 == 1;       //vērtība: true
+$a = "abc";   // NAV SALĪDZINĀŠANA!!!
+$a == "abc";  //vērtība: true
+$a != "abc";  //vērtība: false
+3 < 2.9;      //vērtība: false
+10 >= 10;     //vērtība: true
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Salīdzināšanas operatori
+
+* Tā kā PHP nav stingri noteikti mainīgo tipi, tad interpretators cenšas pēc konvertēt mainīgos uz nepieciešamo datu tipu. 
+* Lai varētu izšķirt vai mainīgajiem ir arī vienāds datu tips PHP ir ieviesti divi īpaši salīdzināšanas operatori 
+ * '===' identisks un 
+ * '!==' nav identisks, 
+* Šie operatori salīdzina ne tikai vērtību, bet arī mainīgā tipu.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Salīdzināšanas operatori</h3>
+
+<pre class="brush: php">
+"5" == 5; //vērtība: true
+"5abc" == 5 //vērtība: true
+//teksta virknes sākumā ir simbols 5 kuru PHP pārveido par skaitli
+"4" === 4; //vērtība: false
+"3" !== 3; //vērtība: true
+</pre>
+
+</section>
+
+
+<section>
+<h3>Speciālie mainīgie</h3>
+
+<ul>
+<li>resource - šī tipa mainīgo vērtība ir saite uz ārējiem resursiem, kā atvērtas datnes, pieslēgums datubāzei.
+<li>Null - 'null' nav gluži mainīgā tips, bet speciāla vērtība, kas norāda, ka mainīgajam nav vērtības. 
+</ul>
+
+<pre class="brush: php">
+$a == null; //vērtība: true
+//Mainīgajam $a vēl nav piešķirta vērtība tādēļ $a == null ir patiess
+$a == 0;  //vērtība: false
+$a = "Labvakar!";  //vērtība: Labvakar!
+$a = null;  //no mainīgā $a tika izdzēsta vērtība
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Saliktie mainīgie
+
+* Ir divi salikto mainīgo veidi – masīvi (<code>array</code>) un objekti (<code>object</code>).
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Array
+
+* PHP izmanto asociatīvos masīvus. Tas nozīmē katrai vērtībai var norādīt brīvi izvēlētu atslēgu jeb indeksu.
+* Atslēga jeb indekss ir kā vērtības adrese masīvā. 
+* Lai izveidotu jaunu masīvu jāizmanto PHP iebūvētā funkcija <code>array()</code>. Tai tiek padoti <code>atslēga => vērtība</code> pāri. 
+* Indekss drīkst būt vesels skaitlis vai simbolu virkne (<code>string</code>), vērtība var būt jebkura tipa mainīgais tai skaitā masīvs. 
+* Masīva indekss var būt tikai vesels skaitlis un tam jābūt robežās no 0 līdz n, kur n ir elementu skaits. (TODO)
+* TODO: īsā sintakse!
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Array</h3>
+
+<ul>
+<li>Sintakse
+</ul>
+
+<pre class="brush: php">
+array( [atslēga =>] vērtība
+      , ...
+)
+</pre>
+
+<ul>
+<li>Īsā sintakse
+</ul>
+
+<pre class="brush: php">
+[ [atslēga =>] vērtība
+      , ...
+]
+</pre>
+
+</section>
+
+
+<section>
+<h3>Array piemērs</h3>
+
+<pre class="brush: php">
+//vērtības var pievienot masīvam jau tā izveidošanas brīdī $arr = array("vards" => "Jānis", 40 => 123);
+$a = $arr["vards"]; //vērtība: Jānis
+$a = $arr[40]; //vērtība: 123
+
+//var izveidot arī tukšu masīvu un pievienot tam vērtības vēlāk
+$arr2 = array();
+$arr2["vards"] = "Kaspars";
+
+//var pievienot jaunu masīvu, kā vērtību
+//(veidot 2 un vairāk dimensiju masīvu)
+$arr["mans_masivs"] = array("atslega1" => "vertiba1");
+
+//tad vērtībai var piekļūt sekojoši
+$a = $arr["mans_masivs"]["atslega1"]; //Rezultāts: vertiba1
+</pre>
+
+</section>
+
+
+<section>
+<h3>Array piemērs ar īso sintaksi</h3>
+
+<pre class="brush: php">
+//vērtības var pievienot masīvam jau tā izveidošanas brīdī $arr = ["vards" => "Jānis", 40 => 123];
+$a = $arr["vards"]; //vērtība: Jānis
+$a = $arr[40]; //vērtība: 123
+
+//var izveidot arī tukšu masīvu un pievienot tam vērtības vēlāk
+$arr2 = array();
+$arr2["vards"] = "Kaspars";
+
+//var pievienot jaunu masīvu, kā vērtību
+//(veidot 2 un vairāk dimensiju masīvu)
+$arr["mans_masivs"] = ["atslega1" => "vertiba1"];
+
+//tad vērtībai var piekļūt sekojoši
+$a = $arr["mans_masivs"]["atslega1"]; //Rezultāts: vertiba1
+</pre>
+
+</section>
+
+
+<section>
+<h3>Array</h3>
+
+<ul>
+<li>Ja kādai vērtībai indekss netiks norādīts, tad PHP automātiski izvēlēsies par indeksu lielāko indeksa sarakstā atrodamo veselo skaitli + 1.
+<li>Pēc noklusējuma indekss sākas ar 0.
+</ul>
+
+<pre class="brush: php">
+$arr = array("ābols", 4 => "banāns", "apelsīns");
+$a = $arr[0];  //vērtība: ābols
+$a = $arr[1];  //masīva elementam nav vērtības - $arr[1] == null
+$a = $arr[4];  //vērtība: banāns
+$a = $arr[5];  //vērtība: apelsīns
+</pre>
+
+</section>
+
+
+<section>
+<h3>Dinamiskie mainīgie</h3>
+
+<ul>
+<li>PHP pieļauj arī skripta izpildes laikā dinamiski izveidot un izmantot jaunus mainīgos. 
+<li>Pirms mainīgā vārda norādot divas dolāra zīmes '$', par mainīgā vārdu tiek uztverta norādītā mainīgā vērtība (string).
+</ul>
+
+<pre class="brush: php">
+$a = "Mans mainīgais";
+$b = "a";
+echo $$b; //Rezultāts: Mans mainīgais
+</pre>
+
+</section>
+
+
+<section>
+<h3>Norādes uz mainīgo</h3>
+
+<ul>
+<li>Pēc būtības tas ir mainīgais, kura vērtība ir norāde uz cita mainīgā adresi un izsaucot tā vērtību nav nepieciešams likt priekšā vēl vienu '$' zīmi. 
+<li>Jebkura mainīgā adresi var iegūt  pirms mainīgā vārda norādot '&' simbolu.
+</ul>
+
+<pre class="brush: php">
+$a = "Mans mainīgais";
+$b = &$a;
+echo $b;	//Rezultāts: Mans mainīgais
+$a = "Jauna vērtība"; echo $b;	//Rezultāts: Jauna vērtība
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Kontroles struktūra
+
+* Kontroles struktūras ļauj vadīt programmas gaitu. 
+* Izmantojot tās, var norādīt interpretatoram pie kādiem nosacījumiem, noteikta skripta daļa ir jāizpilda vai jāizlaiž un cik reizes šīs daļas izpilde jāatkārto.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Sazarojuma operatori
+
+* If – else ir sazarojuma operators. 
+* Tam ir jānorāda nosacījums, kuram apstiprinoties (nosacījums == true) jāizpilda norādītās komandas. 
+* Ja nosacījums nav patiess, tad tiek izpildīts alternatīvais (else) zars, ja tāds ir norādīts.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>If – else</h3>
+
+<pre class="brush: php">
+if (nosacījums) {
+    komandu_bloks;
+}
+[ else {
+	alternatīvais_komandu_bloks;
+} ]
+</pre>
+
+</section>
+
+
+<section>
+<h3>If – else</h3>
+
+<pre class="brush: php">
+$a = 2;
+$b = 0;
+if ($a > $b){
+      echo "a ir lielāks par b";
+      $a++;
+      $b--;
+}
+//Rezultāts:  a ir lielāks par b
+</pre>
+
+</section>
+
+
+<section>
+<h3>If – else</h3>
+
+<pre class="brush: php">
+$a = 5;
+if ($a < 10){
+      echo "a ir mazāks par 10 \n";
+} else {
+      echo "a ir lielāks vai vienāds ar 10 \n";
+}
+//Rezultāts:  a ir mazāks par 10
+</pre>
+
+</section>
+
+
+<section>
+<h3>If – else</h3>
+
+<pre class="brush: php">
+$a = 10;
+if ($a < 10){
+      echo "a ir mazāks par 10 \n";
+} else if ($a > 10) {
+      echo "a ir lielāks par 10 \n";
+} else {
+      echo "a ir vienāds ar 10 \n";
+}
+//Rezultāts: a ir vienāds ar 10
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### switch
+
+* Arī switch ir sazarojuma operators. 
+* Tas ļauj izvēlēties kuru komandu bloku izpildīt, atkarībā no tā kāda vērtība ir nosacījuma izteiksmei. 
+* Izteiksmes vērtība var būt ne tikai patiesa vai nepatiesa, bet arī skaitlis vai teksts.
+* Pēc katra komandu bloka beigās jāieliek <code>break</code>, citādi tiks izpildīts arī nākamais komandu bloks.
+
+Note: 
+</textarea></section>
+
+
+
+<section>
+<h3>switch</h3>
+
+<pre class="brush: php">
+switch(izteiksme){
+case vērtība_1:
+      komandu_bloks_1;
+      break;
+case vērtība_2:
+      komandu_bloks_2;
+      break;
+default:
+      komandas_ja_izteiksmes_vērtība_nesakrīt_ar_iepriekš_pārbaudītajām;
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>switch</h3>
+
+<pre class="brush: php">
+$a = "qwerty";
+switch($a){
+case "abc":
+      echo "Ābece";
+      break;
+case "vzž":
+      echo "Pēdējie alfabēta burti!";
+      break;
+default:
+      echo "Cits teksts";
+}
+//Rezultāts: Cits teksts
+</pre>
+
+</section>
+
+
+<section>
+<h3>Nosacījuma operators - ?:</h3>
+
+<ul>
+<li>nosacījums ? vērtība_ja_patiess : vērtība_ja_nepatiess
+<li>'?:' operators darbojas līdzīgi kā if-else, taču tas nevar izpildīt komandu bloku, bet gan tikai atgriezt vērtību.
+</ul>
+
+<pre class="brush: php">
+$a = 5;
+$b = ( $a>5 ? $a+100 : '$a nav lielāks par 5' );
+echo $b;
+//Rezultāts: $a nav lielāks par 5
+</pre>
+
+</section>
+
+
+<section>
+<h3>Cikla operatori</h3>
+
+<ul>
+<li>Cikla operatori ļauj atkārtot kādu programmas daļu.
+<li>while ir cikla operators. 
+<li>Tā sākumā ir norādīts nosacījums un pēc tam seko komandu bloks, kurš tiek atkārtoti izpildīts tik ilgi kamēr nosacījums ir patiess. 
+<li>Ja nosacījums jau pašā sākumā nav patiess, tad komandu bloks netiek izpildīts vispār.
+</ul>
+
+</section>
+
+
+<section>
+<h3>while</h3>
+
+<ul>
+<li>Sintakse
+</ul>
+
+<pre class="brush: php">
+while(nosacījums){
+      komandu_bloks;
+}
+</pre>
+
+<ul>
+<li>Piemērs
+</ul>
+
+<pre class="brush: php">
+$atzime = 5;
+while($atzime < 10) {
+    // kamer atzime mazāka par 10 – mācamies
+	$a = $a + 1;
+}
+echo $a;
+//Rezultāts: 10
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### do ... while
+
+* Do - while tā pat kā while ir cikla operators, kas tiek izpildīts tik ilgi kamēr tam norādītais nosacījums ir patiess. 
+* Atšķirība ir tā ka bloks neatkarīgi no nosacījuma tiek izpildīts vismaz vienu reizi.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>do ... while</h3>
+
+<ul>
+<li>Sintakse
+</ul>
+
+<pre class="brush: php">
+do {
+      komandu_bloks;
+} while (nosacījums);
+</pre>
+
+<ul>
+<li>Piemērs
+</ul>
+
+<pre class="brush: php">
+$a = 1;
+do {
+      $a++;
+} while ($a < 1);
+echo $a;
+//Rezultāts: 2
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### for
+
+* Cikla operators for ir biežāk izmantotais no cikla operatoriem. 
+* Tas parasti tiek izmantots, ja ir zināms cik reizes cikls jāizpilda.
+ * Cikla_inicializēšanas_izteiksme parasti tiek piešķirta cikla izpildes reižu skaitītāja sākotnējā vērtība.
+ * Nosacījums pārbauda vai jau ir sasniegts izpildāmo reižu skaits.
+ * Soļa_izteiksme izmaina skaitītāja vērtību.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>for</h3>
+
+<pre class="brush: php">
+for (cikla_inicializēšanas_izteiksme; nosacījums; soļa_izteiksme){
+      komandu_bloks;
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>for</h3>
+
+<pre class="brush: php">
+$pakapienuSkaits = 4;
+for($pakapiens = 0; $pakapiens < $pakapienuSkaits; $pakapiens++){
+      echo "Esmu uz $pakapiens pakāpiena <br />\n";
+}
+echo "Esmu augšā! Tagad lekšu ik pa 2 pakāpieniem lejā!<br />\n";
+for($pakapiens = $pakapienuSkaits; $pakapiens > 0; $pakapiens -= 2){
+      echo "Esmu uz $pakapiens pakāpiena <br />\n";
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>for</h3>
+
+<pre class="brush: php">
+Esmu uz 0 pakāpiena <br />
+Esmu uz 1 pakāpiena <br />
+Esmu uz 2 pakāpiena <br />
+Esmu uz 3 pakāpiena <br />
+Esmu augšā! Tagad lekšu ik pa 2 pakāpieniem lejā!<br />
+Esmu uz 4 pakāpiena <br />
+Esmu uz 2 pakāpiena <br />
+</pre>
+
+</section>
+
+
+<section>
+<h3>foreach</h3>
+
+<ul>
+<li>Ir cikla operators, kas ļauj izpildīt operācijas uz katru masīvā esošu elementu. 
+<li>Tas var būt īpaši noderīgs, ja masīva elemenu indeksam ir izmantotas string vērtības.
+</ul>
+
+<pre class="brush: php">
+foreach (masiva_mainigais as indeksa_mainigais => vertibas_mainigais) {
+      komandu_bloks;
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>foreach</h3>
+
+<pre class="brush: php">
+$atzimes = array(
+      "Jānis" => 6,
+      "Ilze" => 7,
+      "Pēteris" => 8,
+      "Anna" => 9
+);
+foreach ($atzimes as $students => $atzime){
+      $atzimes[$students] = $atzime+1;
+      echo "Palielināju atzīmi par viens studentam ".$students."<br />\n";
+}
+echo $atzimes["Jānis"]."<br />\n";
+</pre>
+
+</section>
+
+
+<section>
+<h3>foreach</h3>
+
+<pre class="brush: php">
+Palielināju atzīmi par viens studentam Jānis<br />
+Palielināju atzīmi par viens studentam Ilze<br />
+Palielināju atzīmi par viens studentam Pēteris<br />
+Palielināju atzīmi par viens studentam Anna<br />
+</pre>
+
+</section>
+
+
+<section>
+<h3>Cikla pārtraukšanas operatori</h3>
+
+<ul>
+<li>break - pārtrauc cikla izpildi un turpina programmas koda izpildi, kas seko aiz cikla.
+</ul>
+
+<pre class="brush: php">
+$skaititajs = 0;
+while (true) { // šis mūžīgais cikls, jo nosacījums vienmēr ir patiess
+	if ($skaititajs > 9) {
+		break;
+	} else {
+		$skaititajs++;
+	}
+}
+echo $skaititajs; //Rezultats: 10
+</pre>
+
+</section>
+
+
+<section>
+<h3>Cikla pārtraukšanas operatori</h3>
+
+<ul>
+<li>continue - nepārtrauc ciklu pilnībā, bet gan aptur konkrētās darbības.
+</ul>
+
+<pre class="brush: php">
+for ($i = 0; $i < 10; $i++) {
+	// Ja $i vertiba ir nepara skaitlis, izlaižam soli
+	if ($i % 2 == 1) {
+		continue;
+	}
+	// Nākamā rinda tiek izpildīta tikai tad ja $i ir pāra vērtība
+	echo $i." ";
+}
+// Rezultāts: 0 2 4 6 8
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Funkcijas
+
+* Funkcijas ir programmas koda daļa, kas pilda noteiktu uzdevumu un ir lielā mērā neatkarīga no pārējā koda. 
+* Funkciju izmantošanai ir vairākas priekšrocības –
+ * tās samazina koda izmērus, 
+ * labi izvēlēti funkciju nosaukumi uzlabo koda lasāmību un 
+ * tiek atvieglota koda uzturēšana.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Funkcijas</h3>
+
+<pre class="brush: php">
+function funkcijas_nosaukums([arguments [, arguments ...]]) {
+	komandu_bloks;
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Funkcijas</h3>
+
+<pre class="brush: php">
+// funkcijas definēšana
+function sveiki() {
+	echo "Sveika pasaule!<br />\n";
+}
+
+// funkcijas izmantošana
+sveiki();
+sveiki();
+
+/*Rezultāts:
+Sveika pasaule!<br />
+Sveika pasaule!<br />
+*/
+</pre>
+
+</section>
+
+
+<section>
+<h3>Funkcijas</h3>
+
+<pre class="brush: php">
+function kvadrats($x) {
+	return $x * $x;
+}
+$divi_kvadraataa = kvadrats(2);
+echo $divi_kvadraataa;
+// Rezultāts: 4
+</pre>
+
+</section>
+
+
+<section>
+<h3>Funkcijas</h3>
+
+<pre class="brush: php">
+// Funkcija strādā korekti, ja kāpinātājs ir vesels, nenegatīvs skaitlis
+function pakape($baze, $kapinatajs) {
+	$pakape = 1;
+	for ($i = 0; $i<$kapinatajs; $i++) {
+		$pakape *= $baze;
+	}
+	return $pakape;
+}
+echo pakape(2,3);
+// Rezultāts: 8
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Mainīgie funkcijās
+
+* Funkcijās var izmantot gan iekšējos konkrētās funkcijas mainīgos, gan izpildāmā skripta globālos mainīgos. 
+* Globālie mainīgie ir visi mainīgie, kas nodefinēti ārpus funkcijām, vai klasēm.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Mainīgie funkcijās</h3>
+
+<pre class="brush: php">
+$g = 5; // globāls mainīgais
+function f() {
+	global $g;  // globālais mainīgais tiek ieimportēts funkcijā
+	$l = $g;  // lokālajam mainīgam $l piešķir $g vērtību
+	$g++;
+}
+echo $g; // Rezultāts: 5
+f();
+echo $g; //Rezultāts: 6
+</pre>
+
+</section>
+
+
+<section>
+<h3>Mainīgie funkcijās</h3>
+
+<ul>
+<li>Piemērs – nepareizs lietojums:
+</ul>
+
+<pre class="brush: php">
+$g = 5
+function fKluda() {
+	echo $g;
+}
+fKluda(); // netiek izvadīts nekas, jo nav ieimportēts $g;
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Dinamiski izsaukta funkcija
+
+* Līdzīgi kā mainīgos arī funkcijas var izsaukt dinamiski. 
+* Pieņemot ka mainīgā vērtība ir teksts, kas satur funkcijas nosaukumu, tad pieliekot mainīgā nosaukuma galā '()' iekavas. var izsaukt šo funkciju.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Dinamiski izsaukta funkcija</h3>
+
+<pre class="brush: php">
+function dinSveiks() {
+	echo "Dinamisks sveiciens pasaulei!";
+}
+function dinSveiks2($txt) {
+	echo "Saku pasaulei: $txt !";
+}
+$manaFunc = "dinSveiks";
+$manaFunc(); // Rezultāts: Dinamisks sveiciens pasaulei!
+$manaFunc = "dinSveiks2";
+$manaFunc("Čau"); // Rezultāts: Saku pasaulei: Čau !
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### PHP iebūvētās funkcijas
+
+* PHP ir plašs klāsts ar jau iebūvētām funkcijām, kas ļauj manupulēt masīvus, strādāt ar dažādām datubāzēm u.c.
+* http://www.w3schools.com/php/php_ref_string.asp
+* http://www.php.net/manual/en/funcref.php
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Klases un objekti
+
+* Klase ir pašdefinēts mainīgā tips, bet objekts ir šāda tipa mainīgais. 
+* Katrai klasei var norādīt atribūtus, jeb raksturlielumus, kas aprakstīs objektu un funkcijas, kuras var veikt darbības ar objektu.
+* Klase tiek definēta izmantojot atslēgas vārdu class.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Klases un objekti</h3>
+
+<pre class="brush: php">
+class klases_nosaukums{
+	[atribūti]
+	[konstruktors un/vai destruktors]
+	[funkcijas]
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Klases un objekti</h3>
+
+<pre class="brush: php">
+class Durvis{
+	/* Atribūti nosaka ar kādām īpašām objekts tiks raksturots */
+	public $materials;
+	public $krasa;
+	public $stavoklis;
+	// koks, plastmasa, metāls, ...
+	// balts, zils, zaļš, ...
+	// atvērtas, aizvērtas
+	/*k ontruktors inicializē objekta atribūtus, kad tas tiek veidots */
+	public function __construct($materials){
+		$this->materials = $materials;
+		$this->stavoklis = 'aizvertas';
+	}
+	/* funkcijas apraksta kādas darbības iespējams veikt ar objektu */
+	public function krasot($krasa){
+		$this->krasa = $krasa;
+	}
+	public function vert(){
+		if ($this->stavoklis == 'atvertas'){
+			$this->stavoklis = 'aizvertas';
+		}else{
+			$this->stavoklis = 'atvertas';
+		}
+	}
+	public function aprakstit(){
+		echo "<p>Materiāls: $this->materials <br />\n";
+		echo "Krāsa: $this->krasa <br />\n";
+		echo "Stāvoklis: $this->stavoklis <br /></p>\n";
+	}
+}
+// Izveido jaunas durvis (izsauc konstruktoru)
+$manasDurvis = new Durvis('metals');
+// Veicam darbības ar jaunizveidotajām durvīma
+$manasDurvis->krasot('balts');
+$manasDurvis->aprakstit();
+$manasDurvis->vert();
+$manasDurvis->aprakstit();
+?>
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Klases un objekti
+
+* Atslēgas vārds new izveido aiz tā norādītās klases objektu izsaucot <code>__construct()</code> funkciju un atgriežot jaunu, inicializētu objektu.
+* Objekta atribūtus un funkcijas var izsaukt izmantojot -> operatoru, bet <code>$this</code> ir speciāls mainīgais, kas pieejams tikai objekta iekšienē un norāda uz konkrēto objektu.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Klases un objekti</h3>
+
+<pre class="brush: php">
+<p>Materiāls: metals <br />
+Krāsa: balts <br />
+Stāvoklis: aizvertas <br /></p>
+<p>Materiāls: metals <br />
+Krāsa: balts <br />
+Stāvoklis: atvertas <br /></p>
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Mantošana
+
+* Objektorienētās programmēšanas viens no svarīgākajiem rīkiem ir mantošana, kas ļauj definēt klases, kas izmanto un papildina citu klašu funkcionalitāti.
+* Mantošanu var norādīt izmantojot atslēgas vārdu <code>extends</code>.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Mantošana</h3>
+
+<pre class="brush: php">
+class PaplasinataKlase extends ManaKlase{
+	//pārdefinējam vecāka klases metodi
+	public function izvaditMainigo(){
+		parent::izvaditMainigo();
+		echo ' no paplašinātās klases';
+	}
+$mansObjekts = new PaplasinataKlase('vērtība');
+$mansObjekts->izvaditMainigo();
+//Rezultāts: vērtība no paplašinātās klases
+}
+</pre>
+
+Atslēgas vārds parent ļauj izsaukt metodes vai atribūtus no vecāka klases.
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Izņēmumi (Exceptions)
+
+* Izņēmumi ir īpašs mehānisms, kas paredzēts kļūdu noķeršanai programmas darbības laikā.
+* Izmantojot atslēgas vārdu <code>throw</code>, var “izmest” paša definētu kļūdas paziņojumu. 
+* Savukārt izmantojot <code>try – catch</code> kontroles struktūru izmestās kļūdas var noķert un apstrādāt. 
+* <code>try</code> blokā tiek izpildītas komandas, kas var izmest kļūdu. 
+* Ja kļūda tiek izmesta izpildot komandas ārpus try bloka, tad PHP aptur skripta izpildi un izvada “Fatal Error” kļūdas paziņojumu.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Izņēmumi (Exceptions)</h3>
+
+<pre class="brush: php">
+function dalijums($skaititajs, $saucejs){
+	if($saucejs ==0 ){
+		throw new Exception("Dalīt ar 0 nevar!");
+	}else{
+		return $skaititajs / $saucejs;
+	}
+}
+$skait = 1;
+$sauc = 0;
+try{
+	$a = dalijums($skait,$sauc);
+	echo "$skait / $sauc = $a";
+}catch(Exception $e){
+	echo $e->getMessage();
+}
+// Rezultāts: Dalīt ar 0 nevar!
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Parametru nodošana skriptiem no pārlūkprogrammas
+
+* Iepriekš apskatītie HTTP pieprasījuma veidi – GET un POST. 
+* Izmantojot šos pieprasījumus serverim var tikt nosūtīti mainīgie ar vērtībām, kurus PHP interpretators ļauj izmantot skriptos.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### GET pieprasījums
+
+* Katru reizi uzklikšķinot uz kādu hiperteksta saiti (URL), pārlūkprogramma noformē GET pieprasījumu, nosūta to serverim un parasti saņem atpakaļ HTML dokumentu. 
+* GET pieprasījums ir paredzēts tikai datu iegūšanai nevis, lai izmainītu datus uz servera.
+* Piemērs: http://localhost/test.php
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### GET pieprasījums
+
+* Lai lietotājs varētu norādīt kādu informāciju skriptam jāatgriež ir iespējams saites beigās norādīt vaicājumu, kas sākas ar '?' jautājuma zīmi 
+* Tad seko viens vai vairāki <code>mainīgā_nosaukums=vērtība</code> pāri, kas atdalīti ar '&'. 
+* Piemērs: http://localhost/dalijums.php?skaititajs=6&saucejs=2 
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>GET pieprasījums</h3>
+
+<ul>
+<li>Skriptā vaicājuma mainīgie ir pieejami PHP iebūvētā masīvā <code>$_GET</code>, kas satur visus mainīgos, kas tikuši padoti skriptam izmantojot URL.
+</ul>
+
+<pre class="brush: php">
+//skripts dalijums.php
+echo $_GET['skaititajs'] / $_GET['saucejs'];
+// Rezultāts: 3
+</pre>
+
+</section>
+
+
+<section>
+<h3>GET pieprasījums</h3>
+
+<ul>
+<li>PHP ļauj arī vaicājuma daļā definēt masīvus
+<li>Piemērs: http://localhost/dalijums.php?persona[vards]=Janis&persona[uzvards]=Osis
+</ul>
+
+<pre class="brush: php">
+echo $_GET['persona']['vards'].' '.$_GET['persona']['uzvards'];
+// Rezultāts: Janis Osis
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### POST pieprasījums
+
+* POST pieprasījumi atšķirībā no GET ir tieši paredzēti, lai izmainītu uz servera esošos datus, taču tos ir nedaudz grūtāk realizēt. 
+* Šajā gadījumā vairs nepietiek tikai ar URL, bet gan ir nepieciešams izveidot HTML formu, kurā tiks ievadīti skriptam nepieciešamie dati.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>POST pieprasījums (forma)</h3>
+
+<pre class="brush: php">
+<form action="test.php" method="post">
+	Vārds: <input type="text" name="persona[vards]" /><br />
+	Uzvārds: <input type="text" name="persona[uzvards]" /><br />
+	<input type="submit" value="nosūtīt"/>
+</form>
+</pre>
+
+<img src="img/forma.png"/>
+
+</section>
+
+
+<section>
+<h3>POST pieprasījums</h3>
+
+<pre class="brush: php">
+echo '<br>Jūsu vārds un uzvārds ir: ';
+echo $_POST['persona']['vards'].' '.$_POST['persona']['uzvards'].'.';
+</pre>
+
+<img src="img/forma_output.png"/>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Datņu iekļaušana
+
+* PHP ļauj arī vienkāršā veidā iekļaut kādā datnē saturu no citas datnes izmantojot funkcijas:
+ * require - iekļauj norādīto datni, bet ja tā netiek atrasta, tiek izmests kļūdas paziņojums.
+ * require_once - ekļauj norādīto datni tikai vienu reizi, ja šo datni mēģina iekļaut atkārtoti, tad šī darbība netiek izpildīta, bet ja tā netiek atrasta, tiek izmests kļūdas paziņojums.
+ * include - iekļauj norādīto datni, bet ja tā netiek atrasta, tad nedara neko.
+ * include_once - iekļauj norādīto datni tikai vienu reizi, ja šo datni mēģina iekļaut atkārtoti vai tā netiek atrasta, tad šī darbība netiek izpildīta.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Datņu iekļaušana</h3>
+
+<img src="img/php_includes.png">
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Datņu iekļaušana
+
+* Šis mehānisms tiek izmantots arī lai veicinātu koda atkal-izmantošanu un dinamiskās vietnes koda pārskatāmību. 
+* PHP kods bieži tiek izdalīts uz vairākām datnēm, parasti vienas klases definīcija tiek iznesta atsevišķā datnē un pēc vajadzības iekļauta kodā.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Datņu iekļaušana</h3>
+
+<ul>
+<li>summetajs.php
+</ul>
+
+<pre class="brush: php">
+&lt;?php
+class Summetajs{
+      public $skaitli;
+      public function summet(){
+            $summa = 0;
+            foreach($this->skaitli as $skaitlis){
+                  $summa += $skaitlis;
+            }
+            return $summa;
+      }
+} ?>
+</pre>
+
+</section>
+
+
+<section>
+<h3>Datņu iekļaušana</h3>
+
+<ul>
+<li>index.php
+</ul>
+
+<pre class="brush: php">
+&lt;html>&lt;body>
+<h1>Rezultāts</h1>
+<p>
+&lt;?php
+      require_once 'summetajs.php';
+      $sum = new Summetajs();
+      $sum->skaitli = array(1,2,3); // 1+2+3 = 6
+      echo $sum->summet();
+?>
+&lt;/p>
+&lt;/body>&lt;/html>
+</pre>
+
+</section>
+<!--
+
+
+Sample 1: Markdown
+
+
+<section data-markdown><textarea data-template>
+### 
+
+* 
+
+Note: 
+</textarea></section>
+
+
+Sample 3: Highlighted code sample (still need to escape < symbols)
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+</ul>
+
+<pre class="brush: php">
+
+</pre>
+
+</section>
+
+
+Sample 4: Bullets and highlighted code sample (still need to escape < symbols)
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre class="brush: php">
+
+</pre>
+
+</section>
+
+
+Sample 5: Bullets and regular code sample
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre><code data-trim data-noescape>
+
+</code></pre>
+
+</section>
+-->
+				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+		
+		<!-- Finally, to actually run the highlighter, you need to include this JS on your page -->
+
+
+	</body>
+</html>

@@ -9,7 +9,8 @@ display: none;
 }
 
 .present .syntaxhighlighter .js,
-.present .syntaxhighlighter .html {
+.present .syntaxhighlighter .html,
+.present .syntaxhighlighter .php {
 font-size: 0.68em !important;
 letter-spacing: -4px !important;
 }

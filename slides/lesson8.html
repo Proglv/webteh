@@ -1,0 +1,934 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>web teh</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		
+		<link rel="stylesheet" href="lekcijas.css">
+
+		<!-- highlighter -->
+		<script type="text/javascript" src="sxh/syntaxhighlighter.js"></script> 
+<!-- 		<link href="sxh/theme-default.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-django.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-rdark.css" rel="stylesheet" type="text/css" /> -->
+		<link href="sxh/theme-midnight.css" rel="stylesheet" type="text/css" />
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+			
+<section data-markdown><textarea data-template>
+## 8. Lekcija: PHP II
+
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Šajā lekcijā (TODO)
+
+* Kā pieslēgties DB un izpildīt pieprasījumus un nolasīt datus – MySQLli un PDO
+* PHP sesijas
+* Sīkdatnes
+* Datņu augšupielāde
+* PHP ietvari
+* PHP un drošība
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### PHP un datu bāzes
+
+* PHP ir iebūvētās funkcijas, lai varētu pieslēgties ļoti daudzām DBVS.
+* Liela daļa no PHP funkcijām ar datu bāzēm ir ļoti līdzīgas gan pēc nosaukuma, gan arī pēc to darbībām. 
+* PHP sadarbība ar MySQL.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### PHP un MySQL
+
+* Visu funkciju nosaukumi, kuras paredzētas darbam ar MySQL datu bāzi, sākas ar „mysqli_”.
+* MySQLi modulis arī piedāvā izmantot klases un objektus, lai pieslēgtos datu bāzēm.
+* Lai PHP varētu veiksmīgi pieslēgties datu bāzei, ir jābūt palaistam attiecīgajam datu bāzu serverim.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Pieslēgšanās datu bāzei
+
+* Lai pieslēgtos datu bāzei, jāizveido jauns mysqli klases objekts, kuram konstruktorā jānorāda 
+ * DBVS servera adrese,
+ * DB lietotāja vārds, 
+ * DB lietotāja parole un 
+ * DB nosaukums.
+Funkcijas mysqli_connect_errno() un mysqli_connect_error()
+Beidzot visas darbības ar datu bāzi ieteicams aizvērt pieslēgumu izmantojot mysqli klases close() funkciju.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Pieslēgšanās datu bāzei</h3>
+
+<pre class="brush: php">
+$dblink = new mysqli("localhost", "lietotajs",
+                        "parole", "db_nosaukums");
+// pārbaudam vai pieslēgšanās notikusi veiksmīgi,
+// ja nē izvada kļūdas paziņojumu un pārtrauc skripta izpildi
+if (mysqli_connect_errno()) {
+   printf("Neizdevās pieslēgties: %s\n", mysqli_connect_error());
+   exit();
+}
+printf("Informācija par serveri: %s\n", $dblink->host_info);
+/* aizver pieslēgumu datu bāzei*/
+$dblink->close();
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### PDO - PHP Data Objects
+
+* DB piekļuves slānis, kas nodrošina vienotu metožu platformu sadarbībai ar dažāda veida DBVS
+* Nesāpīgāka migrēšana uz citu DBVS
+ * CUBRID (PDO)
+ * MS SQL Server (PDO)
+ * Firebird (PDO)
+ * IBM (PDO)
+ * Informix (PDO)
+ * MySQL (PDO)
+ * MS SQL Server (PDO)
+ * Oracle (PDO)
+ * ODBC and DB2 (PDO)
+ * PostgreSQL (PDO)
+ * SQLite (PDO)
+ * 4D (PDO)
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Pieslēgšanās DB izmantojot PDO</h3>
+
+<img src="img/pdo.png">
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### printf()
+
+* Šī funkcija līdzīgi kā echo nodrošina datu izvadi uz dokumentu.
+* Pirmais padotais mainīgais norāda formātu kādā tiks izvadīti mainīgie. 
+* Bet pārējie mainīgie tiek ievietoti ar %s vai %d norādītajās pozīcijās.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>printf()</h3>
+
+<pre class="brush: php">
+$skaitlis1 = 1;
+$skaitlis2 = 2;
+$teksts1 = 'pirmais';
+$teksts2 = 'otrais';
+printf("izvadam skaitli: %d<br />\n", $skaitlis1);
+printf("izvadam skaitli 1: %d un tekstu 2: %s <br />\n", $skaitlis1, $teksts2);
+printf("izvadam vēl vairāk: %s; %d; %s; %d <br \>\n", $teksts2, $skaitlis2, $teksts1, $skaitlis1);
+</pre>
+
+<img src="printf_res.png"/>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Pieprasījumu izpilde (MySQL)
+
+* Lai izpildītu pieprasījumus, lieto funkciju $mysqli_obj->query(”pieprasījums”). 
+* Parametrā “pieprasījums” glabājas izpildāmā SQL pieprasījuma teksts. 
+* Pieprasījums var būt:
+ * gan datu pieprasījums no datu bāzes (SELECT), 
+ * gan datu manipulācijas komandas (INSERT,UPDATE,DELETE),
+ * gan arī DB struktūras manipulācijas komandas (CREATE TABLE, ALTER TABLE, DROP TABLE).
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### TODO
+
+* TODO
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### PHP sesijas
+
+* Sesijas ļoti noderīgs rīks lapām, kas nodrošina mijiedarbību ar lietotāju. 
+* php programmas tiek atkārtoti izsaukta katras atsevišķas web lapas uzģenerēšanai un pēc tam to izpilde tiek beigta. 
+* Netiek saglabāti nekādi mainīgie, kas būtu nepieciešami ģenerējot citas lapas.
+* Lai nodrošinātu iespēju saglabāt mainīgos arī pēc tam, kad PHP programmas izpilde ir beigusies tiek izmantotas sesijas.
+* Gandrīz vienmēr sesijas tiek izmantotas lapās, kur nepieciešams autorizēties.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Sesiju darbības principi
+
+* Sesijas pēc savas būtības ir mainīgo saglabāšana īpašās datnēs vai datubāzē uz servera.
+* Problēma rodas tad, kad nepieciešams noteikt, kurš lietotājs ir saglabājis kurus mainīgos, vai kuras šī mainīgā vērtības.
+* Lai to atrisinātu ir nepieciešams viennozīmīgi identificēt katru lietotāja pieslēgumu serverim.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Sesiju darbības principi
+
+* Tam lieto speciālus sesijas identifikatorus un šos identifikatorus parasti saglabā klienta datora Cookie datne.
+* PHP piedāvā automātiski pievienot šo identifikatoru adreses vaicājuma daļā.
+* Sesijas mainīgie saglabājas tikai vienas konkrētās pārlūkprogrammas darbības laikā.
+* Sesijas mainīgie tiek glabāti masīvā $_SESSION[];
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Sesiju inicializēšana
+
+* Pirms darboties ar sesiju to ir nepieciešams inicializēt.
+* Inicializēšana ir unikāla identifikatora piešķiršana sesijai. 
+* Ja šī ir pirmā reize, kad lietotājs izsauc sesijas inicializēšanu, tad automātiski tiek izveidots jauns unikāls sesijas identifikators.
+* Lai inicializētu sesiju, lieto funkciju session_start()
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Sesiju mainīgo izmantošana</h3>
+
+<ul>
+<li>Pēc tam kad sesija ir tikusi inicializēta, sesijas masīvā var saglabāt vai no tās nolasīt datus. 
+<li>Lai griestos pie sesijas mainīgajiem, lieto sekojošu sintaksi $_SESSION['mainiga_nosaukums'];
+</ul>
+
+<pre class="brush: php">
+session_start();
+if (!isset($_SESSION["skaits"])){
+      $_SESSION["skaits"] = 1;
+}else{
+      $_SESSION["skaits"]++;
+}
+echo "Lapa ielādēta ". $_SESSION["skaits"]." reizes";
+</pre>
+
+</section>
+
+
+<section>
+<h3>Sesiju identificēšana</h3>
+
+<ul>
+<li>Lai novērstu  dublēšanos, kas radītu neparedzamu kļūdu programmas izpildes gaitā, PHP ir izveidota iespēja identificēt sesijas piešķirot tām nosaukumus.
+<li>To dara ar funkciju session_name('sesijas_nosaukums'). 
+<li>Šī funkcija jāizsauc pirms session_start();
+</ul>
+
+<pre class="brush: php">
+session_name('sesija_1');
+session_start();
+$_SESSION['skaits'] = 1;
+</pre>
+
+</section>
+
+
+<section>
+<h3>isset(mainīgais)</h3>
+
+<ul>
+<li>Funkcija isset() atgriež vērtību „patiess”, ja šāds mainīgais ir izveidots un „nepatiess”, ja tas nav izveidots. 
+<li>Funkcija darbojas ne tikai ar sesijas mainīgajiem, bet ar jebkuru mainīgo.
+</ul>
+
+<pre class="brush: php">
+if (!isset($_SESSION["skaits"])){
+      $_SESSION["skaits"] = 1;
+}else{
+      $_SESSION["skaits"]++;
+}
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### unset(mainīgais)
+
+* Komanda dzēš mainīgo no sesijas mainīgo masīva, tā neatgriež nekādu vērtību. 
+* Tādu pašu rezultātu var panākt piešķirot mainīgajam vērtību null.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3></h3>
+
+<pre class="brush: php">
+function testIfValSet(){
+  global $test;
+  echo ( isset($test) ? 'true' : 'false' ).' - ';
+}
+
+echo ' - ';
+testIfValSet();
+
+$test = 1;
+testIfValSet();
+
+unset($test);
+testIfValSet();
+
+$test = 1;
+testIfValSet();
+
+$test = null;
+testIfValSet();
+
+//Rezultāts: - false - true - false - true - false -
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Sesiju pielietojums lietotāju autorizēšanai
+
+* Sesijas galvenā īpašība ir, ka šis $_SESSION masīvs saglabā savas vērtības starp atsevišķiem lietotāja pieprasījumiem (piem. klikšķiem uz saitēm).
+* Funkcijai session_start() vienkārši jābūt tā .php faila pašā sākumā uz kuru tiek veikts pieprasījums
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Sesiju pielietojums lietotāju autorizēšanai</h3>
+
+<ul>
+<li>Pieņemsim, ka lietotājs iepriekš jau ticis reģistrēts.
+<li>Kad lietotājs sekmīgi autorizējas, sesijas masīvā $_SESSION kādā brīvi izvēlētā mainīgajā jāieraksta, ka tekošais lietotājs ir sekmīgi autorizējies (piem $_SESSION['is_logged_in']=true;).
+</ul>
+
+<pre class="brush: php">
+if( isset($_SESSION['is_logged_in']) &&
+    $_SESSION['is_logged_in'] == true)
+{
+ //uzskatam ka lietotājs ir autorizēts
+}
+</pre>
+
+<pre class="brush: php">
+unset($_SESSION['is_logged_in']);
+</pre>
+
+</section>
+
+
+<section>
+<h3>Sesiju pielietojums lietotāju autorizēšanai</h3>
+
+<ul>
+<li>ir jānodrošina, lai mainīgā $_SESSION['is_logged_in'] vērtību varētu mainīt tikai funkcijas, kas pārbauda vai lietotājs autorizējas vai beidz autorizāciju. 
+<li>Ir ieteicams izveidot atsevišķu funkciju, kas pārbauda vai lietotājs ir autorizēts un citur kodā izmantot tikai šo funkciju un negriezties tiešā formā pie šī mainīgā.
+</ul>
+
+</section>
+
+
+<section>
+<h3>Sesiju pielietojums lietotāju autorizēšanai</h3>
+
+<pre class="brush: php">
+function is_authorised(){
+return $_SESSION['is_logged_in']; }
+if(is_authorised()==true){
+  // parādam informāciju kas pieejama tikai autorizētiem lietotājiem
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Sesiju pielietojums lietotāju autorizēšanai</h3>
+
+Kļūdains piemērs:
+
+<pre class="brush: php">
+if($_SESSION['is_logged_in'] = true){
+}
+</pre>
+
+</section>
+
+<section data-markdown><textarea data-template>
+### Sīkdatnes
+
+* Cookies jeb sīkdatnes ir paredzētas dažādas informācijas glabāšanai par lietotāju arī pēc tam, kad lietotājs savas darbības ar vietni ir beidzis.
+* Lai saglabātu sīkdatnēs mainīgo vērtības lieto funkciju setcookie(); Tai kā parametru nodod sīkdatnē saglabājamā mainīgā nosaukumu, mainīgā vērtību, sīkdatnes beigu termiņu un citus neobligātus parametrus.
+* Lai grieztos pie sīkdatnē saglabātā mainīgā jālieto masīvs $_COOKIE[]
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Sīkdatnes</h3>
+
+<pre class="brush: php">
+setcookie('cepuma_nosaukums','Selga');
+if (isset($_COOKIE['x'])){
+      setcookie('x',$_COOKIE['x']+1,time()+360000);
+}else{
+	setcookie('x',0,time()+360000);
+}
+echo $_COOKIE['x'];
+echo '<br>';
+echo $_COOKIE['cepuma_nosaukums'];
+</pre>
+
+</section>
+
+
+<section>
+<h3>Sīkdatnes</h3>
+
+<ul>
+<li>Sīkdatnes bieži vien tiek izmantotas lai izsekotu publisku tīmekļa vietņu apmeklētāju uzvedību.
+<li>Sīkdatnēs saglabātie mainīgie kļūst pieejami tikai nākamajā lapas ielādes reizē.
+<li>Ja nepieciešams izdzēst mainīgo no sīkdatnes, tad jālieto tā pati funkcija set_cookie() ar tieši tādiem pašiem parametriem kā veidojot šo sīkdatnes mainīgo, izņemot beigu termiņš jānorāda pirms patreizējā brīža.
+</ul>
+
+<pre class="brush: php">
+setcookie('x',$_COOKIE['x']+1, time()-10);
+</pre>
+
+</section>
+
+
+<section>
+<h3>Datņu augšupielāde</h3>
+
+<ul>
+<li>Datņu ielāde tiek realizēta izmantojot HTML formas. 
+<li>Tajās var pievienot īpašus “file” tipa datu ievades elementus.
+</ul>
+
+<pre class="brush: php">
+<input type="file" name="datne_1" />
+</pre>
+
+<img src="img/upload.png">
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Datņu augšupielāde
+
+* Lai veiktu augšupielādi nepieciešams arī formai norādīt parametrus enctype="multipart/form-data" un method="post".
+* Atribūta action vērtībā jānorāda php skripta datne, kas veiks saņemto datu apstrādi. 
+* Šim skriptam obligāti jāveic datņu apstāde (saglabāšana), citādi tie tiks izdzēsti tūlīt pēc skripta izpildes beigām.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Datņu augšupielāde
+
+* Maksimālo atļauto datnes izmēru kādu drīkst ielādēt var norādīt divās vietās. Php.ini datnē
+* Papildus ir iespējams HTML formā pievienot input lauku ar tipu “hidden” un nosaukumu “MAX_FILE_SIZE” un tā vērtībā norādīt maksimālo datnes izmēru baitos.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Datņu augšupielāde</h3>
+
+<pre class="brush: php">
+<!-- Datu kodēšanas veidam, enctype, JĀBŪT norādītam -->
+<!-- atribūta method vērtībai JĀBŪT post -->
+<form enctype="multipart/form-data" action="upload.php" method="post">
+
+	<!-- MAX_FILE_SIZE jāatrodas pirms datnes izvēles lauka -->
+	<input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+
+	<!-- input elementa nosaukums nosaka datnes atslēju masīvā $_FILES -->
+	Sūtīt šo datni: <input name="userfile" type="file" />
+
+	<input type="submit" value="Sūtīt datni" />
+</form>
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Informācija par augšuplādētājām datnēm
+
+* Dati par augšupielādētajām datnēm glabājas masīvā $_FILES['nosaukums'], kur
+* 'nosaukums' ir HTML dokumenta augšupielādēšanas taga nosaukums
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Informācija par augšuplādētājām datnēm
+
+* $_FILES[] ir vairāku dimensiju masīvs, caur kuru var piekļūt sekojošiem augšupielādētās datnes parametriem:
+ * $_FILES['nosaukums']['name']
+ * $_FILES['nosaukums']['type']
+ * $_FILES['nosaukums']['size']
+ * $_FILES['nosaukums']['tmp_name']
+ * $_FILES['nosaukums']['error']
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Datņu apstrādes funkcijas
+
+* is_uploaded_file(‘temp_name’) - atgriež vērtību patiess, ja norādītā datne augšupielādēta izmantojot metodi POST.
+* move_uploaded_file(file, destination) - pārbauda vai šī datne tikusi augšupielādēta izmantojot POST un vai to ir iespējams pārvietot uz parametrā „destination” norādīto vietu. Ja to var, tad datne tiek pārvietota.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>Forma
+</ul>
+
+<pre class="brush: php">
+<form enctype="multipart/form-data" method="POST" action ="upload.php">
+<input type="hidden" name="MAX_FILE_SIZE" value="100000">
+<input type="file" name="datne"><br>
+<input type="submit" value="upload!">
+</form>
+</pre>
+
+</section>
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+</ul>
+
+<pre class="brush: php">
+if (is_uploaded_file($_FILES['datne']['tmp_name'])){
+      if (copy($_FILES['datne']['tmp_name'],
+            "C:/mana/mape/".$_FILES['datne']['name'])){
+            echo "Datne veiksmīgi augšupielādēta";
+      }else{
+            echo "Kļūda";
+      }
+}else{
+      echo "Nekorekta datne";
+}
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Vairāku failu augšupielāde
+
+* Vienā formā ir iespējams veikt vairāku datņu augšupielādi. Lai to panāktu ir nepieciešams
+* izveidot formā vairākus failu augšupielādes laukus.
+* Katram no laukiem piešķirt citu nosaukumu.
+* Uz servera visa šī informācija tiks saglabāta tajā pašā $_FILES[] masīvā
+* Lai veiktu masīva $_FILES[] apstrādi var tikt izmantots arī cikls foreach.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### PHP ietvari (framework)
+
+* Lai atvieglotu un paātrinātu sarežģītu PHP aplikāciju izstrādi, ir iespējams izmantot jau gatavas funkciju bibliotēkas. 
+* Jārēķinās, ka lai apgūtu freimworka izmantošanu, būs nepieciešams laiks, bet tālāk strādājot izmantojot attiecīgā freimworka kodu iespējams paātrināt aplikāciju izstrādi, jo nepieciešams uzrakstīt mazāk koda, lai paveiktu to pašu darbu.
+ * http://www.symfony-project.com/
+ * http://cakephp.org/
+ * http://www.phpframeworks.com/
+ * https://fatfreeframework.com/3.6/home
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Drošība
+
+* 
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Servera operētājsistēmas un dažādu procesu drošība
+
+* Lielākā daļa no apdraudējumiem ir attiecināma uz servera operētājsistēmu un dazādiem procesiem, kas darbojas uz šī servera.
+* Šie procesi nekādā veidā tieši nav saistīti ar PHP programmu, bet izmantojot nepilnības tajos, uzbrucējs var iegūt pieeju servera failiem
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### PHP programmu drošība
+
+* Ievades datu nodošana URL parametros.
+* Ja tiek nodoti dati, kuriem ir kaut neliela drošības nozīme, tad tos nekādā gadījumā nevajadzētu nodot izmantojot GET metodi.
+* Vietās, kur lietotāju autorizācijas drošība nav ļoti nozīmīgs faktors, (interneta formumi, web e-pasts, un tamlīdzīgi) parasti lietotāju autorizācijas dati tiek pārraidīti nešifrētā veidā izmantojot POST metodi.
+* Ja nepieciešams veidot drošākas autorizācijas metodes, tad tam izmanto savienojumu kodēšanu uz serveri izmantojot HTTPS vai citu protokolu, kas nodrošina šifrētu komunikāijas kanālu.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### PHP programmu drošība
+
+* SQL injekcijas:
+* Datos, ko php programma saņem no Web formas var būt ne tikai dati, bet arī SQL komandas, kuras tiek izpildītas kopā ar nosūtītajiem datiem. 
+* Lai pret tām cīnītos, ir izveidota direktīva ‘magic_quotes_gpc’, kura pēc noklusēšanas ir on stāvoklī.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### PHP programmu drošība
+
+* Datņu ceļu injekcijas
+* PHP ir viegla piekļuve datora datiem uz diska, tādēļ jāuzmanās arī dinamiski veidojot datņu nosaukumus un ceļus, kurus padot include, require vai fopen funkcijām.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3></h3>
+
+<pre class="brush: php">
+//Ja sagaidāma integer vērtība, uzreiz veicam konvertāciju par
+// integer, izmantojot (int)
+$id = (int)$_GET['id'];
+//Pārbaudam vai teksta mainīgajam ir sagaidāmais formāts
+if (ereg("^[a-z]+\.html$", $page)) {
+    echo "Viss kārtībā!";
+} else {
+    die("Try hacking somebody else's site.");
+}
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Papildus drošība izmantojot SSL
+
+* Daudzas web aplikācijas ir ļoti nedrošas, jo tās autorizācijas procesā lietotāja vārdu un paroli pārraida tīklā atklātā veidā. 
+* Ja aplikācijai nepieciešama papildus drošība, tad ieteicams izmantot Secure Socket Layer (SSL), kas veic visas datu plūsmas šifrēšanu starp serveri un klientu.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Apache piekļuves kontrole
+
+* Lai ierobežotu lietotāju piekļūšanu web lapai un pie nepieciešamības veiktu lietotāju autorizāciju, var izmantot Apache webservera iebūvētās iespējas.
+* Apache piedāvā vairākas iespēja, kā to veikt - izmantojot apache konfigurācijas faila (httpd.conf) direktīvas vai .htaccess failus.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Apache piekļuves kontrole</h3>
+
+<ul>
+<li>Direktīva "Allow"
+<li>
+<ul>
+<li>Ar šīs direktīvas palīdzību var atļaut piekļuvi kādam resursam
+</ul>
+</ul>
+
+<img src="img/allow.png">
+
+</section>
+
+
+<section>
+<h3>Apache piekļuves kontrole</h3>
+
+<ul>
+<li>Direktīva "Deny" -direktīva "Deny" aizliedz piekļuvi kādam resursam.
+<li>Direktīva "Order"- šī direktīva nosaka kādā kārtībā notiks <Allow> un <Deny> apstrāde.
+</ul>
+
+<img src="img/allow2.png">
+
+</section>
+
+
+<section>
+<h3>Apache piekļuves kontrole</h3>
+
+<ul>
+<li>Direktīva <Directory ceļš>
+<ul>
+<li>Ar šīs direktīvas palīdzību var noteikt pieejas tiesības failu sistēmas direktoriju koka ietvaros.
+<li>"ceļš" norāda uz kuru direktoriju un tās apakšdirektorijiem tas attieksies.
+<li>Apache pēc noklusēšanas ļauj caur URL piekļūt visiem failu sistēmas failiem.
+</ul>
+</ul>
+
+<pre class="brush: php">
+<Directory /user/public_html>
+Order Allow,Deny
+Allow from All
+</Directory>
+</pre> 
+
+</section>
+
+
+<section>
+<h3>Apache piekļuves kontrole</h3>
+
+<ul>
+<li>Direktīva <Files fails>
+<ul>
+<li>Ar šīs direktīvas palīdzību var noteikt pieejas tiesības konkrētiem failiem vadoties pēc to nosaukuma (vai maskas) neatkarīgi no to atrašanās vietas failu sistēmā.
+</ul>
+</ul>
+
+<pre class="brush: php">
+<Files index.html>
+Order deny, allow
+Allow from all
+</Files>
+</pre> 
+
+</section>
+
+
+<section>
+<h3>Apache piekļuves kontrole</h3>
+
+<ul>
+<li>Direktīva <Location URL>
+<ul>
+<li>Ar šīs direktīvas palīdzību var noteikt pieejas tiesības kādai tīmekļa vietnes vietai vadoties pēc URL. 
+<li>Šādas tiesības var darboties arī attiecībā uz dinamiski ģenerētām lapām.
+</ul>
+</ul>
+
+<pre class="brush: php">
+<Location www.va.lv/private/>
+Order Deny,Allow
+Deny from All
+Allow from va.lv
+</Location>
+</pre> 
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Apache piekļuves kontrole
+
+* .htaccess
+ * Iepriekš apskatītās direktīvas "Allow" un 'Deny" var ievietot arī failā .htaccess. 
+ * Direktīvas, kas ievietotas šajā datnē attieksies uz direktoriju, kur novietots .htaccess fails.
+ * .htaccess datni iesaka izmantot gadījumos, kad tiesību piešķiršana tiek deleģēta katram lietotājam atsevišķi.
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Lietotāju autorizācija</h3>
+
+<ul>
+<li>Apache piedāvā arī iespēju veikt lietotāju autorizāciju un piekļuvi attiecīgiem resursiem piešķirt tikai autorizētiem lietotājiem.
+</ul>
+
+<pre class="brush: php">
+AuthType Basic
+AuthName "Ievadiet paroli"
+AuthUserFile /etc/web_users.psw
+htpasswd –c /etc/web_users.psw ivars
+</pre>
+
+<pre class="brush: php">
+htpasswd /etc/web_users.psw juris
+</pre>
+
+<pre class="brush: php">
+htpasswd –b /etc/web_users.psw juris parole1
+</pre>
+
+</section>
+<!--
+
+
+Sample 1: Markdown
+
+
+<section data-markdown><textarea data-template>
+### 
+
+* 
+
+Note: 
+</textarea></section>
+
+
+Sample 3: Highlighted code sample (still need to escape < symbols)
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+</ul>
+
+<pre class="brush: php">
+
+</pre>
+
+</section>
+
+
+Sample 4: Bullets and highlighted code sample (still need to escape < symbols)
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre class="brush: php">
+
+</pre>
+
+</section>
+
+
+Sample 5: Bullets and regular code sample
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre><code data-trim data-noescape>
+
+</code></pre>
+
+</section>
+-->
+				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+		
+		<!-- Finally, to actually run the highlighter, you need to include this JS on your page -->
+
+
+	</body>
+</html>
