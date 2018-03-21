@@ -1,0 +1,68 @@
+/* Set header size */
+#header {
+	width: 500px;
+	border: 1px solid gray;
+	border-bottom-style: dashed;
+	border-bottom-width: 3px;
+	border-bottom-color: orange;
+}
+
+/* Removes bullets from list items */
+#header li {
+	list-style: none;
+	display: inline;
+}
+
+#header a {
+	margin: 10px;
+	font-size: 30px;
+	color: orange;
+}
+
+#header a:hover {
+	color: green;
+}
+
+#mytable, #mytable td {
+	border: 1px solid black;
+}
+
+#demo {
+	float: right;
+}
+
+.main {
+	font-family: verdana;
+	font-size: 18px;
+}
+
+.minor {
+	font-family: verdana;
+	font-size: 14px;
+	color: gray;
+}
+
+#special {
+	margin: 10px;
+	padding: 10px;
+	text-decoration: underline;
+	color: orange;
+}
+
+
+@media print {
+	img {
+		display: none;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
