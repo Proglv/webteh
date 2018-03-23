@@ -43,14 +43,12 @@ Note:
 
 
 <section data-markdown><textarea data-template>
-### Šajā lekcijā (TODO)
+### Šajā lekcijā
 
-* Kā pieslēgties DB un izpildīt pieprasījumus un nolasīt datus – MySQLli un PDO
+* Kā pieslēgties DB un izpildīt pieprasījumus un nolasīt datus – MySQLi un PDO
 * PHP sesijas
 * Sīkdatnes
 * Datņu augšupielāde
-* PHP ietvari
-* PHP un drošība
 
 Note: 
 </textarea></section>
@@ -70,8 +68,8 @@ Note:
 <section data-markdown><textarea data-template>
 ### PHP un MySQL
 
-* Visu funkciju nosaukumi, kuras paredzētas darbam ar MySQL datu bāzi, sākas ar „mysqli_”.
-* MySQLi modulis arī piedāvā izmantot klases un objektus, lai pieslēgtos datu bāzēm.
+* Funcijas, kuras paredzētas darbam ar MySQL datu bāzi, sākas ar „mysqli_”.
+* MySQLi modulis arī piedāvā izmantot klasi "mysqli", lai strādātu ar datu bāzēm.
 * Lai PHP varētu veiksmīgi pieslēgties datu bāzei, ir jābūt palaistam attiecīgajam datu bāzu serverim.
 
 Note: 
@@ -86,8 +84,19 @@ Note:
  * DB lietotāja vārds, 
  * DB lietotāja parole un 
  * DB nosaukums.
-Funkcijas mysqli_connect_errno() un mysqli_connect_error()
-Beidzot visas darbības ar datu bāzi ieteicams aizvērt pieslēgumu izmantojot mysqli klases close() funkciju.
+* Funkcijas mysqli_connect_errno() un mysqli_connect_error()
+* Beidzot visas darbības ar datu bāzi ieteicams aizvērt pieslēgumu izmantojot mysqli klases close() funkciju.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Kļūdu apstrāde (MySQL)
+
+* Kļūdas var apstrādāt izmantojot mysqli klases atribūtus error un errno. 
+* Atribūts error satur pēdējās kļūdas tekstu vai tukšu rindu gadījumā, ja kļūda nav bijusi, bet atribūts errno satur pēdējās kļūdas numuru vai 0, ja kļūda nav bijusi. 
+* Errno var izmantot gadījumos, ja vēlas lietotājam parādīt kļūdas tekstu latviski.
 
 Note: 
 </textarea></section>
@@ -97,7 +106,7 @@ Note:
 <h3>Pieslēgšanās datu bāzei</h3>
 
 <pre class="brush: php">
-$dblink = new mysqli("localhost", "lietotajs",
+$connection = new mysqli("localhost", "lietotajs",
                         "parole", "db_nosaukums");
 // pārbaudam vai pieslēgšanās notikusi veiksmīgi,
 // ja nē izvada kļūdas paziņojumu un pārtrauc skripta izpildi
@@ -107,38 +116,8 @@ if (mysqli_connect_errno()) {
 }
 printf("Informācija par serveri: %s\n", $dblink->host_info);
 /* aizver pieslēgumu datu bāzei*/
-$dblink->close();
+$connection->close();
 </pre>
-
-</section>
-
-
-<section data-markdown><textarea data-template>
-### PDO - PHP Data Objects
-
-* DB piekļuves slānis, kas nodrošina vienotu metožu platformu sadarbībai ar dažāda veida DBVS
-* Nesāpīgāka migrēšana uz citu DBVS
- * CUBRID (PDO)
- * MS SQL Server (PDO)
- * Firebird (PDO)
- * IBM (PDO)
- * Informix (PDO)
- * MySQL (PDO)
- * MS SQL Server (PDO)
- * Oracle (PDO)
- * ODBC and DB2 (PDO)
- * PostgreSQL (PDO)
- * SQLite (PDO)
- * 4D (PDO)
-
-Note: 
-</textarea></section>
-
-
-<section>
-<h3>Pieslēgšanās DB izmantojot PDO</h3>
-
-<img src="img/pdo.png">
 
 </section>
 
@@ -162,12 +141,12 @@ $skaitlis1 = 1;
 $skaitlis2 = 2;
 $teksts1 = 'pirmais';
 $teksts2 = 'otrais';
-printf("izvadam skaitli: %d<br />\n", $skaitlis1);
-printf("izvadam skaitli 1: %d un tekstu 2: %s <br />\n", $skaitlis1, $teksts2);
-printf("izvadam vēl vairāk: %s; %d; %s; %d <br \>\n", $teksts2, $skaitlis2, $teksts1, $skaitlis1);
+printf("skaitlis: %d<br />\n", $skaitlis1);
+printf("skaitlis 1: %d un teksts 2: %s <br />\n", $skaitlis1, $teksts2);
+printf("vēl vairāk: %s; %d; %s; %d <br \>\n", $teksts2, $skaitlis2, $teksts1, $skaitlis1);
 </pre>
 
-<img src="printf_res.png"/>
+<img src="img/printf_res.png"/>
 
 </section>
 
@@ -187,12 +166,132 @@ Note:
 
 
 <section data-markdown><textarea data-template>
-### TODO
+### Datu lasīšana
 
-* TODO
+* Datus no datu piekļuves objekta var iegūt izmantojot funkciju fetch_assoc(), kas atgriež vienu atlasīto ierakstu un sagatavo atgriešanai nākamo.
+* Ja nepieciešams kursoru var pārbīdīt izmantojot funkciju data_seek() padodot tai parametru – skaitli uz kuru rindu pārbīdīt kursoru. 
+* Funkcija fetch_assoc() atgriezīs asociatīvu masīvu, kurā atslēgas būs kolonnu nosaukumi, bet vērtība būs no nolasītās rindas attiecīgās kolonnas.
 
 Note: 
 </textarea></section>
+
+
+<section>
+<h3>Datu nolasīšana</h3>
+
+<pre class="brush: php">
+$sql = "SELECT actor_id, first_name, last_name FROM actor
+			WHERE actor_id = $aid";
+
+if (!$result = $connection->query($sql)) {
+    // Pieprasījums nenostrādāja.
+    echo "Kļūda pieprasījumā.";
+    echo "Query: " . $sql . "\n";
+    echo "Errno: " . $connection->errno . "\n";
+    echo "Error: " . $connection->error . "\n";
+    exit;
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Datu nolasīšana</h3>
+
+<pre class="brush: php">
+if ($result->num_rows === 0) {
+    // Netika atgriezts neviens rezultāts.
+    echo "Nav aktiera ar ID $aid.";
+    exit;
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Datu nolasīšana</h3>
+
+<pre class="brush: php">
+$actor = $result->fetch_assoc();
+echo "Aktieris: " . $actor['first_name'] . " " . $actor['last_name'];
+</pre>
+
+</section>
+
+
+<section>
+<h3>Vairāki rezultāti</h3>
+
+<pre class="brush: php">
+$sql = "SELECT actor_id, first_name, last_name FROM actor
+			ORDER BY rand() LIMIT 5";
+if (!$result = $mysqli->query($sql)) {
+    echo "Kļūda pieprasījumā.";
+    exit;
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Vairāki rezultāti</h3>
+
+<pre class="brush: php">
+echo "&lt;ul>\n";
+while ($actor = $result->fetch_assoc()) {
+    echo "&lt;li>&lt;a href='aktieris.php?aid=" . $actor['actor_id'] . "'>\n";
+    echo $actor['first_name'] . ' ' . $actor['last_name'];
+    echo "&lt;/a>&lt;/li>\n";
+}
+echo "&lt;/ul>\n";
+</pre>
+
+</section>
+
+
+<section>
+<h3>Jauna ieraksta pievienošana</h3>
+
+<pre class="brush: php">
+$sql = "INSERT INTO actor (first_name, last_name)
+VALUES ('John', 'Doe')";
+
+if ($connection->query($sql) === TRUE) {
+    echo "Jauns ieraksts saglabāts.";
+} else {
+    echo "Kļūda pieprasījumā: " . $sql . "<br>" . $connection->error;
+}
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### PDO - PHP Data Objects
+
+* DB piekļuves slānis, kas nodrošina vienotu metožu platformu sadarbībai ar dažāda veida DBVS
+* Nesāpīgāka migrēšana uz citu DBVS
+ * MS SQL Server (PDO)
+ * Informix (PDO)
+ * MySQL (PDO)
+ * Oracle (PDO)
+ * ODBC and DB2 (PDO)
+ * PostgreSQL (PDO)
+ * SQLite (PDO)
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Pieslēgšanās DB izmantojot PDO</h3>
+
+<img src="img/pdo.png">
+
+</section>
 
 
 <section data-markdown><textarea data-template>
@@ -201,8 +300,16 @@ Note:
 * Sesijas ļoti noderīgs rīks lapām, kas nodrošina mijiedarbību ar lietotāju. 
 * php programmas tiek atkārtoti izsaukta katras atsevišķas web lapas uzģenerēšanai un pēc tam to izpilde tiek beigta. 
 * Netiek saglabāti nekādi mainīgie, kas būtu nepieciešami ģenerējot citas lapas.
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### PHP sesijas
+
 * Lai nodrošinātu iespēju saglabāt mainīgos arī pēc tam, kad PHP programmas izpilde ir beigusies tiek izmantotas sesijas.
-* Gandrīz vienmēr sesijas tiek izmantotas lapās, kur nepieciešams autorizēties.
+* Sesijas izmantoto lapās, kur nepieciešams autorizēties.
 
 Note: 
 </textarea></section>
@@ -222,8 +329,7 @@ Note:
 <section data-markdown><textarea data-template>
 ### Sesiju darbības principi
 
-* Tam lieto speciālus sesijas identifikatorus un šos identifikatorus parasti saglabā klienta datora Cookie datne.
-* PHP piedāvā automātiski pievienot šo identifikatoru adreses vaicājuma daļā.
+* Tam lieto speciālus sesijas identifikatorus (SESSION ID vai PHPSESSID) un šos identifikatorus parasti saglabā klienta datora Cookie datne.
 * Sesijas mainīgie saglabājas tikai vienas konkrētās pārlūkprogrammas darbības laikā.
 * Sesijas mainīgie tiek glabāti masīvā $_SESSION[];
 
@@ -232,7 +338,7 @@ Note:
 
 
 <section data-markdown><textarea data-template>
-### Sesiju inicializēšana
+### Sesiju inicializēšana PHP
 
 * Pirms darboties ar sesiju to ir nepieciešams inicializēt.
 * Inicializēšana ir unikāla identifikatora piešķiršana sesijai. 
@@ -259,24 +365,6 @@ if (!isset($_SESSION["skaits"])){
       $_SESSION["skaits"]++;
 }
 echo "Lapa ielādēta ". $_SESSION["skaits"]." reizes";
-</pre>
-
-</section>
-
-
-<section>
-<h3>Sesiju identificēšana</h3>
-
-<ul>
-<li>Lai novērstu  dublēšanos, kas radītu neparedzamu kļūdu programmas izpildes gaitā, PHP ir izveidota iespēja identificēt sesijas piešķirot tām nosaukumus.
-<li>To dara ar funkciju session_name('sesijas_nosaukums'). 
-<li>Šī funkcija jāizsauc pirms session_start();
-</ul>
-
-<pre class="brush: php">
-session_name('sesija_1');
-session_start();
-$_SESSION['skaits'] = 1;
 </pre>
 
 </section>
@@ -311,41 +399,11 @@ Note:
 </textarea></section>
 
 
-<section>
-<h3></h3>
-
-<pre class="brush: php">
-function testIfValSet(){
-  global $test;
-  echo ( isset($test) ? 'true' : 'false' ).' - ';
-}
-
-echo ' - ';
-testIfValSet();
-
-$test = 1;
-testIfValSet();
-
-unset($test);
-testIfValSet();
-
-$test = 1;
-testIfValSet();
-
-$test = null;
-testIfValSet();
-
-//Rezultāts: - false - true - false - true - false -
-</pre>
-
-</section>
-
-
 <section data-markdown><textarea data-template>
 ### Sesiju pielietojums lietotāju autorizēšanai
 
 * Sesijas galvenā īpašība ir, ka šis $_SESSION masīvs saglabā savas vērtības starp atsevišķiem lietotāja pieprasījumiem (piem. klikšķiem uz saitēm).
-* Funkcijai session_start() vienkārši jābūt tā .php faila pašā sākumā uz kuru tiek veikts pieprasījums
+* Funkcijai session_start() jābūt tā .php faila pašā sākumā uz kuru tiek veikts pieprasījums.
 
 Note: 
 </textarea></section>
@@ -367,12 +425,23 @@ if( isset($_SESSION['is_logged_in']) &&
 }
 </pre>
 
+</section>
+
+
+<section>
+<h3>Sesiju pielietojums lietotāju autorizēšanai</h3>
+
+<ul>
+<li>Ja lietotājs vairs nav autorizējies, tad dzēšam šo mainīgo
+<li>Vai arī iznīcinam visu sesiju
+</ul>
+
 <pre class="brush: php">
 unset($_SESSION['is_logged_in']);
+session_destroy();
 </pre>
 
 </section>
-
 
 <section>
 <h3>Sesiju pielietojums lietotāju autorizēšanai</h3>
@@ -390,9 +459,10 @@ unset($_SESSION['is_logged_in']);
 
 <pre class="brush: php">
 function is_authorised(){
-return $_SESSION['is_logged_in']; }
+	return $_SESSION['is_logged_in'];
+}
 if(is_authorised()==true){
-  // parādam informāciju kas pieejama tikai autorizētiem lietotājiem
+	// parādam informāciju kas pieejama tikai autorizētiem lietotājiem
 }
 </pre>
 
@@ -402,10 +472,10 @@ if(is_authorised()==true){
 <section>
 <h3>Sesiju pielietojums lietotāju autorizēšanai</h3>
 
-Kļūdains piemērs:
+Kļūdains piemērs (tiek izmantota piešķiršana, nevis salīdzināšana):
 
 <pre class="brush: php">
-if($_SESSION['is_logged_in'] = true){
+if ($_SESSION['is_logged_in'] = true){
 }
 </pre>
 
@@ -487,7 +557,7 @@ Note:
 <section data-markdown><textarea data-template>
 ### Datņu augšupielāde
 
-* Maksimālo atļauto datnes izmēru kādu drīkst ielādēt var norādīt divās vietās. Php.ini datnē
+* Maksimālo atļauto datnes izmēru kādu drīkst ielādēt var norādīt divās vietās. Php.ini datnē un...
 * Papildus ir iespējams HTML formā pievienot input lauku ar tipu “hidden” un nosaukumu “MAX_FILE_SIZE” un tā vērtībā norādīt maksimālo datnes izmēru baitos.
 
 Note: 
@@ -516,10 +586,10 @@ Note:
 
 
 <section data-markdown><textarea data-template>
-### Informācija par augšuplādētājām datnēm
+### Informācija par augšupielādētajām datnēm
 
 * Dati par augšupielādētajām datnēm glabājas masīvā $_FILES['nosaukums'], kur
-* 'nosaukums' ir HTML dokumenta augšupielādēšanas taga nosaukums
+ * 'nosaukums' ir HTML dokumenta augšupielādēšanas taga nosaukums
 
 Note: 
 </textarea></section>
@@ -571,18 +641,18 @@ Note:
 <h3></h3>
 
 <ul>
-<li>
+<li>Augsupielādētā faila apstrāde ar PHP
 </ul>
 
 <pre class="brush: php">
-if (is_uploaded_file($_FILES['datne']['tmp_name'])){
+if (is_uploaded_file($_FILES['datne']['tmp_name'])) {
       if (copy($_FILES['datne']['tmp_name'],
-            "C:/mana/mape/".$_FILES['datne']['name'])){
+            "C:/mana/mape/".$_FILES['datne']['name'])) {
             echo "Datne veiksmīgi augšupielādēta";
-      }else{
+      } else {
             echo "Kļūda";
       }
-}else{
+} else {
       echo "Nekorekta datne";
 }
 </pre>
@@ -594,29 +664,16 @@ if (is_uploaded_file($_FILES['datne']['tmp_name'])){
 ### Vairāku failu augšupielāde
 
 * Vienā formā ir iespējams veikt vairāku datņu augšupielādi. Lai to panāktu ir nepieciešams
-* izveidot formā vairākus failu augšupielādes laukus.
-* Katram no laukiem piešķirt citu nosaukumu.
-* Uz servera visa šī informācija tiks saglabāta tajā pašā $_FILES[] masīvā
-* Lai veiktu masīva $_FILES[] apstrādi var tikt izmantots arī cikls foreach.
+ * izveidot formā vairākus failu augšupielādes laukus.
+ * Katram no laukiem piešķirt citu nosaukumu.
+ * Uz servera visa šī informācija tiks saglabāta tajā pašā $_FILES[] masīvā
+ * Lai veiktu masīva $_FILES[] apstrādi var tikt izmantots arī cikls foreach.
 
 Note: 
 </textarea></section>
 
 
-<section data-markdown><textarea data-template>
-### PHP ietvari (framework)
-
-* Lai atvieglotu un paātrinātu sarežģītu PHP aplikāciju izstrādi, ir iespējams izmantot jau gatavas funkciju bibliotēkas. 
-* Jārēķinās, ka lai apgūtu freimworka izmantošanu, būs nepieciešams laiks, bet tālāk strādājot izmantojot attiecīgā freimworka kodu iespējams paātrināt aplikāciju izstrādi, jo nepieciešams uzrakstīt mazāk koda, lai paveiktu to pašu darbu.
- * http://www.symfony-project.com/
- * http://cakephp.org/
- * http://www.phpframeworks.com/
- * https://fatfreeframework.com/3.6/home
-
-Note: 
-</textarea></section>
-
-
+<!-- 
 <section data-markdown><textarea data-template>
 ### Drošība
 
@@ -773,7 +830,7 @@ Allow from All
 Order deny, allow
 Allow from all
 </Files>
-</pre> 
+</pre>
 
 </section>
 
@@ -833,6 +890,7 @@ htpasswd /etc/web_users.psw juris
 <pre class="brush: php">
 htpasswd –b /etc/web_users.psw juris parole1
 </pre>
+ -->
 
 </section>
 <!--

@@ -14,6 +14,13 @@
 		
 		<link rel="stylesheet" href="lekcijas.css">
 
+		<!-- highlighter -->
+		<script type="text/javascript" src="sxh/syntaxhighlighter.js"></script> 
+<!-- 		<link href="sxh/theme-default.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-django.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-rdark.css" rel="stylesheet" type="text/css" /> -->
+		<link href="sxh/theme-midnight.css" rel="stylesheet" type="text/css" />
+
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -35,7 +42,6 @@ Note:
 </textarea></section>
 
 
-<!-- 
 <section data-markdown><textarea data-template>
 ### Šajā lekcijā
 
@@ -49,6 +55,7 @@ Note:
 </textarea></section>
 
 
+<!--
 <section data-markdown><textarea data-template>
 ### Kas ir internets? todo
 
@@ -92,6 +99,7 @@ Note:
 
 Note: 
 </textarea></section>
+-->
 
 
 <section data-markdown><textarea data-template>
@@ -128,6 +136,8 @@ Note:
 Note: 
 </textarea></section>
 
+
+<!--
 <section data-markdown><textarea data-template>
 ### Informācijas plūsma todo
 
@@ -135,6 +145,7 @@ Note:
 
 Note: 
 </textarea></section>
+-->
 
 
 <section data-markdown><textarea data-template>
@@ -176,6 +187,7 @@ Note:
 </textarea></section>
 
 
+<!--
 <section data-markdown><textarea data-template>
 ### HTTP pieprasījuma un atbildes paraugs todo
 
@@ -256,7 +268,7 @@ Note:
 
 
 <section>
-<h3>HTML dokuments</h3>
+<h3>HTML dokumenta piemērs</h3>
 
 <pre><code data-trim data-noescape>
 &lt;!DOCTYPE html&gt;
@@ -294,6 +306,12 @@ Note:
 <section>
 <h3>Meta informācija</h3>
 
+<ul>
+<li>title tags - lapas nosaukums, kas parādās pārlūkprogrammas loga augšā.
+<li>meta tags ar name="keywords" - atslēgvārdi priekš Google u.c. meklētājiem
+<li>meta tags ar atribūtu charset - norāda faila kodējumu (UTF-8 ir unikods)
+</ul>
+
 <pre><code data-trim data-noescape>
 &lt;head&gt;
 &lt;title&gt;Lapas virsraksts&lt;/title&gt;
@@ -309,9 +327,9 @@ Note:
 <h3>Speciālie tagi</h3>
 
 <ul>
-<li>&lt;link&gt;
-<li>&lt;style&gt;
-<li>&lt;script&gt;
+<li>&lt;link&gt; - lai ielādētu ārēju CSS failu
+<li>&lt;style&gt; - lai izmantotu dokumentā iekļauto CSS
+<li>&lt;script&gt; - Lai izmantotu JavaScript
 </ul>
 
 <pre><code data-trim data-noescape>
@@ -391,8 +409,8 @@ Note:
 <h3>HTML attēlošana</h3>
 
 <ul>
-<li>Bloka līmeņa tagi - aizņem maksimālu platumu, attēlojas viens zem otra
-<li>Ringas līmeņa tagi - aizņem minimālu platumu, attēlojas blakus viens otram
+<li>Bloka līmeņa tagi - aizņem maksimālu platumu, attēlojas viens zem otra.
+<li>Rindas līmeņa tagi - aizņem minimālu platumu, attēlojas blakus viens otram.
 </ul>
 
 </section>
@@ -427,10 +445,13 @@ Note:
 
 </section>
 
+
+
 <!--
 
 
 Sample 1: Markdown
+
 
 <section data-markdown><textarea data-template>
 ### 
@@ -441,7 +462,8 @@ Note:
 </textarea></section>
 
 
-Sample 2: Regular with bullets
+Sample 3: Highlighted code sample (still need to escape < symbols)
+
 
 <section>
 <h3></h3>
@@ -450,10 +472,35 @@ Sample 2: Regular with bullets
 <li>
 </ul>
 
+<pre class="brush: php">
+
+</pre>
+
 </section>
 
 
-Sample 3: Regular with bullets and code sample
+Sample 4: Bullets and highlighted code sample (still need to escape < symbols)
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre class="brush: php">
+
+</pre>
+
+</section>
+
+
+Sample 5: Bullets and regular code sample
+
 
 <section>
 <h3></h3>
@@ -470,8 +517,6 @@ Sample 3: Regular with bullets and code sample
 </code></pre>
 
 </section>
-
-
 -->
 				
 			</div>
