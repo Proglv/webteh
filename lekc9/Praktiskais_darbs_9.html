@@ -33,6 +33,7 @@
 <li>Izveidojiet PHP programmu:
 <ol>
 <li>Izveidot pieslēgšanās formu ar lietotājvārda un paroles ievades laukiem.
+<ol><li>Lietotāja autentificēšana notiek ar fiksētu lietotājvārdu un paroli (piem. "peteris" un "noslepums").</ol>
 <li>Ja lietotājs sekmīgi aizpilda formu, izveidot sesijas mainīgo, kas norāda, ka lietotājs ir autorizēts.
 <li>Lapas saturu rādīt tikai autorizētiem lietotājiem.
 <li>Izveidot izlogošanās linku, kuru atverot sesija tiek izbeigta.
@@ -51,8 +52,10 @@
 <li>Izveidot formu ar faila (vai vairāku failu) augšupielādes formu.
 <li>Ja tiek augšupielādēts fails, programma saglabā to apakšdirektorijā.
 <li>Programma nolasa visus failus no apakšdirektorijas un attēlo lapā.
+<ol><li>Izmantojiet funkciju <a target="_blank" href="http://php.net/manual/en/function.readdir.php">readdir</a> vai <a target="_blank" href="http://php.net/manual/en/function.scandir.php">scandir</a>.</ol>
 <li>Bonus 1: Programma ļauj ielādēt tikai attēlus (jpg, png, gif).
 <li>Bonus 2: Programma saglabā katram attēlam samazinātu (200px x 200px versiju).
+<ol><li>Izmantojiet funkciju <a target="_blank" href="http://php.net/manual/en/function.imagecopyresized.php">imagecopyresized</a>.</ol>
 <li>Bonus 3: Programma attēlo samazinātos attēlus tabulā 4 kolonās.
 </ol>
 </li>
@@ -62,7 +65,7 @@
 
 
 
-<h4>Uzdevums 3 (Neobligāts): Apstrādāt augšupielādēto failu</h4>
+<h4>Uzdevums 3 (Bonus): Apstrādāt augšupielādēto failu</h4>
 <div class="ordering">
 ...
 <!-- 
