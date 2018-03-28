@@ -20,6 +20,13 @@
     right: 10px; /* space between number and text */
 </style>
 
+
+		<script type="text/javascript" src="../slides/sxh/syntaxhighlighter.js"></script> 
+<!-- 		<link href="sxh/theme-default.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-django.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-rdark.css" rel="stylesheet" type="text/css" /> -->
+		<link href="../slides/sxh/theme-midnight.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
 
@@ -60,15 +67,27 @@
 </ol>
 </li>
 </ol>
-
 </div>
 
+<h4>Instrukcija kā samazināt JPG attēlu</h4>
+
+<pre class="brush: php">
+// Ielādē oriģinālo failu apstrādei.
+$image =  imagecreatefromjpeg($filename);
+// Samazina uz 200x200.
+$imageScaled = imagescale($image, 200, 200);
+// Saglabā mazāku attēlu.
+imagejpeg($imageScaled, 'smaller.jpg',90);
+// Atbrīvo atmiņu.
+imagedestroy($image);
+imagedestroy($imageScaled);
+</pre>
 
 
+<!--
 <h4>Uzdevums 3 (Bonus): Apstrādāt augšupielādēto failu</h4>
 <div class="ordering">
 ...
-<!-- 
 <ol>
 <li>Izveidojiet PHP programmu:
 <ol>
@@ -79,8 +98,8 @@
 </ol>
 </li>
 </ol>
- -->
 </div>
+-->
 
 
 
