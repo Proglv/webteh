@@ -1,0 +1,609 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>web teh</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		
+		<link rel="stylesheet" href="lekcijas.css">
+
+		<!-- highlighter -->
+		<script type="text/javascript" src="sxh/syntaxhighlighter.js"></script> 
+<!-- 		<link href="sxh/theme-default.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-django.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-rdark.css" rel="stylesheet" type="text/css" /> -->
+		<link href="sxh/theme-midnight.css" rel="stylesheet" type="text/css" />
+		
+<!-- 
+		<script type="text/javascript" src="syntaxhighlighter-master/js/shCore.js"></script> 
+		<script type="text/javascript" src="syntaxhighlighter-master/css/shBrushJScript.js"></script>
+		<link href="syntaxhighlighter-master/css/shCore.css" rel="stylesheet" type="text/css" />
+		<link href="syntaxhighlighter-master/css/shThemeDefault.css" rel="stylesheet" type="text/css" />
+ -->
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+			
+<section data-markdown><textarea data-template>
+## 6. Lesson: jQuery
+
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### What is jQuery
+
+* Popular and small library
+* Provides browser compatability
+* HTML and DOM manipulations
+* Work directly with CSS
+* Events management
+* Effects and animations
+* AJAX communications
+* Other plugins and utilities
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### What is jQuery
+
+* Easier to write Javascript code
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Getting jQuery
+
+* http://jquery.com/download/
+
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Loading jQuery</h3>
+
+<pre class="brush: js">
+&lt;script type="text/javascript" src="jquery-3.3.1.js">&lt;/script>
+</pre>
+
+<pre class="brush: js">
+&lt;script type="text/javascript"
+ src="https://code.jquery.com/jquery-3.3.1.js">&lt;/script>
+</pre>
+
+</section>
+
+
+<section>
+<h3>First jQuery script</h3>
+
+<pre class="brush: js">
+&lt;a href="1.html">A link&lt;/a>
+&lt;script src="jquery.js">&lt;/script>
+&lt;script>
+  $(document).ready(function() {
+    $("a").click(function(event) {
+      alert("You clicked on a link to " + this.href );
+    });
+  });
+&lt;/script>
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### First script
+
+* $ - special function
+* document object events "load" un "ready"
+* anonymous functions
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>jQuery: shortest exmple</h3>
+
+<pre class="brush: js">
+$(document).ready(function() {
+  console.log('ready!');
+});
+</pre>
+
+<pre class="brush: js">
+$(function() {
+  console.log('ready!');
+});
+</pre>
+
+</section>
+
+
+<section>
+<h3>jQuery example: react to every clicked link</h3>
+
+<pre class="brush: js">
+$(function() {
+  $("a").click(function(event) {
+    alert("You clicked on a link to " + this.href );
+  });
+});
+</pre>
+
+</section>
+
+
+<section>
+<h3>Selectiong elements</h3>
+
+<pre class="brush: js">
+$( '#header' ); // select the element with an ID of 'header'
+$( 'li' );      // select all list items on the page
+$( 'ul li' );   // select list items that are in unordered lists
+$( '.person' ); // select all elements with a class of 'person'
+</pre>
+
+</section>
+
+
+<section>
+<h3>Registering events</h3>
+
+<pre class="brush: js">
+$("a").click(function(event) { event.preventDefault(); }
+</pre>
+
+</section>
+
+
+<section>
+<h3>Example: open all links in new window</h3>
+
+<pre class="brush: js">
+$(function () {
+  $("a").click(function (event) {
+    if (null != this.href && this.href.length > 4
+    && this.href.substring(0, 4) == "http") {
+      event.preventDefault();
+      window.open(this.href);
+    }
+  });
+});
+</pre>
+
+</section>
+
+
+<section>
+<h3>CSS modifications</h3>
+
+<pre class="brush: js">
+&lt;div id="open" style="padding: 1em; border: 3px solid black;
+font-size: 300%;">We are open&lt;/div>
+&lt;div id="closed" style="padding: 1em; border: 3px solid black;
+font-size: 300%;">We are closed&lt;/div>
+
+$(function () {
+  $("#closed").hide();
+  $("#open, #closed").click(function (event) {
+    $("#open, #closed").toggle();
+  });
+});
+</pre>
+
+<a href="lesson6_sample1.html">Example</a>
+
+</section>
+
+
+<section>
+<h3>Getting and setting CSS attributes</h3>
+
+<pre class="brush: js">
+$(this).css("text-decoration", "underline");
+alert("The font size is " + $(this).css("font-size"));
+</pre>
+
+<a href="lesson6_sample1.html">Example</a>
+
+</section>
+
+
+<section>
+<h3>Changing page content</h3>
+
+<ul>
+<li>Changing classes
+</ul>
+
+<pre class="brush: js">
+$(function () {
+	$("p").mouseenter(function () {
+		$(this).addClass("highlighted");
+	});
+	$("p").mouseleave(function () {
+		$(this).removeClass("highlighted");
+	});
+})
+</pre>
+
+<!-- <a href="lesson6_sample2.html">Piemērs</a> -->
+
+</section>
+
+
+<section>
+<h3>Changing page content</h3>
+
+<ul>
+<li>Changing classes: toggleClass
+</ul>
+
+<pre class="brush: js">
+$(function () {
+	$("li").click(function () {
+		$(this).toggleClass("highlighted");
+	});
+});
+</pre>
+
+</section>
+
+
+<section>
+<h3>Changing page content</h3>
+
+<ul>
+<li>Checking classes: hasClass
+</ul>
+
+<pre class="brush: js">
+$("li").click(function () {
+	if (!$(this).hasClass("highlighted")) {
+		$(this).addClass("highlighted");
+	}
+	else {
+		alert("This list item is already highlighted.");
+	}
+});
+</pre>
+
+</section>
+
+
+
+<section>
+<h3>Lapas satura izmainīšana</h3>
+
+<ul>
+<li>Formu vērtību manipulācijas: forma
+</ul>
+
+<pre class="brush: html">
+&lt;style>
+	input[name="email"] { color: #999; }
+&lt;/style>
+&lt;form>
+	&lt;label>Email address:
+		&lt;input name="email" value="person@example.com" size="40" />
+	&lt;/label>
+&lt;/form>
+</pre>
+
+<!-- <a href="lesson6_sample2.html">Piemērs</a> -->
+
+</section>
+
+
+<section>
+<h3>Lapas satura izmainīšana</h3>
+
+<ul>
+<li>Formu vērtību manipulācijas: focus un blur
+</ul>
+
+<pre class="brush: js">
+$(function () {
+	$("input[name='email']").focus(function () {
+		if ($(this).val() == "person@example.com") {
+			$(this).val("");
+			$(this).css("color", "black");
+		}
+	});
+	$("input[name='email']").blur(function () {
+		if ($(this).val() == "") {
+			$(this).val("person@example.com");
+			$(this).css("color", "#999");
+		}
+	});
+});
+</pre>
+
+</section>
+
+
+<section>
+<h3>Lapas satura izmainīšana</h3>
+
+<ul>
+<li>HTML atribūtu manipulācijas: forma ar "disabled" lauku
+</ul>
+
+<pre class="brush: html">
+&lt;form>
+	&lt;label>Email address:
+		&lt;input name="email" value="person@example.com" size="40" />
+	&lt;/label>
+	&lt;input id="emailFormSubmit" type="submit" disabled />
+&lt;/form>
+</pre>
+
+</section>
+
+
+<section>
+<h3>Lapas satura izmainīšana</h3>
+
+<ul>
+<li>HTML atribūtu manipulācijas: forma ar "disabled" lauku
+</ul>
+
+<pre class="brush: js">
+$("input[name='email']").blur(function () {
+	if ($(this).val() == "") {
+		$(this).val("person@example.com");
+		$(this).css("color", "#999");
+		$("#emailFormSubmit").attr("disabled", "disabled");
+	}
+	else {
+		$("#emailFormSubmit").removeAttr("disabled"); 
+	}
+});
+</pre>
+
+<!-- <a href="lesson6_sample2.html">Piemērs</a> -->
+
+</section>
+
+
+<section>
+<h3>Manipulate website content</h3>
+
+<ul>
+<li>Add or remove content
+</ul>
+
+<pre class="brush: html">
+&lt;ul id="editable">
+&lt;/ul>
+
+&lt;form id="addElement">
+&lt;label>New list item: &lt;input name="liContent" size="60" />&lt;/label>
+&lt;input type="submit" value="Add Item" />
+&lt;/form>
+</pre>
+
+<a href="lesson6_sampleX.html">Example</a>
+
+</section>
+
+
+<section>
+<h3>Manipulate website content</h3>
+
+<ul>
+<li>Add or remove content
+</ul>
+
+<pre class="brush: html">
+&lt;p>&lt;a id="clearList" href="#">Clear List&lt;/a>&lt;/p>
+</pre>
+
+<pre class="brush: js">
+$("#clearList").click(function (event) {
+	event.preventDefault();
+	$("#editable").empty();
+});
+</pre>
+
+</section>
+
+
+<section>
+<h3>Manipulate website content</h3>
+
+<ul>
+<li>Add or remove content: add new entry
+</ul>
+
+<pre class="brush: js">
+$("#addElement").submit(function (event) {
+	event.preventDefault();
+	$("#editable").append("<li>"
+		+ $("#addElement input[name='liContent']").val() + "</li>");
+	$("#addElement input[name='liContent']").val("");
+});
+</pre>
+
+</section>
+
+
+<section>
+<h3>Manipulate website content</h3>
+
+<ul>
+<li>Add or remove content: delete one by one
+</ul>
+
+<pre class="brush: js">
+$(document).on('click', "#editable li", function () {
+	$(this).remove();
+});
+</pre>
+
+<a href="lesson6_sampleX.html">Piemērs</a>
+
+</section>
+
+
+<section>
+<h3>Effects</h3>
+
+<pre class="brush: js">
+$(document).on('click', "#editable li", function () {
+	$(this).fadeOut('slow', function() {
+		$(this).remove()
+	});
+});
+</pre>
+
+</section>
+
+
+<section>
+<h3>Ajax</h3>
+
+<pre class="brush: js">
+$("button").click(function(){
+    $.ajax({url: "demo_test.txt", success: function(result){
+        $("#div1").html(result);
+    }});
+});
+</pre>
+
+</section>
+
+
+<section>
+<h3>Sources</h3>
+
+<ul>
+<li>http://jqfundamentals.com/chapter/jquery-basics
+</ul>
+
+</section>
+<!--
+
+
+Sample 1: Markdown
+
+<section data-markdown><textarea data-template>
+### 
+
+* 
+
+Note: 
+</textarea></section>
+
+
+Sample 2: Regular html with bullets
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+</ul>
+
+</section>
+
+
+Sample 3: Highlighted code sample (still need to escape < symbols)
+
+<section>
+<h3></h3>
+
+<pre class="brush: js">
+</pre>
+
+</section>
+
+Sample 4: Bullets and highlighted code sample (still need to escape < symbols)
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre class="brush: js">
+</pre>
+
+</section>
+
+
+Sample 5: Bullets and regular code sample
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre><code data-trim data-noescape>
+
+</code></pre>
+
+</section>
+-->
+				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+		
+		<!-- Finally, to actually run the highlighter, you need to include this JS on your page -->
+
+
+	</body>
+</html>

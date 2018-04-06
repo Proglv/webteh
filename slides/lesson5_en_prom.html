@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>web teh</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		
+		<link rel="stylesheet" href="lekcijas.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+			
+<section data-markdown><textarea data-template>
+## 5. Lesson: JavaScript and jQuery
+
+
+Note: 
+</textarea></section>
+
+
+<!-- 
+<section data-markdown><textarea data-template>
+### Klases
+
+* Lai izveidotu jaunu klasi nepieciešams tikai nodefinēt funkciju, kas būs klases konstruktors.
+* Konstruktorā izmantojot atslēgas vārdu this mēs varam konkrētajam objektam pievienot jaunus atribūtus un metodes. 
+* Lai izveidotu jaunu attiecīgās klases objektu, kā parasti jāizmanto atslēgas vārds new.
+
+
+Note: 
+</textarea></section>
+ -->
+
+
+<!-- 
+<section>
+<h3>Klases izveides piemērs</h3>
+
+<pre><code data-trim data-noescape>
+function Kakjis(vards,vecums,krasa) {
+      this.vards=vards
+      this.vecums=vecums
+      this.krasa=krasa
+      this.sakaNjau = function(){
+            alert('Ņau, Es esmu '+vards+'!')
+      }
+}
+minka = new Kakjis('Minka',3,'balts')
+document.writeln(minka.krasa) //Rezultāts: balts
+minka.sakaNjau() //izmet brīdinājuma logu ar tekstu: Ņau, Es esmu Minka!
+
+</code></pre>
+
+</section>
+ -->
+
+
+<!-- 
+<section data-markdown><textarea data-template>
+### Iebūvētās klases
+
+* Array
+* Date
+* Math
+* String
+
+
+Note: 
+</textarea></section>
+
+ -->
+
+<section data-markdown><textarea data-template>
+### Browser objects
+
+* Window - This object contains all properties and methods to work with web browser from Javascript. As well as getting browser and computer information.
+* Document - This object contains information about HTML document structure - or DOM (Document Object Model) tree.
+
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### How to manipulate HTML with Javascript
+
+* Several ways:
+ * use <code>document.writeln()</code> function to output text or 
+ * DOM (Document Object Model), with which you can manipulate any page element.
+
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### DOM tree
+
+* DOM tree is the way Javascript sees HTML document, to read and write to it.
+
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>DOM tree example</h3>
+
+<pre><code data-trim data-noescape>
+&lt;p id=&quot;piem&quot; title=&quot;piemērs&quot;&gt;
+      Šis ir piemērs
+      &lt;b&gt;
+            HTML, kas varētu
+            &lt;br /&gt;
+            būt
+      &lt;/b&gt;
+      Jūsu dokumentā.
+&lt;/p&gt;
+</code></pre>
+
+<img src="img/piemers.png"/>
+
+</section>
+
+
+
+<section data-markdown><textarea data-template>
+### DOM tree example
+
+![struktura](img/dom_koks.png "DOM koks")
+
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### DOM tree
+
+* HTML dokumenti DOM kokā pamatā tiek sadalīti 3 veidu elementos:
+ * Text elements;
+ * HTML elements;
+ * HTML attributes.
+
+
+Note: 
+</textarea></section>
+
+
+
+
+
+<section data-markdown><textarea data-template>
+### Outputing options
+
+* document.writeln()
+* alert()
+* console.log()
+
+Note: 
+</textarea></section>
+
+
+
+<!--
+
+
+Sample 1: Markdown
+
+<section data-markdown><textarea data-template>
+### 
+
+* 
+
+Note: 
+</textarea></section>
+
+
+Sample 2: Regular with bullets
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+</ul>
+
+</section>
+
+
+Sample 3: Regular with bullets and code sample
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre><code data-trim data-noescape>
+
+</code></pre>
+
+</section>
+
+
+-->
+				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+		
+		
+<!-- Include required JS files -->
+<script type="text/javascript" src="js/shCore.js"></script>
+ 
+<!--
+    At least one brush, here we choose JS. You need to include a brush for every
+    language you want to highlight
+-->
+<script type="text/javascript" src="css/shBrushJScript.js"></script>
+ 
+<!-- Include *at least* the core style and default theme -->
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeDefault.css" rel="stylesheet" type="text/css" />
+		
+	</body>
+</html>
