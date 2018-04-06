@@ -1,0 +1,94 @@
+
+/* galvenes izmērs */
+#header {
+	width: 800px;
+	height: 100px;
+}
+/* navigācijas linku izkārtojums */
+#header li {
+	list-style: none;
+	display: inline;
+	padding: 10px;
+	margin: 0px;
+}
+/* linku stils */
+#header a {
+	color: #61C0BF;
+	font-weight: bold;
+	font-size: 18px;
+	font-family: verdana;
+}
+/* linki, kad uzbrauc ar peli */
+#header li:hover {
+	background-color: #61C0BF;
+}
+#header li:hover a {
+	color: white;
+}
+/* galvenes rāmis */
+#header {
+	background-color: #3b7a79;
+	border: 4px dashed black;
+	margin-bottom: 10px;
+}
+
+/* Kvadrāts */
+#kvadrats {
+	width: 150px;
+	height: 150px;
+	color: red;
+	background-color: yellow;
+}
+
+/* Teksts */
+p {
+	font-family: helvetica;
+	font-size: 14px;
+	color: #351F39;
+}
+.mazs-teksts {
+	font-size: 12px;
+}
+.liels-teksts {
+	font-size: 18px
+}
+.izcelts {
+	color: red;
+	text-decoration: underline;
+}
+#paragrafs2, #paragrafs3 {
+	color: blue;
+}
+
+/* Attēli */
+.attels-ar-rami {
+	border: 2px solid orange;
+}
+.attels-pa-kreisi {
+	float: left;
+}
+.attels-pa-labi {
+	float: right;
+}
+
+/* Tabula */
+table, td {
+	border: 1px solid black;
+}
+#tabula1 tr:nth-child(odd) {
+	background-color: red;
+}
+
+/* Drukāšanai */
+@media print {
+	img {
+		display: none;
+	}
+	#header {
+		display: none;
+	}
+	#kvadrats {
+		background-color: white;
+	}
+}
+

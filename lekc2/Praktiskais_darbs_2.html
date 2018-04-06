@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+		<script type="text/javascript" src="../slides/sxh/syntaxhighlighter.js"></script> 
+		<link href="../slides/sxh/theme-default.css" rel="stylesheet" type="text/css" />
+<!-- 		<link href="../slides/sxh/theme-django.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="../slides/sxh/theme-rdark.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="../slides/sxh/theme-midnight.css" rel="stylesheet" type="text/css" /> -->
+
 <title>Praktiskais darbs 2</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
@@ -18,6 +25,11 @@ ol li:before {
     position: absolute;
     margin-right: 100%;
     right: 10px; /* space between number and text */
+}
+    
+h5 {
+	text-decoration: underline;
+}
 </style>
 
 </head>
@@ -27,7 +39,7 @@ ol li:before {
 
 <h3>Mērķis: Apgūt CSS lietojumu, lai izstrādātu vietnes vizuālo noformējumu</h3>
 
-<h4>Uzdevums: Izmantojot CSS noformēt iepriekšējā praktiskajā darbā izveidoto HTML (vai arī jaunizveidotu), radot vienotu stilu visām lapām.</h4>
+<h4>Uzdevums: Izmantojot CSS noformēt iepriekšējā praktiskajā darbā izveidoto HTML, radot vienotu stilu visām lapām.</h4>
 
 <ol>
 
@@ -37,40 +49,264 @@ ol li:before {
 </ol>
 </li>
 
-<li>Izveidojiet izkārtojumu un galveni:
+<li>Izveidot un noformēt galveni:
 <ol>
-<li>Jāizveido ārēja CSS datne, kas tiek iekļauta html dokumentā ar <code>link</code> taga palīdzību.</li>
-<li>Jāizveido <code>960px</code> plata un vismaz <code>500px</code> augsta divu kolonnu (saturs + reklāmas vai cits papildus saturs) lapa, kura ir centrēta loga vidū izmantojot <code>margin: 0 auto;</code> stilu.</li>
-<li>Jāizveido horizontālā izvēlne lapas augšpusē, izmantojot <code>ul</code>, <code>li</code> tagus un <code>list-style</code> īpašību. Uzbīdot ar peli uz izvēlnes tās fona un teksta krāsai jāmainās uz pretējo. Jāizmanto <code>padding</code> un <code>margin</code>, izvēlnes elementu stilizēšanai.</li>
-<li>Zem izvēlnes jānovelk horizontāla svītra visu <code>960px</code> platumā izmantojot <code>border</code> īpašību.</li>
+<li>Izveidot CSS datni, kas tiek iekļauta HTML dokumentā ar <strong>link</strong> taga palīdzību.</li>
+
+<li>Izveidot galveni izmantojot div tagu un piešķirt tai izmēru ar CSS īpašībām widht un height.</li>
+
+<li>Galvenē izveidot horizontālu izvēlni, izmantojot sarakstu (<strong>ul</strong>, <strong>li</strong> tagus) un <strong>list-style</strong> īpašību. Uzbīdot ar peli (pseidoklase <strong>hover</strong>) uz izvēlnes tās fona un teksta krāsai jāmainās uz pretējo. Izmantot <strong>padding</strong> un <strong>margin</strong> īpašības, izvēlnes elementu atkāpju noformēšanai.</li>
+<li>Ierāmēt galveni krāsainā rāmī - īpašība <strong>border</strong>.</li>
 </ol>
 </li>
 
-<li>Noformējiet saturu:
+<li>Noformēt saturu:
 <ol>
-<li>Jāizmanto <code>class</code> vai <code>id</code> selektori, lai noteiktu kuriem html elementiem piešķirt jaunu izskatu.</li>
-<li>Jāizmanto teksta stila īpašības, piemēram, <code>font-family</code> stilu.</li>
-<li>Visām saitēm jāpaslēpj apakšsvītra un jābūt tumši pelēkām.</li>
-<li>Jāizveido rindkopa ar tekstu kurā ievietots attēls. Tekstam jāplūst ap attēlu izmantojot <code>float</code> īpašību.</li>
-<li>Jāizmanto katra otrā elementa fona iekrāsošana citā krāsā, piemēram. bloga ierakstiem, izmantojot <code>nth-child(odd)</code> pseidoklasi.</li>
+<li>Uzstādīt HTML tagiem <strong>class</strong> un/vai <strong>id</strong> atribūtus, lai varētu šiem tagiem piešķirt izskatu ar CSS.</li>
+
+<li>Krāsot elementus izmantojot īpašības:
+<ol>
+<li><strong>color</strong>,</li>
+<li><strong>background-color</strong>.</li>
+</ol>
+</li>
+
+<li>Izmantot teksta stila īpašības, piemēram:
+<ol>
+<li><strong>font-family</strong>,</li>
+<li><strong>font-size</strong>,</li>
+<li><strong>font-weight</strong>,</li>
+<li><strong>text-decoration</strong>.</li>
+</ol>
+</li>
+
+<li>Uzstādīt stilu saitēm (<strong>a</strong> tagiem), lai tām nebūtu apakšsvītra un krāsa būtu tumši pelēka.</li>
+
+<li>Izveidot rindkopu ar tekstu, kurā ievietots attēls. Tekstam jāplūst ap attēlu izmantojot <strong>float</strong> īpašību.</li>
+
+<li>Izveidot katra otrā elementa fona iekrāsošana citā krāsā, piemēram. tabulas rindas, izmantojot <strong>nth-child(odd)</strong> pseidoklasi.</li>
+
 </ol>
 </li>
 
 <li>Izveidojiet drukas stilu:
 <ol>
-<li>Vietnei jābūt dažādām stila lapām priekš izvades uz druku un ekrānu. Piemēram, lai netērētu printera tinti drukas stila lapai var nenorādīt nekādus fona atribūtus vai arī atsevišķus elementus, kā navigāciju, paslēpt izmantojot atribūtus <code>display: none;</code> vai <code>visibility: hidden;</code>.</li>
+<li>Jāiekļauj stils priekš lapas drukāšanas. Piemēram, lai taupīta printera tinti, drukas stilam var noņemt fona atribūtus vai paslēpt atsevišķus elementus, kā navigāciju -  izmantojot atribūtus <strong>display: none;</strong> vai <strong>visibility: hidden;</strong>.</li>
 </ol>
 </li>
 
 </ol>
 
+<h4>Paraugi:</h4>
+
+<h5>CSS faila iekļaušana:</h5>
+<h6>HTML:</h6>
+<pre class="brush: html">
+...
+<head>
+<link rel="stylesheet" type="text/css" href="stils.css">
+</head>
+...
+</pre>
+
+<!-- 
+<h5>ID un class atribūtu norādīšana un izmantošana:</h5>
+<h6>HTML:</h6>
+<pre class="brush: html">
+
+</pre>
+<h6>CSS:</h6>
+<pre class="brush: css">
+ -->
+
+<h5>Elementu izmērs un krāsošana:</h5>
+<h6>HTML:</h6>
+<pre class="brush: html">
+&lt;div id="kvadrats">
+Šis būs kvadrāts!
+&lt;/div>
+</pre>
+<h6>CSS:</h6>
+<pre class="brush: css">
+#kvadrats {
+	width: 150px;
+	height: 150px;
+	color: red;
+	background-color: yellow;
+}
+</pre>
+
+<h5>Galvene ar linkiem:</h5>
+<!-- <p>Paskaidrojums</p> -->
+<h6>HTML:</h6>
+<pre class="brush: html">
+&lt;div id="header">
+	&lt;ul class="navigation">
+		&lt;li><a href="index.html">Sākumlapa</a>&lt;/li>
+		&lt;li><a href="lapa1.html">Lapa 1</a>&lt;/li>
+		&lt;li><a href="lapa2.html">Lapa 2</a>&lt;/li>
+		&lt;li><a href="lapa3.html">Lapa 3</a>&lt;/li>
+		&lt;li><a href="lapa4.html">Lapa 4</a>&lt;/li>
+	&lt;/ul>
+&lt;/div>
+</pre>
+<h6>CSS:</h6>
+<pre class="brush: css">
+/* galvenes izmērs */
+#header {
+	width: 800px;
+	height: 100px;
+}
+/* navigācijas linku izkārtojums */
+#header li {
+	list-style: none;
+	display: inline;
+	padding: 10px;
+	margin: 0px;
+}
+/* linku stils */
+#header a {
+	color: #61C0BF;
+	font-weight: bold;
+	font-size: 18px;
+	font-family: verdana;
+}
+/* linki, kad uzbrauc ar peli */
+#header li:hover {
+	background-color: #61C0BF;
+}
+#header li:hover a {
+	color: white;
+}
+/* galvenes rāmis */
+#header {
+	background-color: #3b7a79;
+	border: 4px dashed black;
+	margin-bottom: 10px;
+}
+</pre>
+
+<h5>Teksta stila īpašības:</h5>
+<h6>HTML:</h6>
+<pre class="brush: html">
+&lt;p class="mazs-teksts" id="paragrafs1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, &lt;span class="izcelts">sed do eiusmod tempor&lt;/span> incididunt ut labore et dolore magna aliqua.&lt;/p>
+&lt;img class="attels-ar-rami attels-pa-kreisi" src="bildes/makrele.gif"/>
+&lt;p class="liels-teksts" id="paragrafs2">Lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi. Tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Nisi scelerisque eu ultrices vitae auctor. Lorem ipsum dolor sit amet consectetur adipiscing elit.&lt;/p>
+&lt;img class="attels attels-pa-labi" src="bildes/vimba.jpg"/>
+&lt;p class="mazs-teksts"" id="paragrafs3">Vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra. Libero enim sed faucibus turpis in. Tortor dignissim convallis aenean et tortor at. Aenean pharetra magna ac placerat vestibulum. Id eu nisl nunc mi ipsum.&lt;/p>
+</pre>
+<h6>CSS:</h6>
+<pre class="brush: css">
+p {
+	font-family: helvetica;
+	font-size: 14px;
+	color: #351F39;
+}
+.mazs-teksts {
+	font-size: 12px;
+}
+.liels-teksts {
+	font-size: 18px
+}
+.izcelts {
+	color: red;
+	text-decoration: underline;
+}
+#paragrafs2, #paragrafs3 {
+	color: blue;
+}
+</pre>
+
+<!-- 
+<h5>Linku formatēšana:</h5>
+<h6>HTML:</h6>
+<pre class="brush: html">
+
+</pre>
+<h6>CSS:</h6>
+<pre class="brush: css">
+
+</pre>
+ -->
+
+<h5>Attēlu pludināšana ap tekstu:</h5>
+<h6>HTML:</h6>
+<pre class="brush: html">
+&lt;img class="attels-ar-rami attels-pa-kreisi" src="bildes/makrele.gif"/>
+&lt;p class="liels-teksts" id="paragrafs2">Lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi. Tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Nisi scelerisque eu ultrices vitae auctor. Lorem ipsum dolor sit amet consectetur adipiscing elit.&lt;/p>
+&lt;img class="attels attels-pa-labi" src="bildes/vimba.jpg"/>
+&lt;p class="mazs-teksts"" id="paragrafs3">Vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra. Libero enim sed faucibus turpis in. Tortor dignissim convallis aenean et tortor at. Aenean pharetra magna ac placerat vestibulum. Id eu nisl nunc mi ipsum.&lt;/p>
+</pre>
+<h6>CSS:</h6>
+<pre class="brush: css">
+.attels-ar-rami {
+	border: 2px solid orange;
+}
+.attels-pa-kreisi {
+	float: left;
+}
+.attels-pa-labi {
+	float: right;
+}
+</pre>
+
+<h5>Pseidoklases izmantošana:</h5>
+<h6>HTML:</h6>
+<pre class="brush: html">
+&lt;table id="tabula1">
+	&lt;tr>
+		&lt;td>1&lt;/td>
+		&lt;td>2&lt;/td>
+	&lt;/tr>
+	&lt;tr>
+		&lt;td>3&lt;/td>
+		&lt;td>4&lt;/td>
+	&lt;/tr>
+	&lt;tr>
+		&lt;td>5&lt;/td>
+		&lt;td>6&lt;/td>
+	&lt;/tr>
+	&lt;tr>
+		&lt;td>7&lt;/td>
+		&lt;td>8&lt;/td>
+	&lt;/tr>
+&lt;/table>
+</pre>
+<h6>CSS:</h6>
+<pre class="brush: css">
+table, td {
+	border: 1px solid black;
+}
+#tabula1 tr:nth-child(odd) {
+	background-color: red;
+}
+</pre>
+
+<h5>Drukas stils:</h5>
+<h6>CSS:</h6>
+<pre class="brush: css">
+@media print {
+	img {
+		display: none;
+	}
+	#header {
+		display: none;
+	}
+	#kvadrats {
+		background-color: white;
+	}
+}
+</pre>
+
+<h4>Piemērs:</h4>
+
+<a target="_blank" href="paraugs/index.html">Pilna piemēra HTML</a><br/>
+<a target="_blank" href="paraugs/stils.css">Pilna piemēra CSS</a>
+
+
 <p>Darbu sagatavojiet jaunā folderī ar nosaukumu "Vārds Uzvārds Prakt2" (aiztājiet ar savu vārdu un uzvārdu).<br/>
 Praktiskā darba folderi arhivējiet zip formātā.<br/>
 Nosūtiet arhīvu uz e-pastu mikelis@va.lv.</p>
-
-<p>Piemērs:</p>
-
-<img src="piemers.PNG"/>
 
 </body>
 </html>

@@ -20,6 +20,12 @@
     right: 10px; /* space between number and text */
 </style>
 
+		<script type="text/javascript" src="../slides/sxh/syntaxhighlighter.js"></script> 
+<!-- 		<link href="sxh/theme-default.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-django.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-rdark.css" rel="stylesheet" type="text/css" /> -->
+		<link href="../slides/sxh/theme-midnight.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
 
@@ -38,7 +44,7 @@
 </ol>
 </li>
 
-<li>Ar satura elementiem:
+<li>Ievietot satura elementus:
 <ol>
 <li>Virsraksti, paragrāfi un saraksti;</li>
 <li>Attēli;</li>
@@ -47,13 +53,11 @@
 </ol>
 </li>
 
-<li>Un komponentiem:
+<li>Ievietot Bootstrap komponentus:
 <ol>
 <li>Brīdinājums (alert);</li>
-<li>Akordeons;</li>
 <li>Formu ar dažiem formas elementiem;</li>
 <li>Bilžu karuseli ar navigāciju;</li>
-<li>Tooltip.</li>
 </ol>
 </li>
 
@@ -74,6 +78,181 @@
 
 <p>Paraugs:</p>
 <img src="responsive.jpg"/>
+
+<p>Skat. piemēru šeit: <a target="_blank" href="example/index.html">piemērs</a>.</p>
+<img src="example.png">
+
+
+
+<h3>Paraugi (instrukcijas):</h3>
+
+<p>Izveidot jaunu tukšu dokumentu:</p>
+
+<pre class="brush: html">
+&lt;!doctype HTML>
+&lt;html>
+&lt;head>
+&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+&lt;/head>
+&lt;body>
+&lt;/body>
+&lt;/html>
+</pre>
+
+<p>Iekļaut Bootstrap bibliotēku savā lapā (ievietot šo kodu starp &lt;head> un &lt;/head> tagiem):</p>
+
+<pre class="brush: html">
+&lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+&lt;script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">&lt;/script>
+&lt;script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">&lt;/script>
+</pre>
+
+<p>Izveidot pamata izklājumu (ievietot šo kodu starp &lt;body> un &lt;/body> tagiem):</p>
+
+<pre class="brush: html">
+&lt;div class="container">
+
+	&lt;div class="row">
+		&lt;div class="banner col-sm-12 col-lg-12">
+		Banner
+		&lt;/div>
+	&lt;/div>
+
+	&lt;div class="row">
+		&lt;div class="navbar col-sm-12 col-lg-12">Navigation&lt;/div>
+	&lt;/div>
+
+	&lt;div class="row">
+		&lt;div class="pic1 col-sm-6 col-lg-3">Pic1&lt;/div>
+		&lt;div class="pic2 col-sm-6 col-lg-3">Pic2&lt;/div>
+		&lt;div class="pic3 col-sm-6 col-lg-3">Pic3&lt;/div>
+		&lt;div class="pic4 col-sm-6 col-lg-3">Pic4&lt;/div>
+	&lt;/div>
+
+	&lt;div class="row">
+		&lt;div class="article1 col-sm-12 col-lg-6">Article1&lt;/div>
+		&lt;div class="article2 col-sm-12 col-lg-6">Article2&lt;/div>
+	&lt;/div>
+
+	&lt;div class="row">
+		&lt;div class="footer col-sm-12 col-lg-12">Footer&lt;/div>
+	&lt;/div>
+
+&lt;/div>
+</pre>
+
+<p>Pievienot virsrakstus, paragrāfus un sarakstus:</p>
+
+<pre class="brush: html">
+&lt;h1>Big heading&lt;/h1>
+&lt;h2>Subheading&lt;/h2>
+&lt;h3>Smaller heading&lt;/h3>
+&lt;p>Paragraph 1. Paragraph 1. Paragraph 1. Paragraph 1. Paragraph 1.&lt;/p>
+&lt;p>Paragraph 2. Paragraph 2. Paragraph 2. Paragraph 2. Paragraph 2.&lt;/p>
+&lt;ul>
+	&lt;li>List item 1&lt;/li>
+	&lt;li>List item 2&lt;/li>
+	&lt;li>List item 3&lt;/li>
+&lt;/ul>
+</pre>
+
+<p>Pievienot attēlus:</p>
+
+<pre class="brush: html">
+&lt;img src="mypicture1.png"/>
+</pre>
+
+<p>Pievienot citātu un avotu:<br/>
+Dokumentācija: <a href="https://getbootstrap.com/docs/4.0/content/typography/#blockquotes" target="_blank">https://getbootstrap.com/docs/4.0/content/typography/#blockquotes</a></p>
+
+<pre class="brush: html">
+&lt;blockquote class="blockquote">
+  &lt;p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.&lt;/p>
+  &lt;footer class="blockquote-footer">Someone famous in &lt;cite title="Source Title">Source Title&lt;/cite>&lt;/footer>
+&lt;/blockquote>
+</pre>
+
+
+<p>Pievienot tabulu (ar zebras svītrām) un parakstu:<br/>
+Dokumentācija: <a href="https://getbootstrap.com/docs/4.0/content/tables/" target="_blank">https://getbootstrap.com/docs/4.0/content/tables/</a></p>
+
+<pre class="brush: html">
+&lt;table class="table table-striped">
+  &lt;caption>List of users&lt;/caption>
+  &lt;tr>
+    &lt;td>Mark&lt;/td>
+    &lt;td>Otto&lt;/td>
+  &lt;/tr>
+  &lt;tr>
+    &lt;td>Jacob&lt;/td>
+    &lt;td>Thornton&lt;/td>
+  &lt;/tr>
+  &lt;tr>
+    &lt;td>Larry&lt;/td>
+    &lt;td>the Bird&lt;/td>
+  &lt;/tr>
+&lt;/table>
+</pre>
+
+
+<p>Pievienot paziņojumu (alert) iekš div taga:<br/>
+Dokumentācija: <a href="https://getbootstrap.com/docs/4.0/components/alerts/" target="_blank">https://getbootstrap.com/docs/4.0/components/alerts/</a></p>
+
+<pre class="brush: html">
+&lt;div class="alert alert-primary" role="alert">
+  This is a primary alert—check it out!
+&lt;/div>
+</pre>
+
+<p>Pievienot formu ar dažiem formas elementiem:<br/>
+Dokumentācija: <a href="https://getbootstrap.com/docs/4.0/components/forms/" target="_blank">https://getbootstrap.com/docs/4.0/components/forms/</a></p>
+
+<pre class="brush: html">
+<form action="submit.php">
+	<input type="email" class="form-control" placeholder="Enter email">
+	<select name="age" class="form-control">
+		<option value="10">Ten</option>
+		<option value="11">Eleven</option>
+	</select>
+	<div class="form-check">
+		<input type="radio" class="form-check-input" name="age" id="defaultCheck1" value="10">
+		<label class="form-check-label" for="defaultCheck1">Ten</label>
+	</div>
+	<div class="form-check">
+		<input type="radio" class="form-check-input" name="age" id="defaultCheck2" value="11">
+		<label class="form-check-label" for="defaultCheck2">Eleven</label>
+	</div>
+	<button type="button" class="btn btn-lg btn-primary">Submit</button>
+</form>
+</pre>
+
+<p>Izveidot attēlu karuseli iekš div taga, aizstāt "..." ar attēliem:<br/>
+Dokumentācija: <a href="https://getbootstrap.com/docs/4.0/components/carousel/" target="_blank">https://getbootstrap.com/docs/4.0/components/carousel/</a></p>
+
+<pre class="brush: html">
+&lt;div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  &lt;div class="carousel-inner">
+    &lt;div class="carousel-item active">
+      &lt;img class="d-block w-100" src="..." alt="First slide">
+    &lt;/div>
+    &lt;div class="carousel-item">
+      &lt;img class="d-block w-100" src="..." alt="Second slide">
+    &lt;/div>
+    &lt;div class="carousel-item">
+      &lt;img class="d-block w-100" src="..." alt="Third slide">
+    &lt;/div>
+  &lt;/div>
+  &lt;a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    &lt;span class="carousel-control-prev-icon" aria-hidden="true">&lt;/span>
+    &lt;span class="sr-only">Previous&lt;/span>
+  &lt;/a>
+  &lt;a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    &lt;span class="carousel-control-next-icon" aria-hidden="true">&lt;/span>
+    &lt;span class="sr-only">Next&lt;/span>
+  &lt;/a>
+&lt;/div>
+</pre>
+
 
 <p>Darbu sagatavojiet jaunā folderī ar nosaukumu "Vārds Uzvārds Prakt3" (aiztājiet ar savu vārdu un uzvārdu).<br/>
 Praktiskā darba folderi arhivējiet zip formātā.<br/>

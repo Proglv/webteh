@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+		<script type="text/javascript" src="../slides/sxh/syntaxhighlighter.js"></script> 
+		<link href="../slides/sxh/theme-default.css" rel="stylesheet" type="text/css" />
+<!-- 		<link href="../slides/sxh/theme-django.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="../slides/sxh/theme-rdark.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="../slides/sxh/theme-midnight.css" rel="stylesheet" type="text/css" /> -->
+
 <title>Praktiskais darbs 1</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 </head>
@@ -13,7 +20,6 @@
 <p><em>Piezīme: uzdevuma laikā koncentrējiet uzmanību tikai uz dokumentu saturu. Noformējums šeit nav būtisks, jo to mēs apskatīsim nākamajā praktiskajā darbā.</em></p>
 
 <p><em>Necentieties to veidot kā mājas lapu, domājiet par HTML drīzāk kā par dokumentu līdzīgi kā MS Word dokumentiem:</em></p>
-
 <ul>
 <li><em>vienu pēc otra ievietojiet virsrakstus, paragrāfus, tabulas;</em></li>
 <li><em>paragrāfos vai tabulās ievietojiet tekstu, attēlus, saites;</em></li>
@@ -22,15 +28,127 @@
 
 <h4>Prasības:</h4>
 <ul>
-<li>Izveidot vismaz četrus savstarpēji saisītus (ar hipersaitēm), HTML5 standartam atbilstošus dokumentus, par izvēlēto tēmu. Dokumentu saturam un struktūrai jābūt loģiskai;</li>
-<li>Galvenās lapas failam jābūt nosauktam par <strong>"index.html"</strong></li>            <li>Veikt validāciju izveidotajiem dokumentiem izmantojot tiešsaistes validāciju <a href="http://validator.w3.org/ ">http://validator.w3.org/</a>vai arī uzstādot pārlūkprogrammai validēšanas papildinājumus (add-on, extension)</li>
-<li>Katrai lapai jāsatur virsraksta elements h1 vai h2, title metadatu atribūts un head sadaļā jābūt norādītam teksta kodējumam.</li>
-<li>Vienā no dokumentiem jāizveido vienkārša aptaujas forma ar izvēlni no saraksta, radio pogām un apstiprināšanas pogu. Aizpildītie lauki pagaidām nav jāapstrādā;</li>
-<li>Vismaz vienā no dokumentiem jāizveido tabula;</li>
-<li>Vismaz vienā no dokumentiem jāievieto attēls. Vismaz vienam no attēliem jābūt kā saitei;</li>
-<li>Dokumentos atbilstoši to nozīmei jāizmanto p, div un span tagi, piemēram, p – rindkopai, bet div un span tagi – lapas izkārtojuma veidošanai vai savādāka stila norādīšanai;</li>
-<li>Stilizēt dažus vārdus vai rindkopas izmantojot style atribūtu, piemēram nokrāsotjot tos sarkanus.</li>
-<li>Izveidot vienkāršu nenumurētu punktu uzskaitījuma sarakstu (bullets).</li>        </ul>
+<li>Izveidot vismaz četrus HTML dokumentus par izvēlēto tēmu. Izveidot hipersaites (<strong>a</strong> tags) starp dokumentiem (linkus no viena uz otru, un atpakaļ). Dokumentiem jāatbilst HTML5 standartam. Dokumentu saturam un struktūrai jābūt loģiskai.</li>
+<li>Galvenās lapas failam jābūt nosauktam par <strong>"index.html"</strong>.</li>
+<li>Katrai lapai jāsatur virsraksta tags <strong>h1</strong> vai <strong>h2</strong>.</li>
+<li>Katra lapa head sadaļā satur - <strong>title</strong> tags ar lapas nosaukumu, <strong>meta</strong> tags ar teksta kodējumu, <strong>meta</strong> tags ar lapas atslēgas vārdiem.
+
+<li>Lapās iekļaujiet šādus HTML elementus:</li>
+<ul>
+<li>Dokumentos atbilstoši to nozīmei jāizmanto <strong>p</strong>, <strong>div</strong> un <strong>span</strong> tagi, piemēram, <strong>p</strong> – rindkopai, bet <strong>div</strong> un <strong>span</strong> tagi – lapas izkārtojuma veidošanai un satura izdalīšanai.</li>
+
+<li>Vismaz vienā no dokumentiem jāievieto attēls - <strong>img</strong> tags (saglabājiet attēlus tajā pašā direktorijā, kur html dokumenti). Vismaz vienam no attēliem jābūt kā saitei (<strong>a</strong> tags).</li>
+<li>Vismaz vienā no dokumentiem jāizveido tabula (tagi: <strong>table</strong>, <strong>tr</strong>, <strong>td</strong>).</li>
+<li>Vienā no dokumentiem jāizveido vienkārša aptaujas forma ar izvēlni no saraksta (dropdown), radio pogām un apstiprināšanas pogu (tagi: <strong>form</strong>, <strong>select</strong> un <strong>option</strong>, <strong>input</strong>). (Formu pagaidām nevar nosūtīt, to apgūsim citā lekcijā.)</li>
+<li>Izveidot vienkāršu nenumurētu punktu uzskaitījuma sarakstu (bulleted list). Tagi - <strong>ul</strong> un <strong>li</strong>. </li>
+</ul>
+
+<li>Veikt validāciju izveidotajiem dokumentiem izmantojot tiešsaistes validāciju <a href="http://validator.w3.org/ ">http://validator.w3.org/</a>.</li>
+</ul>
+
+<h4>Paraugi:</h4>
+
+<h5>Tukšs dokuments ar aizpildītu head sadaļu un virsrakstu body sadaļā:</h5>
+
+<pre class="brush: html">
+&lt;!DOCTYPE html>
+&lt;html>
+&lt;head>
+&lt;title>Web tehnoloģijas&lt;/title>
+&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+&lt;meta name="keywords" content="Piemērs, paraugs, weblapa">
+&lt;/head>
+&lt;body>
+&lt;h1>Web kursa paraugs&lt;/h1>
+&lt;/body>
+
+...
+
+&lt;/head>
+</pre>
+
+<h5>Strukturēts dokumenta teksta saturs:</h5>
+
+<pre class="brush: html">
+&lt;div>
+&lt;h1>Virsraksts pirmajai sadaļas&lt;/h1>
+&lt;h2>Apakšvirsraksts&lt;/h2>
+&lt;p>Paragrāfs. Sarkana lapsa pārleca pāri laiskam sunim.&lt;/p>
+&lt;p>Otrs paragrāfs. &lt;span>Īpašs teksts paragrāfa vidū.&lt;/span> Paragrāfs turpinās.&lt;/p>
+&lt;/div>
+
+&lt;div>
+&lt;h1>Virsraksts otrajai sadaļas&lt;/h1>
+&lt;h2>Apakšvirsraksts&lt;/h2>
+&lt;p>Vēl viens paragrāfs.&lt;/p>
+&lt;/div>
+</pre>
+
+<h5>Teksts kā saite, attēls un attēls kā saite:</h5>
+
+<pre class="brush: html">
+&lt;a href="http://www.va.lv">Vidzemes augstskola&lt;/a>
+&lt;img src="test.png" alt="Testa bilde">
+&lt;a href="lapa.html">&lt;img src="test.png" alt="Testa bilde">&lt;/a>
+</pre>
+
+<h5>Tabula (style atribūtā definēts tabulas rāmja stils):</h5>
+
+<pre class="brush: html">
+&lt;table style="border: 1px solid black">
+&lt;tr>
+&lt;td>Col1 Cell1&lt;/td>
+&lt;td>Col2 Cell1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Col1 Cell2&lt;/td>
+&lt;td>Col2 Cell2&lt;/td>
+&lt;/tr>
+&lt;/table>
+</pre>
+
+<h5>Forma:</h5>
+
+<pre class="brush: html">
+&lt;form action="submit.php">
+
+Teksta ievades lauks: &lt;input type="text" name="vards">
+
+&lt;div>
+Izkrītošā izvēlni:
+&lt;select name="vecums">
+&lt;option value="10">Desmit&lt;/option>
+&lt;option value="11">Vienpadsmit&lt;/option>
+&lt;option value="12">Divpadsmit&lt;/option>
+&lt;/select>
+&lt;/div>
+
+&lt;div>
+Radio pogas:
+&lt;input type="radio" name="vecums" value="10">Desmit
+&lt;input type="radio" name="vecums" value="11">Vienpadsmit
+&lt;input type="radio" name="vecums" value="12">Divpadsmit
+&lt;/div>
+
+&lt;div>
+&lt;button type="submit">Nosūtīt&lt;/button>
+&lt;/div>
+
+&lt;/form>
+</pre>
+
+<h5>Saraksts:</h5>
+
+<pre class="brush: html">
+&lt;ul>
+&lt;li>Ieraksts 1&lt;/li>
+&lt;li>Ieraksts 2&lt;/li>
+&lt;/ul>
+</pre>
+
+<h4>Piemērs:</h4>
+
+<a target="_blank" href="paraugs.html">Skat. pilnu piemēru šeit</a>
 
 <p>Darbu sagatavojiet jaunā folderī ar nosaukumu "Vārds Uzvārds Prakt1" (aiztājiet ar savu vārdu un uzvārdu).<br/>
 Praktiskā darba folderi arhivējiet zip formātā.<br/>
