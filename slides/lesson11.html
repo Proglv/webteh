@@ -1,0 +1,590 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>web teh</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		
+		<link rel="stylesheet" href="lekcijas.css">
+
+		<!-- highlighter -->
+		<script type="text/javascript" src="sxh/syntaxhighlighter.js"></script> 
+<!-- 		<link href="sxh/theme-default.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-django.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-rdark.css" rel="stylesheet" type="text/css" /> -->
+		<link href="sxh/theme-midnight.css" rel="stylesheet" type="text/css" />
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+			
+<section data-markdown><textarea data-template>
+## 11. Lekcija: Laravel II
+
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Turpinājums (MVC)
+
+* Skats (View)
+* Kontrolieris (Controller)
+* Modelis (Model)
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Kontrolieris
+
+* Viena vietā organizē visas darbības
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Kontroliera izmantošana</h3>
+
+<pre class="brush: php">
+Route::get('/forma', [
+	'uses' => 'formaController@showForma',
+	'as' => 'forma'
+]);
+Route::post('/apstrade', [
+	'uses' => 'formaController@postForma',
+	'as' => 'apstrade'
+]);
+</pre>
+
+</section>
+
+
+<section>
+<h3>Kontroliera definēšana</h3>
+
+<ul>
+<li>Fails: app/Http/Controllers/FormaController.php
+</ul>
+
+<pre class="brush: php">
+&lt;?php
+namespace App\Http\Controllers;
+use \Illuminate\Http\Request;
+class FormaController extends Controller
+{
+	public function showForma()
+	{
+	}	
+	public function postForma(Request $request)
+	{
+	}
+}
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Ievada validēšana
+
+Validēšanas noteikumi:
+* alpha (Burti)
+* email (E-pasta adrese)
+* numeric (Skatlis)
+* integer (Vesels skaitlis)
+* Citi: https://laravel.com/docs/5.6/validation#available-validation-rules
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Ievada validēšana</h3>
+
+<pre class="brush: php">
+public function postForma(Request $request)
+{
+	$this->validate($request, [
+		'vards' => 'required|alpha',
+	]);
+	return view('apstrade', ['vards' => $request['vards']]);
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Ievada validēšana</h3>
+
+<ul>
+<li>Kļudu izvadīšana (skatā)
+</ul>
+
+<pre class="brush: php">
+@if (count($errors) > 0)
+	&lt;div>
+		&lt;ul>
+			@foreach($errors->all() as $error)
+				{{ $error }}
+			@endforeach
+		&lt;ul/>
+	&lt;/div>
+@endif
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Modelis
+
+* Modelis nodrošina viena veida datu glabāšanu datubāzē (tabulā)
+* Modelis ir datu reprezentācija objekta formā
+* Veic automātiskas darbības (tabulas izveide utt.)
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### DB izveide
+
+* (Jāizveido datubāze ar MySQL Workbench vai PhpMyAdmin)
+* Datubāzei jābūt "utf8_unicode_ci" vai "utf8mb4_unicode_ci" kodējumā
+* Ja nestrādā migrēšana, tad rediģējiet config/database.php failu:
+ * mysql > charset uz "utf8"
+ * mysql > collation uz "utf8_unicode_ci"
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### DB konfigurācija
+
+* Fails (Laravel instalācijas direktorijā): .env
+* DB_DATABASE, DB_USERNAME, DB_PASSWORD
+* (Uz ViA datoriem: root un VMWare2002!)
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Modeļa izveidošana
+
+Pieejamie datu tipi:
+https://laravel.com/docs/5.6/migrations#columns
+
+* Izveidot modeļa klasi un DB tabulu
+* Vai no termināļa ar komandu:
+ * cd /c/xampp/htdocs/prakt11
+ * php artisan make:model Story -m
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Modeļa migrācijas fails
+
+* Fails: database/migrations/...create...table.php
+* Tabulas izveides un dzēšanas funkcijas
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Modeļa migrācijas kods, tabulas izveide</h3>
+
+<pre class="brush: php">
+public function up()
+{
+	Schema::create('stories', function (Blueprint $table) {
+		$table->increments('id');
+		$table->timestamps();
+	});
+}
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Migrācijas palaišana un atsaukšana
+
+* cd /c/xampp/htdocs/prakt11
+* php artisan migrate
+* php artisan migrate:reset
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Piemērs: Ziņu aplikācija
+
+* Forma kurā var pievienot jaunu ziņu
+* Sarakstā parāda visas pievienotās ziņas
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Piemērs: routes</h3>
+
+<pre class="brush: php">
+Route::get('jauns', [
+	'uses' => 'storyController@addStoryForm',
+	'as' => 'jauns'
+]);
+Route::post('saglabat', [
+	'uses' => 'storyController@saveStory',
+	'as' => 'saglabat'
+]);
+Route::get('raksti', [
+	'uses' => 'storyController@allStories',
+	'as' => 'raksti'
+]);
+</pre>
+
+</section>
+
+
+<section>
+<h3>Piemērs: modelis</h3>
+
+<pre class="brush: php">
+cd /c/xampp/htdocs/prakt11
+php artisan make:model Story -m
+</pre>
+
+</section>
+
+
+<section>
+<h3>Piemērs: modelis</h3>
+
+Kāda izskatās tukša izveidotā modeļa klase?
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Piemērs: modelis
+
+* Papildinām modeļa migrācijas failu ar papildus laukiem
+* Fails: app/Story.php (skat. nāk slaidu)
+* Un tad laiž migrāciju:
+ * php artisan migrate
+
+Note: 
+</textarea></section>
+
+
+<section>
+<h3>Pievienoti lauki title un content</h3>
+
+<pre class="brush: php">
+public function up()
+{
+	Schema::create('stories', function (Blueprint $table) {
+		$table->increments('id');
+		$table->timestamps();
+		$table->string('title');
+		$table->text('content');
+	});
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Izveido kontrolieri</h3>
+
+<ul>
+<li>Fails: app/Http/Controllers/StoryController.php
+</ul>
+
+<pre class="brush: php">
+namespace App\Http\Controllers;
+use \Illuminate\Http\Request;
+use App\Story;
+class StoryController extends Controller
+{
+	public function addStoryForm() {}
+	public function saveStory(Request $request) {}
+	public function allStories() {}
+}
+
+</pre>
+
+</section>
+
+
+<section>
+<h3>Raksta pievienošanas forma</h3>
+
+<pre class="brush: php">
+public function addStoryForm()
+{
+	return view('story_form');
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Raksta pievienošanas formas templeits</h3>
+
+<pre class="brush: php">
+...
+&lt;form action="{{ route('saglabat') }}" method="post">
+@csrf
+Title: 
+&lt;input type="text" name="title">&lt;br/>
+Content: 
+&lt;textarea name="content" cols="50" rows="20">&lt;/textarea>&lt;br/>
+&lt;input type="submit" value="Send">
+&lt;/form>
+...
+</pre>
+
+</section>
+
+
+<section>
+<h3>Raksta saglabāšana</h3>
+
+<pre class="brush: php">
+public function saveStory(Request $request)
+{
+	$this->validate($request, [
+		'title' => 'required',
+		'content' => 'required',
+	]);
+	
+	$story = new Story();
+	$story->title = $request['title'];
+	$story->content = $request['content'];
+	$story->save();
+	
+	return redirect()->route('raksti');
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Datu nolasīšana</h3>
+
+<pre class="brush: php">
+public function allStories()
+{
+	$stories = Story::all();
+	return view('all_stories', ['stories' => $stories]);
+}
+</pre>
+
+</section>
+
+
+<section>
+<h3>Parādīšana skatā</h3>
+
+<pre class="brush: php">
+@foreach ($stories as $story)
+	&lt;div class="story">
+		&lt;div class="title">&lt;h2>{{ $story->title }}&lt;/h2>&lt;/div>
+		&lt;div class="content">
+			{{ $story->content }}
+		&lt;/div>
+	&lt;/div>
+	&lt;br/>
+	&lt;br/>
+@endforeach
+</pre>
+
+</section>
+
+
+<!-- 
+<section data-markdown><textarea data-template>
+### Modeļu relācijas
+
+* ...
+
+Note: 
+</textarea></section>
+ -->
+
+
+<section>
+<h3>Lapošana</h3>
+
+<pre class="brush: php">
+$stories = Story::paginate(2);
+</pre>
+
+<pre class="brush: php">
+{{ $stories->links() }}
+</pre>
+
+</section>
+
+
+<section data-markdown><textarea data-template>
+### Autentifikācija
+
+* ...
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Citi temati
+
+* Query builder
+* Eventi
+* Ajax
+* E-pastu nosūtīšana
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Uzdevumi
+
+1. Izveidot ziņu aplikāciju pēc parauga (pievienošana, attēlošana, lapošana)
+2. Pievienot komentāru formu katram rakstam. Izveidot adresi, kurā var redzēt rakstu un visus tā komentārus (raksts/xxx).
+3. Izveidot autorizētā lietotāja sadaļu, kurā var rediģēt un dzēst rakstus.
+
+Note: 
+</textarea></section>
+
+
+<!--
+
+
+Sample 1: Markdown
+
+
+<section data-markdown><textarea data-template>
+### 
+
+* 
+
+Note: 
+</textarea></section>
+
+
+Sample 3: Highlighted code sample (still need to escape < symbols)
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+</ul>
+
+<pre class="brush: php">
+
+</pre>
+
+</section>
+
+
+Sample 4: Bullets and highlighted code sample (still need to escape < symbols)
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre class="brush: php">
+
+</pre>
+
+</section>
+
+
+Sample 5: Bullets and regular code sample
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre><code data-trim data-noescape>
+
+</code></pre>
+
+</section>
+-->
+				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+		
+		<!-- Finally, to actually run the highlighter, you need to include this JS on your page -->
+
+
+	</body>
+</html>
